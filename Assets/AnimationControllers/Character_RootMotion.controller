@@ -329,7 +329,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crouch
+  m_Name: Crouch Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -840,6 +840,15 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: 0f694abe18c23944cbe4a0df18429308,
+      type: 3}
+    m_Threshold: -0.5
+    m_Position: {x: -1, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: vely
+    m_Mirror: 0
+  - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 5920e678c07b4334ebbf7f33fe2fa8c3,
       type: 3}
     m_Threshold: 0
@@ -849,30 +858,21 @@ BlendTree:
     m_DirectBlendParameter: vely
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 0f694abe18c23944cbe4a0df18429308,
-      type: 3}
-    m_Threshold: 0.5
-    m_Position: {x: -1, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: vely
-    m_Mirror: 0
-  - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: aa7d8fc6e778920428fe1f0041b0f1c2,
       type: 3}
-    m_Threshold: 1
+    m_Threshold: 0.5
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: vely
     m_Mirror: 0
-  m_BlendParameter: vely
+  m_BlendParameter: velx
   m_BlendParameterY: velx
-  m_MinThreshold: 0
-  m_MaxThreshold: 1
+  m_MinThreshold: -0.5
+  m_MaxThreshold: 0.5
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
-  m_BlendType: 2
+  m_BlendType: 0
 --- !u!206 &4335279566092421268
 BlendTree:
   m_ObjectHideFlags: 1
