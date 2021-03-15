@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    private Animator anim;
+    private Rigidbody rbody;
+    private CharacterInputController cinput;
+
     public int moveSpeed = 5;
     // Start is called before the first frame update
     void Start()
@@ -14,6 +18,9 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float inputForward = 0f;
+        float inputTurn = 0f;
+
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
@@ -30,5 +37,8 @@ public class PlayerControl : MonoBehaviour
         {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
         }
+
+        anim.SetFloat("velx", inputTurn);
+        anim.SetFloat("vely", inputForward);
     }
 }
