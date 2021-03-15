@@ -2638,6 +2638,9 @@ MonoBehaviour:
   InputMapToCircular: 1
   forwardInputFilter: 5
   turnInputFilter: 5
+  animationSpeed: 0
+  rootMovementSpeed: 1
+  rootTurnSpeed: 1
   moveSpeed: 5
 --- !u!136 &1214507192
 CapsuleCollider:
@@ -4210,7 +4213,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865023750}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbb2884e31ea5f9469bdfee03e8b0743, type: 3}
   m_Name: 
@@ -4218,6 +4221,9 @@ MonoBehaviour:
   InputMapToCircular: 1
   forwardInputFilter: 5
   turnInputFilter: 5
+  animationSpeed: 0
+  rootMovementSpeed: 1
+  rootTurnSpeed: 1
   moveSpeed: 5
 --- !u!114 &1865023761
 MonoBehaviour:
@@ -4226,7 +4232,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865023750}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a6ec16018c47e64fa57a75a1dcbc9fc, type: 3}
   m_Name: 
