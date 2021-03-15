@@ -4186,7 +4186,7 @@ MonoBehaviour:
   exitMatchTargetsAnimTime: 0.75
   animationSpeed: 1.25
   rootMovementSpeed: 1.5
-  rootTurnSpeed: 1
+  rootTurnSpeed: 1.5
   buttonObject: {fileID: 0}
   jumpableGroundNormalMaxAngle: 45
   closeToJumpableGround: 0
@@ -4206,25 +4206,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1865023760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865023750}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbb2884e31ea5f9469bdfee03e8b0743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InputMapToCircular: 1
-  forwardInputFilter: 5
-  turnInputFilter: 5
-  animationSpeed: 0
-  rootMovementSpeed: 1
-  rootTurnSpeed: 1
-  moveSpeed: 5
 --- !u!114 &1865023761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4238,7 +4219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputMapToCircular: 1
-  forwardInputFilter: 10
+  forwardInputFilter: 5
   turnInputFilter: 5
 --- !u!1001 &1877832128
 PrefabInstance:
