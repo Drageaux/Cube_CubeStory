@@ -4184,8 +4184,8 @@ MonoBehaviour:
   buttonCloseEnoughForPressAngleDegrees: 5
   initalMatchTargetsAnimTime: 0.25
   exitMatchTargetsAnimTime: 0.75
-  animationSpeed: 1
-  rootMovementSpeed: 1
+  animationSpeed: 1.25
+  rootMovementSpeed: 1.5
   rootTurnSpeed: 1
   buttonObject: {fileID: 0}
   jumpableGroundNormalMaxAngle: 45
@@ -4238,7 +4238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputMapToCircular: 1
-  forwardInputFilter: 5
+  forwardInputFilter: 10
   turnInputFilter: 5
 --- !u!1001 &1877832128
 PrefabInstance:
