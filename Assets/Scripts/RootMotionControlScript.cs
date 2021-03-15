@@ -102,7 +102,7 @@ public class RootMotionControlScript : MonoBehaviour
         //Therefore, an additional raycast approach is used to check for close ground.
         //This is good for allowing player to jump and not be frustrated that the jump button doesn't
         //work
-        //bool isGrounded = IsGrounded || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+        bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
 
 
@@ -163,7 +163,7 @@ public class RootMotionControlScript : MonoBehaviour
         anim.speed = this.animationSpeed;
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);
-        //anim.SetBool("isFalling", !isGrounded);
+        anim.SetBool("isFalling", !isGrounded);
         anim.SetBool("doButtonPress", doButtonPress);
         anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
@@ -202,7 +202,7 @@ public class RootMotionControlScript : MonoBehaviour
         Vector3 newRootPosition;
         Quaternion newRootRotation;
 
-        bool isGrounded = IsGrounded; //|| CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+        bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
         if (isGrounded)
         {

@@ -25,6 +25,11 @@ public class PlayerControl : MonoBehaviour
 
     private float forwardSpeedLimit = 1f;
 
+    public float animationSpeed = 1f;
+    public float rootMovementSpeed = 1f;
+    public float rootTurnSpeed = 1f;
+    public int moveSpeed = 5;
+
 
     public float Forward
     {
@@ -51,6 +56,15 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    private int groundContactCount = 0;
+    public bool IsGrounded
+    {
+        get
+        {
+            return groundContactCount > 0;
+        }
+    }
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -68,15 +82,14 @@ public class PlayerControl : MonoBehaviour
         //    Debug.Log("CharacterInput could not be found");
     }
 
-    public int moveSpeed = 5;
     void Start()
     {
-        //example of how to get access to certain limbs
-        leftFoot = this.transform.Find("mixamorig:Hips/mixamorig:LeftUpLeg/mixamorig:LeftLeg/mixamorig:LeftFoot");
-        rightFoot = this.transform.Find("mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot");
+        ////example of how to get access to certain limbs
+        //leftFoot = this.transform.Find("mixamorig:Hips/mixamorig:LeftUpLeg/mixamorig:LeftLeg/mixamorig:LeftFoot");
+        //rightFoot = this.transform.Find("mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot");
 
-        if (leftFoot == null || rightFoot == null)
-            Debug.Log("One of the feet could not be found");
+        //if (leftFoot == null || rightFoot == null)
+        //    Debug.Log("One of the feet could not be found");
 
     }
 
@@ -101,24 +114,24 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-        if (Input.GetKey(KeyCode.W))
-        {
+        //if (Input.GetKey(KeyCode.W))
+        //{
 
-            //float inputForward = 0f;
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        }
+        //    //float inputForward = 0f;
+        //    transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        //}
 
         //do some filtering of our input as well as clamp to a speed limit
         filteredForwardInput = Mathf.Clamp(Mathf.Lerp(filteredForwardInput, v,
@@ -130,7 +143,39 @@ public class PlayerControl : MonoBehaviour
         Forward = filteredForwardInput;
         Turn = filteredTurnInput;
 
+        anim.speed = this.animationSpeed;
         anim.SetFloat("velx", Turn);
         anim.SetFloat("vely", Forward);
+    }
+
+    void OnAnimatorMove()
+    {
+
+        Vector3 newRootPosition;
+        Quaternion newRootRotation;
+
+        bool isGrounded = IsGrounded;//|| CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
+
+        if (isGrounded)
+        {
+            //use root motion as is if on the ground		
+            newRootPosition = anim.rootPosition;
+        }
+        else
+        {
+            //Simple trick to keep model from climbing other rigidbodies that aren't the ground
+            newRootPosition = new Vector3(anim.rootPosition.x, this.transform.position.y, anim.rootPosition.z);
+        }
+
+        //use rotational root motion as is
+        newRootRotation = anim.rootRotation;
+
+        //TODO Here, you could scale the difference in position and rotation to make the character go faster or slower
+        newRootPosition = Vector3.LerpUnclamped(this.transform.position, newRootPosition, this.rootMovementSpeed);
+        newRootRotation = Quaternion.LerpUnclamped(this.transform.rotation, newRootRotation, this.rootTurnSpeed);
+
+        this.transform.position = newRootPosition;
+        this.transform.rotation = newRootRotation;
+
     }
 }
