@@ -59,7 +59,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.5555556
     m_Position: {x: -0.33, y: 0}
-    m_TimeScale: 2
+    m_TimeScale: 5
     m_CycleOffset: 0
     m_DirectBlendParameter: vely
     m_Mirror: 0
@@ -68,7 +68,7 @@ BlendTree:
       type: 3}
     m_Threshold: 0.8333333
     m_Position: {x: 0.33, y: 0}
-    m_TimeScale: 2
+    m_TimeScale: 5
     m_CycleOffset: 0
     m_DirectBlendParameter: vely
     m_Mirror: 0
