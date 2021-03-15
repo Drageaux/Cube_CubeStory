@@ -2186,9 +2186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2632dcd2cc24af489d6c0e8befb8e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1214507195}
-  distanceUp: 15
-  distanceAway: 10
+  target: {fileID: 1865023763}
+  distanceUp: 2
+  distanceAway: 5
   smooth: 2
   camDepthSmooth: 5
 --- !u!4 &983784559 stripped
@@ -4221,6 +4221,12 @@ MonoBehaviour:
   InputMapToCircular: 1
   forwardInputFilter: 5
   turnInputFilter: 5
+--- !u!4 &1865023763 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4985787401459075171, guid: 9da0f18063101694cb43dda184fa4920,
+    type: 3}
+  m_PrefabInstance: {fileID: 1865023749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1877832128
 PrefabInstance:
   m_ObjectHideFlags: 0
