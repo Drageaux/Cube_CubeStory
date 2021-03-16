@@ -4,8 +4,7 @@
 BillboardAsset:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: Conifer Tall_BillboardAsset
   serializedVersion: 2
   width: 14.540682
