@@ -58,7 +58,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 0f694abe18c23944cbe4a0df18429308,
       type: 3}
     m_Threshold: 0.5555556
-    m_Position: {x: -0.33, y: 0}
+    m_Position: {x: -0.5, y: -0.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: vely
@@ -67,7 +67,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: aa7d8fc6e778920428fe1f0041b0f1c2,
       type: 3}
     m_Threshold: 0.8333333
-    m_Position: {x: 0.33, y: 0}
+    m_Position: {x: 0.5, y: -0.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: vely
@@ -405,7 +405,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Crouch Idle
-  m_Speed: 1
+  m_Speed: 0.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4445428206201597718}
