@@ -164,6 +164,7 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetFloat("velx", inputTurn);
         anim.SetFloat("vely", inputForward);
         anim.SetBool("crouching", cinput.Crouch);
+        anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
         anim.SetBool("doButtonPress", doButtonPress);
         anim.SetBool("matchToButtonPress", doMatchToButtonPress);

@@ -146,6 +146,7 @@ public class PlayerControl : MonoBehaviour
         anim.speed = this.animationSpeed;
         anim.SetFloat("velx", Turn);
         anim.SetFloat("vely", Forward);
+        //anim.SetFloat("running", cin);
     }
 
     void OnAnimatorMove()
