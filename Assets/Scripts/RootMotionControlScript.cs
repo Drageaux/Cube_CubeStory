@@ -67,8 +67,8 @@ public class RootMotionControlScript : MonoBehaviour
     void Start()
     {
         //example of how to get access to certain limbs
-        leftFoot = this.transform.Find("mixamorig:Hips/mixamorig:LeftUpLeg/mixamorig:LeftLeg/mixamorig:LeftFoot");
-        rightFoot = this.transform.Find("mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot");
+        leftFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
+        rightFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
@@ -92,7 +92,7 @@ public class RootMotionControlScript : MonoBehaviour
         {
             inputForward = cinput.Forward;
             inputTurn = cinput.Turn;
-            inputAction = cinput.Action;
+            //inputAction = cinput.Action;
 
         }
 
@@ -105,59 +105,59 @@ public class RootMotionControlScript : MonoBehaviour
 
 
 
-        float buttonDistance = float.MaxValue;
-        float buttonAngleDegrees = float.MaxValue;
+        //float buttonDistance = float.MaxValue;
+        //float buttonAngleDegrees = float.MaxValue;
 
-        if (buttonPressStandingSpot != null)
-        {
-            buttonDistance = Vector3.Distance(transform.position, buttonPressStandingSpot.transform.position);
-            buttonAngleDegrees = Quaternion.Angle(transform.rotation, buttonPressStandingSpot.transform.rotation);
-        }
+        //if (buttonPressStandingSpot != null)
+        //{
+        //    buttonDistance = Vector3.Distance(transform.position, buttonPressStandingSpot.transform.position);
+        //    buttonAngleDegrees = Quaternion.Angle(transform.rotation, buttonPressStandingSpot.transform.rotation);
+        //}
 
-        if (inputAction)
-        {
-            Debug.Log("Action pressed");
+        //if (inputAction)
+        //{
+        //    Debug.Log("Action pressed");
 
-            if (buttonDistance <= buttonCloseEnoughForMatchDistance)
-            {
-                if (buttonDistance <= buttonCloseEnoughForPressDistance &&
-                    buttonAngleDegrees <= buttonCloseEnoughForPressAngleDegrees)
-                {
-                    Debug.Log("Button press initiated");
+        //    if (buttonDistance <= buttonCloseEnoughForMatchDistance)
+        //    {
+        //        if (buttonDistance <= buttonCloseEnoughForPressDistance &&
+        //            buttonAngleDegrees <= buttonCloseEnoughForPressAngleDegrees)
+        //        {
+        //            Debug.Log("Button press initiated");
 
-                    doButtonPress = true;
+        //            doButtonPress = true;
 
-                }
-                else
-                {
-                    Debug.Log("match to button initiated");
-                    doMatchToButtonPress = true;
-                }
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("match to button initiated");
+        //            doMatchToButtonPress = true;
+        //        }
 
-            }
-        }
+        //    }
+        //}
 
-        // get info about current animation
-        var animState = anim.GetCurrentAnimatorStateInfo(0);
-        // If the transition to button press has been initiated then we want
-        // to correct the character position to the correct place
-        if (animState.IsName("MatchToButtonPress")
-        && !anim.IsInTransition(0) && !anim.isMatchingTarget)
-        {
-            if (buttonPressStandingSpot != null)
-            {
-                Debug.Log("Target matching correction started");
+        //// get info about current animation
+        //var animState = anim.GetCurrentAnimatorStateInfo(0);
+        //// If the transition to button press has been initiated then we want
+        //// to correct the character position to the correct place
+        //if (animState.IsName("MatchToButtonPress")
+        //&& !anim.IsInTransition(0) && !anim.isMatchingTarget)
+        //{
+        //    if (buttonPressStandingSpot != null)
+        //    {
+        //        Debug.Log("Target matching correction started");
 
-                initalMatchTargetsAnimTime = animState.normalizedTime;
+        //        initalMatchTargetsAnimTime = animState.normalizedTime;
 
-                var t = buttonPressStandingSpot.transform;
-                anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
-                new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
-                1f),
-                initalMatchTargetsAnimTime,
-                exitMatchTargetsAnimTime);
-            }
-        }
+        //        var t = buttonPressStandingSpot.transform;
+        //        anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
+        //        new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
+        //        1f),
+        //        initalMatchTargetsAnimTime,
+        //        exitMatchTargetsAnimTime);
+        //    }
+        //}
 
         anim.speed = this.animationSpeed;
         anim.SetFloat("velx", inputTurn);
@@ -165,8 +165,8 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
-        anim.SetBool("doButtonPress", doButtonPress);
-        anim.SetBool("matchToButtonPress", doMatchToButtonPress);
+        //anim.SetBool("doButtonPress", doButtonPress);
+        //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
     }
 

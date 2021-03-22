@@ -23,6 +23,12 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
+    public Vector3 Direction
+    {
+        get;
+        private set;
+    }
+
     public float Turn
     {
         get;
@@ -54,7 +60,7 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-
+    float turnSmoothVelocity;
 
     void Update()
     {
@@ -62,7 +68,14 @@ public class CharacterInputController : MonoBehaviour
         //GetAxisRaw() so we can do filtering here instead of the InputManager
         float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
         float v = Input.GetAxisRaw("Vertical"); // setup v variables as our vertical input axis
+        this.Direction = new Vector3(h, 0f, v).normalized;
 
+        if (this.Direction.magnitude >= 0.05f)
+        {
+            float targetAngle = Mathf.Atan2(this.Direction.x, this.Direction.z) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity , 0.1f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
 
         if (InputMapToCircular)
         {
