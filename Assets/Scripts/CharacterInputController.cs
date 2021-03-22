@@ -95,16 +95,15 @@ public class CharacterInputController : MonoBehaviour
         else if (Input.GetKey(KeyCode.E))
             h = 0.5f;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        this.Run = false;
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            this.Run = !this.Run;
-            if (this.Run == true) { this.Crouch = false; }
+            this.Run = true;
         } 
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C))
         {
             this.Crouch = !this.Crouch;
-            if (this.Crouch == true) { this.Run = false; }
         }
 
 
