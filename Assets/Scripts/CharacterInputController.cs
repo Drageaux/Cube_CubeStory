@@ -18,6 +18,7 @@ public class CharacterInputController : MonoBehaviour
 
     private float forwardSpeedLimit = 1f;
 
+
     public float Forward
     {
         get;
@@ -141,6 +142,7 @@ public class CharacterInputController : MonoBehaviour
 
 
         //Capture "fire" button for action event
+        
         Action = Input.GetButtonDown("Fire1");
 
         Jump = Input.GetButtonDown("Jump");

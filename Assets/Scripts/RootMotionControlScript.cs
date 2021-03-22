@@ -87,15 +87,6 @@ public class RootMotionControlScript : MonoBehaviour
         bool doButtonPress = false;
         bool doMatchToButtonPress = false;
 
-
-        if (cinput.enabled)
-        {
-            inputForward = cinput.Forward;
-            inputTurn = cinput.Turn;
-            //inputAction = cinput.Action;
-
-        }
-
         //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
         //Uneven terrain can cause the player to become technically airborne, but so close the player thinks they're touching ground.
         //Therefore, an additional raycast approach is used to check for close ground.
@@ -160,8 +151,8 @@ public class RootMotionControlScript : MonoBehaviour
         //}
 
         anim.speed = this.animationSpeed;
-        anim.SetFloat("velx", inputTurn);
-        anim.SetFloat("vely", inputForward);
+        anim.SetFloat("velx", Mathf.Abs(cinput.Turn));
+        anim.SetFloat("vely", Mathf.Abs(cinput.Forward));
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
