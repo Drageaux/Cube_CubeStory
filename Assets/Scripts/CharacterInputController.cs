@@ -6,6 +6,7 @@ public class CharacterInputController : MonoBehaviour
 {
 
     //public string Name = "George P Burdell";
+    public Transform cam;
 
     private float filteredForwardInput = 0f;
     private float filteredTurnInput = 0f;
@@ -72,7 +73,7 @@ public class CharacterInputController : MonoBehaviour
 
         if (this.Direction.magnitude >= 0.05f)
         {
-            float targetAngle = Mathf.Atan2(this.Direction.x, this.Direction.z) * Mathf.Rad2Deg;
+            float targetAngle = Mathf.Atan2(this.Direction.x, this.Direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity , 0.1f);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
