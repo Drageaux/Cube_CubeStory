@@ -48,9 +48,9 @@ public class PlayerDetection_Animal : MonoBehaviour
         }
 
 
-        if (distance < 1)
+        if (distance < 1.5)
         {
-            Debug.Log("chicken_collected");
+           Debug.Log("chicken_collected");
             anim.Play("GetHit");
             StartCoroutine("WaitForSec");
             // Destroy(this.gameObject);
@@ -68,9 +68,10 @@ public class PlayerDetection_Animal : MonoBehaviour
     //    Debug.Log("chicken_collected");
     //    Destroy(this.gameObject);
     //}
+   
     IEnumerator WaitForSec()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.2f);
         Destroy(this.gameObject);
 
 

@@ -7,17 +7,17 @@ public class FanShapedArea : MonoBehaviour
     public static GameObject go;
     public static MeshFilter mf;
     public static MeshRenderer mr;
-    public static Shader shader;
+    public Shader shader;
     // Update is called once per frame
 
     void Update()
     {
         
-         ToDrawSectorSolid(transform, transform.localPosition, 90, 5);//if change value, change Player Detection.cs Wolf as well
+         ToDrawSectorSolid(transform, transform.localPosition, 90, 10);//if change value, change Player Detection.cs Wolf as well
 
     }
 
-    private static GameObject CreateMesh(List<Vector3> vertices)
+    private GameObject CreateMesh(List<Vector3> vertices,float yPos)
 
     {
         int[] triangles;
@@ -36,22 +36,24 @@ public class FanShapedArea : MonoBehaviour
 
         {
             go = new GameObject("mesh");
-            go.transform.position = new Vector3(0, 0.1f, 0);
+            go.transform.position = new Vector3(0, 0.5f+yPos, 0);
             mf = go.AddComponent<MeshFilter>();
             mr = go.AddComponent<MeshRenderer>();
-            shader = Shader.Find("Unlit/Color");
+            //shader = Shader.Find("UniGLTF/UniUnlit");
+            
 
         }
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles;
         mf.mesh = mesh;
         mr.material.shader = shader;
-        mr.material.color = Color.red;
+        //mr.material.color = Color.red;
+        mr.material.color = new Color32(255,0,0,150);
         return go;
     }  
 
-    //绘制实心扇形        
-    public static void ToDrawSectorSolid(Transform t, Vector3 center, float angle, float radius)  
+    //draw sector solid        
+    public void ToDrawSectorSolid(Transform t, Vector3 center, float angle, float radius)  
 
     {  
 
@@ -66,6 +68,7 @@ public class FanShapedArea : MonoBehaviour
             Vector3 pos = Quaternion.Euler(0f, -angle / 2 + eachAngle * (i - 1), 0f) * forward * radius + center;
             vertices.Add(pos);  
         }
-        CreateMesh(vertices);  
+        //Debug.Log(center.y);
+        CreateMesh(vertices,center.y);  
     }  
 }
