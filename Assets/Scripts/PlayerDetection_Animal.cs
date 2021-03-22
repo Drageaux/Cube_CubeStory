@@ -26,20 +26,34 @@ public class PlayerDetection_Animal : MonoBehaviour
         if (distance < 5)
         {
             //close to chicken, chicken will run away
-            anim.speed = 10;
+            //anim.speed = 10;
+            anim.Play("Run_RM");
+            if(distance < 2)
+            {
+                float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
 
+                Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
+                movementDirection.Normalize();
+
+                transform.Translate(movementDirection * anim.speed * Time.deltaTime, Space.World);
+                anim.Play("RunAngry_RM");
+            }
         }
         else
         {
             //far from chicken, chicken will wandaring
-            anim.speed = 1;
+            // anim.speed = 1;
+            anim.Play("Walk_RM");
         }
 
 
         if (distance < 1)
         {
             Debug.Log("chicken_collected");
-            Destroy(this.gameObject);
+            anim.Play("GetHit");
+            StartCoroutine("WaitForSec");
+            // Destroy(this.gameObject);
         }
 
         
@@ -54,4 +68,11 @@ public class PlayerDetection_Animal : MonoBehaviour
     //    Debug.Log("chicken_collected");
     //    Destroy(this.gameObject);
     //}
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(this.gameObject);
+
+
+    }
 }

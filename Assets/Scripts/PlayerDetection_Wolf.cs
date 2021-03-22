@@ -12,11 +12,15 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
     private Vector3 wolfPos=Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
+    private Vector3 directionOfCharacter;
+
+    private Animator anim;
+   // private int randomLookAround;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,6 +48,19 @@ public class PlayerDetection_Wolf : MonoBehaviour
         if (distance < minDistance && angle < minAngle / 2)
         {
             Debug.Log("In Wolf EyeSight");
+            directionOfCharacter = player.transform.position - gameObject.transform.position;
+            directionOfCharacter = directionOfCharacter.normalized;    // Get Direction to Move Towards
+            gameObject.transform.Translate(directionOfCharacter * anim.speed, Space.World);
+            anim.Play("IdleAggressive");
+            WaitForSec();
         }
+    }
+
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(2);
+        anim.Play("Run_RM");
+
+
     }
 }
