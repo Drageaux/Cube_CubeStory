@@ -8,7 +8,6 @@ using UnityEditor;
 
 //require some things the bot control needs
 [RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
-[RequireComponent(typeof(CharacterInputController))]
 public class RootMotionControlScript : MonoBehaviour
 {
     private Animator anim;
@@ -58,7 +57,7 @@ public class RootMotionControlScript : MonoBehaviour
         if (rbody == null)
             Debug.Log("Rigid body could not be found");
 
-        cinput = GetComponent<CharacterInputController>();
+        cinput = GetComponentInParent<CharacterInputController>();
         if (cinput == null)
             Debug.Log("CharacterInput could not be found");
     }
