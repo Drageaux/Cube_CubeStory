@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,13 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Ground
   - Player
+=======
+  - Terrain
+  - 
+>>>>>>> master
   - 
   - 
   - 
