@@ -83,7 +83,13 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Update()
     {
-
+        if (remainingTimer > 0)
+        {
+            remainingTimer--;
+        } else
+        {
+            cooking = false;
+        }
         //bool doMatchToButtonPress = false;
 
         //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
@@ -104,7 +110,7 @@ public class RootMotionControlScript : MonoBehaviour
             //Debug.Log("distance to cook " + buttonDistance);
             Debug.Log("angle to cook " + buttonAngleDegrees);
         } 
-        if (cinput.Action)
+        if (cinput.Action && remainingTimer == 0f)
         {
             Debug.Log("Action pressed");
 
@@ -115,6 +121,7 @@ public class RootMotionControlScript : MonoBehaviour
                 {
                     Debug.Log("Cooking initiated");
                     cooking = true;
+                    remainingTimer = interactionTimer;
                 }
                 else
                 {
