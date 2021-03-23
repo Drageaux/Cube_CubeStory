@@ -1325,6 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SucessText: {fileID: 514293759}
   ingredient: {fileID: 1289431816}
+  Storagetext: {fileID: 0}
 --- !u!65 &341148885
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3536,6 +3537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SucessText: {fileID: 1843886526}
   ingredient: {fileID: 675350651}
+  Storagetext: {fileID: 0}
 --- !u!1001 &760555441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4100,7 +4102,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936677651}
-  m_LocalRotation: {x: 0.08604983, y: 0.00000000428564, z: -3.701515e-10, w: 0.99629086}
+  m_LocalRotation: {x: 0.08604983, y: -0.0000000042856403, z: 3.7015155e-10, w: 0.99629086}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4406,7 +4408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.104109846, y: 0, z: 0, w: 0.99456584}
-  m_LocalPosition: {x: 23.382147, y: 2.5, z: 5.746128}
+  m_LocalPosition: {x: 23.382147, y: 3, z: 5.746128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6748,7 +6750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055525596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -6}
+  m_LocalPosition: {x: 0, y: 2, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 130448498}
@@ -10609,6 +10611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SucessText: {fileID: 703312535}
   ingredient: {fileID: 1042578147}
+  Storagetext: {fileID: 0}
 --- !u!65 &1711464721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11165,6 +11168,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985787401459075171, guid: 9da0f18063101694cb43dda184fa4920,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985787401459075171, guid: 9da0f18063101694cb43dda184fa4920,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985787401459075171, guid: 9da0f18063101694cb43dda184fa4920,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4985787401459075171, guid: 9da0f18063101694cb43dda184fa4920,
         type: 3}
