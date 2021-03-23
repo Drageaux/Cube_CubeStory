@@ -30,7 +30,7 @@ public class RootMotionControlScript : MonoBehaviour
     public float animationSpeed = 1f;
     public float rootMovementSpeed = 1f;
     public float rootTurnSpeed = 1f;
-    public GameObject buttonObject;
+    public GameObject cookingObject;
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
@@ -232,13 +232,13 @@ public class RootMotionControlScript : MonoBehaviour
                 float buttonWeight = anim.GetFloat("buttonClose");
 
                 // Set the look target position, if one has been assigned
-                if (buttonObject != null)
+                if (cookingObject != null)
                 {
                     anim.SetLookAtWeight(buttonWeight);
-                    anim.SetLookAtPosition(buttonObject.transform.position);
+                    anim.SetLookAtPosition(cookingObject.transform.position);
                     anim.SetIKPositionWeight(AvatarIKGoal.RightHand, buttonWeight);
                     anim.SetIKPosition(AvatarIKGoal.RightHand,
-                    buttonObject.transform.position);
+                    cookingObject.transform.position);
 
                 }
             }
