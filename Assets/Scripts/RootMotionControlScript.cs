@@ -17,8 +17,8 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
-    public float interactionTimer = 200f;
-    private float remainingTimer = 0;
+    public float cookingTime = 4f; // in seconds
+    private float remainingTimer;
 
     public bool cooking;
     public GameObject cookingStandingSpot;
@@ -83,11 +83,9 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Update()
     {
-        if (remainingTimer > 0)
+        if (Time.time > remainingTimer)
         {
-            remainingTimer--;
-        } else
-        {
+            Debug.Log("timer " + Time.time);
             cooking = false;
         }
         //bool doMatchToButtonPress = false;
@@ -108,9 +106,9 @@ public class RootMotionControlScript : MonoBehaviour
             buttonDistance = Vector3.Distance(transform.position, cookingStandingSpot.transform.position);
             buttonAngleDegrees = Quaternion.Angle(transform.rotation, cookingStandingSpot.transform.rotation);
             //Debug.Log("distance to cook " + buttonDistance);
-            Debug.Log("angle to cook " + buttonAngleDegrees);
+            //Debug.Log("angle to cook " + buttonAngleDegrees);
         } 
-        if (cinput.Action && remainingTimer == 0f)
+        if (cinput.Action)
         {
             Debug.Log("Action pressed");
 
@@ -120,8 +118,10 @@ public class RootMotionControlScript : MonoBehaviour
                     buttonAngleDegrees <= cookingCloseEnoughAngle)
                 {
                     Debug.Log("Cooking initiated");
+                
+            Debug.Log("timer " + Time.time);
                     cooking = true;
-                    remainingTimer = interactionTimer;
+                    remainingTimer = Time.time + cookingTime;
                 }
                 else
                 {
