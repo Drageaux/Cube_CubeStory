@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDetection_Animal : MonoBehaviour
 {
     public GameObject player;
     private float distance = 0;
     private Animator anim;
+    private Text Storagetext;
+    Ingredient_Collider col_script;
+    private bool added=false;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -15,6 +19,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     void Start()
     {
         distance = Vector3.Distance(gameObject.transform.position,player.transform.position);
+        col_script = GameObject.Find("Cube").GetComponent<Ingredient_Collider>();
     }
 
     // Update is called once per frame
@@ -54,6 +59,12 @@ public class PlayerDetection_Animal : MonoBehaviour
             anim.Play("GetHit");
             StartCoroutine("WaitForSec");
             // Destroy(this.gameObject);
+            if (added == false)
+            {
+                col_script.Storagetext.text += this.name;
+                col_script.Storagetext.text += '\n';
+                added = true;
+            }
         }
 
         
