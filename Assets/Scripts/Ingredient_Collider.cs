@@ -9,6 +9,7 @@ public class Ingredient_Collider : MonoBehaviour
     private bool touch = false;
     public GameObject ingredient;
 
+
     // Start is called before the first frame update
     void Start()
     {
