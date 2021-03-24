@@ -30,7 +30,7 @@ public class Ingredient_Collider : MonoBehaviour
             {
                 SucessText.SetActive(true);
                 StartCoroutine("WaitForSec");
-                Destroy(ingredient);
+                // Destroy(c);
                 ingredientList.Add(ingredient);
                 Debug.Log("storage info");
                 Debug.Log(ingredientList.Count);

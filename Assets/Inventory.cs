@@ -62,6 +62,7 @@ public class Inventory : MonoBehaviour
                 }
                 orders.RemoveAt(0);
                 print("worked");
+                //anim cook
             }
             else
             {
@@ -74,7 +75,7 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
-        string name = c.gameObject.name;
+        string name = c.gameObject.tag;
         switch (name)
         {
             case "Potato":
@@ -87,6 +88,7 @@ public class Inventory : MonoBehaviour
                     this.ingredientList[name]++;
 
                 }
+                Destroy(c.gameObject);
                 break;
             case "Egg":
                 if (!this.ingredientList.ContainsKey("Egg"))
@@ -97,6 +99,7 @@ public class Inventory : MonoBehaviour
                 {
                     this.ingredientList[name]++;
                 }
+                Destroy(c.gameObject);
                 break;
         }
          foreach (KeyValuePair<string, int> entry in ingredientList)
