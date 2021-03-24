@@ -2,23 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class Health : MonoBehaviour
 {
-    public float health = 100f;
+    private float health = 100f;
+    private Animator anim;
 
     private void Awake()
     {
         health = 100f;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        anim = GetComponent<Animator>();
+
+        if (anim == null)
+            Debug.Log("Animator could not be found");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (health <= 0)
+        {
+            anim.SetBool("dead", true);
+        }
+    }
+
+    public void GetHit(float dmgDone)
+    {
+        if (dmgDone > 0)
+        {
+            health -= dmgDone;
+            anim.SetTrigger("hurt");
+        }
     }
 }

@@ -8,6 +8,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
+    private const float damage = 100f;
 
     float minDistance = 10f;//if change, change FanShapedArea.cs as well
     float minAngle = 90f;//if change, change FanShapedArea.cs as well
@@ -74,6 +75,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
           {
               Debug.Log("Wolf Caught Player");
               anim.SetBool("caught", true);
+              player.GetComponent<Health>().GetHit(damage);
           }
           else
           {
