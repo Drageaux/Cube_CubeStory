@@ -85,7 +85,7 @@ public class RootMotionControlScript : MonoBehaviour
     {
         if (Time.time > remainingTimer)
         {
-            Debug.Log("timer " + Time.time);
+            //Debug.Log("timer " + Time.time);
             cooking = false;
         }
         //bool doMatchToButtonPress = false;
