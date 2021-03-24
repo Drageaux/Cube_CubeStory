@@ -34,13 +34,13 @@ public class Ingredient_Collider : MonoBehaviour
                 ingredientList.Add(ingredient);
                 Debug.Log("storage info");
                 Debug.Log(ingredientList.Count);
-                for (int i = 0; i < ingredientList.Count; i++)
-                {
-                    Debug.Log("!!displaying ingredients!!");
-                    Storagetext.text += ingredientList[i].name;
-                    Storagetext.text += '\n';
-                    Debug.Log(ingredientList[i].name);
-                }
+                // for (int i = 0; i < ingredientList.Count; i++)
+                // {
+                //     Debug.Log("!!displaying ingredients!!");
+                //     Storagetext.text += ingredientList[i].name;
+                //     Storagetext.text += '\n';
+                //     Debug.Log(ingredientList[i].name);
+                // }
 
             }
 
