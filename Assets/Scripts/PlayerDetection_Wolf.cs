@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class PlayerDetection_Wolf : MonoBehaviour
 {
     
@@ -15,68 +17,120 @@ public class PlayerDetection_Wolf : MonoBehaviour
     private Vector3 directionOfCharacter;
 
     private Animator anim;
-   // private int randomLookAround;
+    private NavMeshAgent agent;
+    public GameObject[] waypoint;
+    int curentWaypoint = -1;
 
+    public enum AIState
+    {
+        wander,//wander among waypoints
+        chase
+    }
+    public AIState aistate;
+
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        aistate = AIState.wander;
+        setNextWayPoint();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //change into finite state machine waypoint? later, now using randomly rotate
-       /* if(Random.Range(0,10)<0.2)
-        {
-            gameObject.transform.Rotate(0f, Random.Range(-10,10), 0f);
-        }*/
-        wolfPos = gameObject.transform.position;
-        playerPos = player.transform.position;
 
-        float distance = Vector3.Distance(wolfPos, playerPos);
+          wolfPos = gameObject.transform.position;
+          playerPos = player.transform.position;
+          float distance = Vector3.Distance(wolfPos, playerPos);
 
-        //the vector of player and wolf
-        Vector3 srcLocalVect = playerPos - wolfPos;
-        srcLocalVect.y = 0;
+          //calculate the angle of wolf and player
+          Vector3 srcLocalVect = playerPos - wolfPos;
+          srcLocalVect.y = 0;
+          Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
+          Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
+          forwardLocalVect.y = 0;
+          float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
 
-        //get a point in the right front of the wolf
-        Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
+          //in wolf eyesight, wolf chase
+          if (distance < minDistance && angle < minAngle / 2)
+          {
+              aistate = AIState.chase;
+              
+          }
+          else
+          {
+                aistate = AIState.wander;
+                anim.SetBool("detected", false);
+          }
 
-        //get the vector of the right front
-        Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
-        forwardLocalVect.y = 0;
+          //wolf caught
+          if (distance <1f && angle < minAngle / 2)
+          {
+              Debug.Log("Wolf Caught Player");
+              anim.SetBool("caught", true);
+          }
+          else
+          {
+              anim.SetBool("caught", false);
+          }
 
-        //calculate the angle of player and wolf
-        float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
-
-
-        //in wolf eyesight, wolf chase
-        if (distance < minDistance && angle < minAngle / 2)
-        {
-            Debug.Log("In Wolf EyeSight");
-            directionOfCharacter = player.transform.position - gameObject.transform.position;
-            directionOfCharacter = directionOfCharacter.normalized;    // Get Direction to Move Towards
-            gameObject.transform.Translate(directionOfCharacter * 0.12f, Space.World);
-            anim.Play("IdleAggressive");
-            WaitForSec();
-        }
-
-        //wolf caught
-        if (distance <2f && angle < minAngle / 2)
-        {
-            Debug.Log("Wolf Caught Player");
-      
-        }
-    }
-
-    IEnumerator WaitForSec()
-    {
-        yield return new WaitForSeconds(1);
-        anim.Play("Run_RM");
         
-
+        switch (aistate)
+        {
+            case AIState.wander:
+                if(agent.remainingDistance-agent.stoppingDistance<=0 && agent.pathPending==false)
+                {
+                    setNextWayPoint();
+                }
+                break;
+            case AIState.chase:
+                chasePlayer();
+                break;
+            default:
+                break;
+        }
     }
 
-   
+    void chasePlayer()
+    { 
+        directionOfCharacter = playerPos - wolfPos;
+        directionOfCharacter = directionOfCharacter.normalized;    // Get Direction to Move Towards
+
+        //facing player
+        Quaternion q = Quaternion.LookRotation(playerPos - wolfPos);
+        transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, q, 3 * Time.deltaTime);
+        gameObject.transform.Translate(directionOfCharacter * 0.02f, Space.World);
+        //anim.Play("IdleAggressive");
+        anim.SetBool("detected", true);
+        //WaitForSec();
+    }
+
+    void setNextWayPoint()
+    {
+        curentWaypoint++;
+        if(waypoint.Length==0)
+        {
+            Debug.LogError("waypoints has no object");
+            return;
+        }
+        if(curentWaypoint==waypoint.Length)
+        {
+            curentWaypoint = 0;
+        }
+        //Debug.Log(curentWaypoint);
+        agent.SetDestination(waypoint[curentWaypoint].transform.position);
+    }
+    /* IEnumerator WaitForSec()
+     {
+         yield return new WaitForSeconds(1);
+         anim.Play("Run_RM");
+     }*/
+
+
 }
