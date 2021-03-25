@@ -90,7 +90,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
             /* Attack condition */
             //wolf caught
-            if (distance < 1f && angle < minAngle / 2)
+            if (distance < 1.2f)
             {
                 if(Time.time > attackTimer)
                 {
