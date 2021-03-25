@@ -112,7 +112,8 @@ public class PlayerDetection_Wolf : MonoBehaviour
         switch (aistate)
         {
             case AIState.wander:
-                if(agent.remainingDistance-agent.stoppingDistance<=0 && agent.pathPending==false)
+                agent.isStopped = false;
+                if (agent.remainingDistance-agent.stoppingDistance<=0 && agent.pathPending==false)
                 {
                     setNextWayPoint();
                 }
@@ -147,7 +148,6 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
     void setNextWayPoint()
     {
-        agent.isStopped = false;
         curentWaypoint++;
         if(waypoint.Length==0)
         {
