@@ -17,5 +17,10 @@ public class Order : ScriptableObject
     }
 
     public List<RequiredIngredient> requiredIngredients = new List<RequiredIngredient>();
+
+    public void Cook()
+    {
+
+    }
 }
 
