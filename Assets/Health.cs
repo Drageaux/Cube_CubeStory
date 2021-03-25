@@ -23,10 +23,12 @@ public class Health : MonoBehaviour
         {
             anim.SetBool("dead", true);
             Destroy(GetComponent<CharacterInputController>());
-        } else
-        {
-            anim.ResetTrigger("hurt");
-        }
+        } 
+    }
+
+    private void LateUpdate()
+    {
+        anim.ResetTrigger("hurt");
     }
 
     public void GetHit(float dmgDone)
