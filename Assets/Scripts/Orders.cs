@@ -67,6 +67,6 @@ public class Order
     public void decreaseTimer()
     {
         RemainingTime = timeToComplete - Time.time;
-        Debug.Log("remaining time: " + RemainingTime);
+        //Debug.Log("remaining time: " + RemainingTime);
     }
 }
