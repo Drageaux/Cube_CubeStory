@@ -27,7 +27,8 @@ public class PlayerDetection_Wolf : MonoBehaviour
     public enum AIState
     {
         wander,//wander among waypoints
-        chase
+        chase,
+        idle
     }
     public AIState aistate;
 
@@ -35,6 +36,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        attackTimer = Time.time;
     }
     // Start is called before the first frame update
     void Start()
@@ -47,12 +49,14 @@ public class PlayerDetection_Wolf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<Health>().Alive())
+        
+        anim.ResetTrigger("caught");
+        if (Time.time < attackTimer)
         {
-            if (Time.time > attackTimer)
-            {
-                anim.SetBool("caught", true);
-            }
+            aistate = AIState.idle;
+        }
+        else if (player.GetComponent<Health>().Alive())
+        {
             wolfPos = gameObject.transform.position;
             playerPos = player.transform.position;
             float distance = Vector3.Distance(wolfPos, playerPos);
@@ -65,10 +69,19 @@ public class PlayerDetection_Wolf : MonoBehaviour
             forwardLocalVect.y = 0;
             float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
 
+            /* AI State conditions */
             //in wolf eyesight, wolf chase
             if (distance < minDistance && angle < minAngle / 2)
             {
-                aistate = AIState.chase;
+                //in wolf eyesight but if attacking on cooldown, don't move
+                if (Time.time > attackTimer)
+                {
+                    aistate = AIState.chase;
+                } 
+                else
+                {
+                    aistate = AIState.idle;
+                }
             }
             else
             {
@@ -76,26 +89,26 @@ public class PlayerDetection_Wolf : MonoBehaviour
                 anim.SetBool("detected", false);
             }
 
+            /* Attack condition */
             //wolf caught
-            if (distance < 1f && angle < minAngle / 2 && Time.time > attackTimer)
+            if (distance < 1f && angle < minAngle / 2)
             {
-                Debug.Log("Wolf Caught Player");
-                anim.SetBool("caught", true);
-                player.GetComponent<Health>().GetHit(damage);
-                attackTimer = Time.time + hitRate;
+                if(Time.time > attackTimer)
+                {
+                    Debug.Log("Wolf Caught Player");
+                    anim.SetTrigger("caught");
+                    player.GetComponent<Health>().GetHit(damage);
+                    attackTimer = Time.time + hitRate;
+                } 
             }
-            else
-            {
-                anim.SetBool("caught", false);
-            }
-        } else
+        } 
+        else
         {
             anim.SetBool("detected", false);
-            anim.SetBool("caught", false);
             aistate = AIState.wander;
         }
 
-        
+        /* AI Switch states */
         switch (aistate)
         {
             case AIState.wander:
@@ -106,6 +119,12 @@ public class PlayerDetection_Wolf : MonoBehaviour
                 break;
             case AIState.chase:
                 chasePlayer();
+                break;
+            case AIState.idle:
+                Debug.Log("wait");
+                agent.isStopped = true;
+                transform.position = transform.position;
+                transform.rotation = transform.rotation;
                 break;
             default:
                 break;
@@ -128,6 +147,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
     void setNextWayPoint()
     {
+        agent.isStopped = false;
         curentWaypoint++;
         if(waypoint.Length==0)
         {
