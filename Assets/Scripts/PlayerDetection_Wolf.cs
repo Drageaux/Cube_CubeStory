@@ -49,7 +49,6 @@ public class PlayerDetection_Wolf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         anim.ResetTrigger("caught");
         if (Time.time < attackTimer)
         {
