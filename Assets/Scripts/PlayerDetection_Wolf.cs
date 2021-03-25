@@ -8,7 +8,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
-    private const float damage = 50f;
+    private const float damage = 40f;
     private const float hitRate = 2f;
     private float attackTimer;
 
@@ -123,8 +123,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
             case AIState.idle:
                 Debug.Log("wait");
                 agent.isStopped = true;
-                transform.position = transform.position;
-                transform.rotation = transform.rotation;
+                gameObject.transform.Translate(directionOfCharacter * 0f, Space.World);
                 break;
             default:
                 break;
