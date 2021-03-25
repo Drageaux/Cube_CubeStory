@@ -20,13 +20,19 @@ public class Orders : MonoBehaviour
     #endregion
 
 
-    public List<Recipe> orders = new List<Recipe>();
 
-    public void Add(Recipe order)
+    [System.Serializable]
+    public class Order
     {
-        if (!order.isDefaultOrder)
-        {
-            orders.Add(order);
-        }
+        [HideInInspector]
+        public string name = "Order";
+        public Recipe dish;
+        public float remainingTime;
+    }
+    public List<Order> orders = new List<Order>();
+
+    public void Add(Order order)
+    {
+        orders.Add(order);
     }
 }
