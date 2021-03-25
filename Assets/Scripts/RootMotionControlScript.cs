@@ -8,11 +8,14 @@ using UnityEditor;
 
 //require some things the bot control needs
 [RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
+[RequireComponent(typeof(Health))]
 public class RootMotionControlScript : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody rbody;
     private CharacterInputController cinput;
+
+    private Health healthScript;
 
     private Transform leftFoot;
     private Transform rightFoot;
@@ -60,9 +63,14 @@ public class RootMotionControlScript : MonoBehaviour
         if (rbody == null)
             Debug.Log("Rigid body could not be found");
 
-        cinput = GetComponentInParent<CharacterInputController>();
+        cinput = GetComponent<CharacterInputController>();
         if (cinput == null)
             Debug.Log("CharacterInput could not be found");
+
+
+        healthScript = GetComponent<Health>();
+        if (healthScript == null)
+            Debug.Log("Health script could not be found");
     }
 
 
@@ -83,6 +91,10 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Update()
     {
+        if (!healthScript.Alive())
+        {
+            return;
+        }
         if (Time.time > remainingTimer)
         {
             cooking = false;
