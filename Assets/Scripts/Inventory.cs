@@ -12,7 +12,14 @@ public class Inventory : MonoBehaviour
     public Text eggStorage;
     public GameObject lackIngredient;
     public GameObject storagePanel;
+    public Orders ordersSystem;
 
+
+
+    private void Awake()
+    {
+        ordersSystem = Orders.instance;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,58 +41,112 @@ public class Inventory : MonoBehaviour
         // if space is hit
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if(!(orders.Count > 0)){
-               return;
-            }
-            Dictionary<string, int> ordercurr = orders[0];
-            bool iscompleted = true;
-            foreach (KeyValuePair<string, int> entry in ordercurr)
+            if (ordersSystem.orders.Count > 0)
             {
-                int quantity = entry.Value;
-                if (ingredientList.ContainsKey(entry.Key))
+                Order currentOrder = null;
+                foreach (Order o in ordersSystem.orders)
                 {
-                    if (!(ingredientList[entry.Key] >= quantity))
+                    // cook if not completed or not failed to do on time
+                    if (!o.completed && o.RemainingTime > 0)
                     {
-                        iscompleted = false;
+                        
+                        currentOrder = o;
                         break;
                     }
-                } else {
-                    iscompleted = false;
-                    break;
                 }
-            }
-            print(iscompleted);
 
+                bool iscompleted = HasEnoughIngredients(currentOrder);
+                Debug.Log("Have enough ingredients? " + iscompleted);
 
-            if (iscompleted)
-            {
-                foreach (KeyValuePair<string, int> entry in ordercurr)
+                if (iscompleted)
                 {
-                    int quantity = entry.Value;
-                    ingredientList[entry.Key] -= quantity;
-                    if (entry.Key == "Potato")
+                    foreach (RequiredIngredient req in currentOrder.dish.requiredIngredients)
                     {
-                        potatoStorage.text = "+" + ingredientList[entry.Key];
-
+                        int quantity = req.quantity;
+                        string ingredientName = req.ingredient.name;
+                        ingredientList[ingredientName] -= req.quantity;
+                        if (ingredientName == "Potato")
+                        {
+                            potatoStorage.text = "+" + ingredientList[ingredientName];
+                        }
+                        else if (ingredientName == "Egg")
+                        {
+                            eggStorage.text = "+" + ingredientList[ingredientName];
+                        }
+                        if (ingredientList[ingredientName] <= 0)
+                        {
+                            ingredientList.Remove(ingredientName);
+                        }
                     }
-                    else if (entry.Key == "Egg")
-                    {
-                        eggStorage.text = "+" + ingredientList[entry.Key];
-                    }
-                    if (ingredientList[entry.Key] <= 0)
-                    {
-                        ingredientList.Remove(entry.Key);
-                    }
+                    orders.RemoveAt(0);
+                    print("worked");
+                    //anim cook
                 }
-                orders.RemoveAt(0);
-                print("worked");
-                //anim cook
-            }
-            else
-            {
-                lackIngredient.SetActive(true);
-                print("not enough ingredients");
-                // UI message to User
+                else
+                {
+                    lackIngredient.SetActive(true);
+                    print("not enough ingredients");
+                    // UI message to User
+                }
+
+                //Debug.Log("Does ingredient to make " + )
+
+                //if (!(orders.Count > 0))
+                //{
+                //    return;
+                //}
+                //Dictionary<string, int> ordercurr = orders[0];
+                //bool iscompleted = true;
+                //foreach (KeyValuePair<string, int> entry in ordercurr)
+                //{
+                //    int quantity = entry.Value;
+                //    if (ingredientList.ContainsKey(entry.Key))
+                //    {
+                //        if (!(ingredientList[entry.Key] >= quantity))
+                //        {
+                //            iscompleted = false;
+                //            break;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        iscompleted = false;
+                //        break;
+                //    }
+                //}
+                //print(iscompleted);
+
+
+                //if (iscompleted)
+                //{
+                //    foreach (KeyValuePair<string, int> entry in ordercurr)
+                //    {
+                //        int quantity = entry.Value;
+                //        ingredientList[entry.Key] -= quantity;
+                //        if (entry.Key == "Potato")
+                //        {
+                //            potatoStorage.text = "+" + ingredientList[entry.Key];
+
+                //        }
+                //        else if (entry.Key == "Egg")
+                //        {
+                //            eggStorage.text = "+" + ingredientList[entry.Key];
+                //        }
+                //        if (ingredientList[entry.Key] <= 0)
+                //        {
+                //            ingredientList.Remove(entry.Key);
+                //        }
+                //    }
+                //    orders.RemoveAt(0);
+                //    print("worked");
+                //    //anim cook
+                //}
+                //else
+                //{
+                //    lackIngredient.SetActive(true);
+                //    print("not enough ingredients");
+                //    // UI message to User
+                //}
             }
         }
         //if s it hit
@@ -142,5 +203,36 @@ public class Inventory : MonoBehaviour
                     print(entry.Value);
                 }
 
+    }
+
+    private bool HasEnoughIngredients(Order order)
+    {
+        bool hasEnough = true;
+        if (order != null)
+        {
+            Debug.Log("current order: " + order.dish);
+            foreach (RequiredIngredient req in order.dish.requiredIngredients)
+            {
+                if (ingredientList.ContainsKey(req.ingredient.name))
+                {
+                    if (!(ingredientList[req.ingredient.name] >= req.quantity))
+                    {
+                        hasEnough = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    hasEnough = false;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            hasEnough = false;
+        }
+        Debug.Log("Have enough ingredients? " + hasEnough);
+        return hasEnough;
     }
 }
