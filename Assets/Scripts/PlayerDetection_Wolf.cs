@@ -8,6 +8,9 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
+    private const float damage = 40f;
+    private const float hitRate = 2f;
+    private float attackTimer;
 
     float minDistance = 10f;//if change, change FanShapedArea.cs as well
     float minAngle = 90f;//if change, change FanShapedArea.cs as well
@@ -24,7 +27,8 @@ public class PlayerDetection_Wolf : MonoBehaviour
     public enum AIState
     {
         wander,//wander among waypoints
-        chase
+        chase,
+        idle
     }
     public AIState aistate;
 
@@ -32,6 +36,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        attackTimer = Time.time;
     }
     // Start is called before the first frame update
     void Start()
@@ -44,53 +49,81 @@ public class PlayerDetection_Wolf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.ResetTrigger("caught");
+        if (Time.time < attackTimer)
+        {
+            aistate = AIState.idle;
+        }
+        else if (player.GetComponent<Health>().Alive())
+        {
+            wolfPos = gameObject.transform.position;
+            playerPos = player.transform.position;
+            float distance = Vector3.Distance(wolfPos, playerPos);
 
-          wolfPos = gameObject.transform.position;
-          playerPos = player.transform.position;
-          float distance = Vector3.Distance(wolfPos, playerPos);
+            //calculate the angle of wolf and player
+            Vector3 srcLocalVect = playerPos - wolfPos;
+            srcLocalVect.y = 0;
+            Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
+            Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
+            forwardLocalVect.y = 0;
+            float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
 
-          //calculate the angle of wolf and player
-          Vector3 srcLocalVect = playerPos - wolfPos;
-          srcLocalVect.y = 0;
-          Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
-          Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
-          forwardLocalVect.y = 0;
-          float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
-
-          //in wolf eyesight, wolf chase
-          if (distance < minDistance && angle < minAngle / 2)
-          {
-              aistate = AIState.chase;
-              
-          }
-          else
-          {
+            /* AI State conditions */
+            //in wolf eyesight, wolf chase
+            if (distance < minDistance && angle < minAngle / 2)
+            {
+                //in wolf eyesight but if attacking on cooldown, don't move
+                if (Time.time > attackTimer)
+                {
+                    aistate = AIState.chase;
+                } 
+                else
+                {
+                    aistate = AIState.idle;
+                }
+            }
+            else
+            {
                 aistate = AIState.wander;
                 anim.SetBool("detected", false);
-          }
+            }
 
-          //wolf caught
-          if (distance <1f && angle < minAngle / 2)
-          {
-              Debug.Log("Wolf Caught Player");
-              anim.SetBool("caught", true);
-          }
-          else
-          {
-              anim.SetBool("caught", false);
-          }
+            /* Attack condition */
+            //wolf caught
+            if (distance < 1f && angle < minAngle / 2)
+            {
+                if(Time.time > attackTimer)
+                {
+                    Debug.Log("Wolf Caught Player");
+                    anim.SetTrigger("caught");
+                    player.GetComponent<Health>().GetHit(damage);
+                    attackTimer = Time.time + hitRate;
+                } 
+            }
+        } 
+        else
+        {
+            anim.SetBool("detected", false);
+            aistate = AIState.wander;
+        }
 
-        
+        /* AI Switch states */
         switch (aistate)
         {
             case AIState.wander:
-                if(agent.remainingDistance-agent.stoppingDistance<=0 && agent.pathPending==false)
+                agent.isStopped = false;
+                if (agent.remainingDistance-agent.stoppingDistance<=0 && agent.pathPending==false)
                 {
                     setNextWayPoint();
                 }
                 break;
             case AIState.chase:
                 chasePlayer();
+                break;
+            case AIState.idle:
+                Debug.Log("wait");
+                agent.isStopped = true;
+                gameObject.transform.Translate(directionOfCharacter * 0f, Space.World);
                 break;
             default:
                 break;
