@@ -19,9 +19,10 @@ public class Orders : MonoBehaviour
 
     #endregion
 
-    public List<Order> orders = new List<Order>();
 
-    public void Add(Order order)
+    public List<Recipe> orders = new List<Recipe>();
+
+    public void Add(Recipe order)
     {
         if (!order.isDefaultOrder)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Order", menuName = "Food/Order")]
-public class Order : ScriptableObject
+public class Recipe : ScriptableObject
 {
     new public string name = "New Order";
     public Sprite icon = null;
