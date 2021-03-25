@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Order", menuName = "Food/Order")]
+[CreateAssetMenu(fileName = "New Recipe", menuName = "Food/Recipe")]
 public class Recipe : ScriptableObject
 {
-    new public string name = "New Order";
+    new public string name = "New Recipe";
     public Sprite icon = null;
-    public bool isDefaultOrder = false;
+    public bool isDefaultRecipe = false;
 
     [System.Serializable]
     public class RequiredIngredient
