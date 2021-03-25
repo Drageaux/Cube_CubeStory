@@ -648,7 +648,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130448496}
-  m_LocalRotation: {x: 0.12218326, y: 0.000000004269366, z: -5.25583e-10, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218326, y: -0.000000004269366, z: 5.25583e-10, w: 0.9925076}
   m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9534,6 +9534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ba1f89ea43ffb4f900e92ba02523d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orders: []
 --- !u!4 &1341648444
 Transform:
   m_ObjectHideFlags: 0
@@ -12702,6 +12703,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1782967672}
     m_Modifications:
+    - target: {fileID: 4605035488792915269, guid: 7331e1450df490c4bb916aca082e96cf,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4725603828666048076, guid: 7331e1450df490c4bb916aca082e96cf,
         type: 3}
       propertyPath: m_Pivot.x
@@ -12837,6 +12843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725603828917628726, guid: 7331e1450df490c4bb916aca082e96cf,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4725603828917628727, guid: 7331e1450df490c4bb916aca082e96cf,
         type: 3}
