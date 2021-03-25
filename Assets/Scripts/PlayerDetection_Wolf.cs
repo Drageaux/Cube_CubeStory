@@ -47,47 +47,53 @@ public class PlayerDetection_Wolf : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Time.time > attackTimer)
+        if (player.GetComponent<Health>().Alive())
         {
-            anim.SetBool("caught", true);
-        }
-        wolfPos = gameObject.transform.position;
-          playerPos = player.transform.position;
-          float distance = Vector3.Distance(wolfPos, playerPos);
+            if (Time.time > attackTimer)
+            {
+                anim.SetBool("caught", true);
+            }
+            wolfPos = gameObject.transform.position;
+            playerPos = player.transform.position;
+            float distance = Vector3.Distance(wolfPos, playerPos);
 
-          //calculate the angle of wolf and player
-          Vector3 srcLocalVect = playerPos - wolfPos;
-          srcLocalVect.y = 0;
-          Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
-          Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
-          forwardLocalVect.y = 0;
-          float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
+            //calculate the angle of wolf and player
+            Vector3 srcLocalVect = playerPos - wolfPos;
+            srcLocalVect.y = 0;
+            Vector3 forwardLocalPos = gameObject.transform.forward * 1 + wolfPos;
+            Vector3 forwardLocalVect = forwardLocalPos - wolfPos;
+            forwardLocalVect.y = 0;
+            float angle = Vector3.Angle(srcLocalVect, forwardLocalVect);
 
-          //in wolf eyesight, wolf chase
-          if (distance < minDistance && angle < minAngle / 2)
-          {
-              aistate = AIState.chase;
-              
-          }
-          else
-          {
+            //in wolf eyesight, wolf chase
+            if (distance < minDistance && angle < minAngle / 2)
+            {
+                aistate = AIState.chase;
+            }
+            else
+            {
                 aistate = AIState.wander;
                 anim.SetBool("detected", false);
-          }
+            }
 
-          //wolf caught
-          if (distance <1f && angle < minAngle / 2 && Time.time > attackTimer)
-          {
-              Debug.Log("Wolf Caught Player");
-              anim.SetBool("caught", true);
-              player.GetComponent<Health>().GetHit(damage);
-              attackTimer = Time.time + hitRate;
-          }
-          else
-          {
-              anim.SetBool("caught", false);
-          }
+            //wolf caught
+            if (distance < 1f && angle < minAngle / 2 && Time.time > attackTimer)
+            {
+                Debug.Log("Wolf Caught Player");
+                anim.SetBool("caught", true);
+                player.GetComponent<Health>().GetHit(damage);
+                attackTimer = Time.time + hitRate;
+            }
+            else
+            {
+                anim.SetBool("caught", false);
+            }
+        } else
+        {
+            anim.SetBool("detected", false);
+            anim.SetBool("caught", false);
+            aistate = AIState.wander;
+        }
 
         
         switch (aistate)
