@@ -9,13 +9,6 @@ public class Recipe : ScriptableObject
     public Sprite icon = null;
     public bool isDefaultRecipe = false;
 
-    [System.Serializable]
-    public class RequiredIngredient
-    {
-        public Ingredient ingredient;
-        public int quantity;
-    }
-
     public List<RequiredIngredient> requiredIngredients = new List<RequiredIngredient>();
 
     public void Cook()
@@ -24,3 +17,9 @@ public class Recipe : ScriptableObject
     }
 }
 
+[System.Serializable]
+public class RequiredIngredient
+{
+    public Ingredient ingredient;
+    public int quantity;
+}
