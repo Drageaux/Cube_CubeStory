@@ -22,11 +22,13 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             anim.SetBool("dead", true);
+            Destroy(GetComponent<CharacterInputController>());
         }
     }
 
     public void GetHit(float dmgDone)
     {
+        anim.ResetTrigger("hurt");
         if (dmgDone > 0)
         {
             health -= dmgDone;

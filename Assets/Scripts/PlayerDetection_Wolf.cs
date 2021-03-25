@@ -8,7 +8,9 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
-    private const float damage = 100f;
+    private const float damage = 50f;
+    private const float hitRate = 2f;
+    private float attackTimer;
 
     float minDistance = 10f;//if change, change FanShapedArea.cs as well
     float minAngle = 90f;//if change, change FanShapedArea.cs as well
@@ -46,7 +48,11 @@ public class PlayerDetection_Wolf : MonoBehaviour
     void Update()
     {
 
-          wolfPos = gameObject.transform.position;
+        if (Time.time > attackTimer)
+        {
+            anim.SetBool("caught", true);
+        }
+        wolfPos = gameObject.transform.position;
           playerPos = player.transform.position;
           float distance = Vector3.Distance(wolfPos, playerPos);
 
@@ -71,11 +77,12 @@ public class PlayerDetection_Wolf : MonoBehaviour
           }
 
           //wolf caught
-          if (distance <1f && angle < minAngle / 2)
+          if (distance <1f && angle < minAngle / 2 && Time.time > attackTimer)
           {
               Debug.Log("Wolf Caught Player");
               anim.SetBool("caught", true);
               player.GetComponent<Health>().GetHit(damage);
+              attackTimer = Time.time + hitRate;
           }
           else
           {
