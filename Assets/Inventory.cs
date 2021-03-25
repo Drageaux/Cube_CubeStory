@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public Dictionary<string, int> ingredientList;
     public List<Dictionary<string, int>> orders;
     public Dictionary<string, int> order1;
+    public Text potatoStorage;
+    public Text eggStorage;
+    public GameObject lackIngredient;
+    public GameObject storagePanel;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +23,8 @@ public class Inventory : MonoBehaviour
         this.order1.Add("Egg", 1);
         orders = new List<Dictionary<string, int>>();
         orders.Add(this.order1);
+        lackIngredient.SetActive(false);
+        storagePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,6 +63,15 @@ public class Inventory : MonoBehaviour
                 {
                     int quantity = entry.Value;
                     ingredientList[entry.Key] -= quantity;
+                    if (entry.Key == "Potato")
+                    {
+                        potatoStorage.text = "+" + ingredientList[entry.Key];
+
+                    }
+                    else if (entry.Key == "Egg")
+                    {
+                        eggStorage.text = "+" + ingredientList[entry.Key];
+                    }
                     if (ingredientList[entry.Key] <= 0)
                     {
                         ingredientList.Remove(entry.Key);
@@ -66,10 +83,25 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                lackIngredient.SetActive(true);
                 print("not enough ingredients");
                 // UI message to User
             }
         }
+        //if s it hit
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (storagePanel.activeSelf== false)
+            {
+                storagePanel.SetActive(true);
+            }
+            else
+            {
+                storagePanel.SetActive(false);
+            }
+        }
+      //  potatoStorage.text = "+" + this.ingredientList["Potato"];
+      //  eggStorage.text = "+" + this.ingredientList["Egg"];
     }
 
 
@@ -89,6 +121,7 @@ public class Inventory : MonoBehaviour
 
                 }
                 Destroy(c.gameObject);
+                potatoStorage.text = "+" + this.ingredientList[name];
                 break;
             case "Egg":
                 if (!this.ingredientList.ContainsKey("Egg"))
@@ -100,6 +133,7 @@ public class Inventory : MonoBehaviour
                     this.ingredientList[name]++;
                 }
                 Destroy(c.gameObject);
+                eggStorage.text = "+" + this.ingredientList[name];
                 break;
         }
          foreach (KeyValuePair<string, int> entry in ingredientList)
