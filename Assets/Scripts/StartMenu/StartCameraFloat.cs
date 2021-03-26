@@ -9,11 +9,12 @@ public class StartCameraFloat : MonoBehaviour
     //public Rigidbody rd;
     public float Rotatespeed = 0.3f;
 
-    private Camera camera;
+   
+    //private Camera camera;
 
     private void Start()
     {
-        camera = GetComponentInChildren<Camera>();
+        //camera = GetComponentInChildren<Camera>();
 
     }
     private void Update()
