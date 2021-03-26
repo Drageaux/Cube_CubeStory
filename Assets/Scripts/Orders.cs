@@ -36,6 +36,7 @@ public class Orders : MonoBehaviour
     public void Remove(Order order)
     {
         orders.Remove(order);
+        onOrdersChangedCallback.Invoke();
     }
 
     private void Start()

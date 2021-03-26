@@ -4,6 +4,7 @@ public class OrdersUI : MonoBehaviour
 {
     Orders orders;
 
+    const int maxDisplayedIngredients = 5;
     OrderSlot[] slots;
 
     // Start is called before the first frame update
@@ -19,7 +20,11 @@ public class OrdersUI : MonoBehaviour
         orders.Add(new Order(orders.menu[1]));
         orders.Add(new Order(orders.menu[0]));
         orders.Add(new Order(orders.menu[1]));
-        //orders.Add(new Order(orders.menu[0]));
+        orders.Add(new Order(orders.menu[0]));
+        orders.Add(new Order(orders.menu[0]));
+
+        // test to see if can update ordering when removed 1 element
+        //orders.Remove(orders.orders[0]);
     }
 
     // Update is called once per frame

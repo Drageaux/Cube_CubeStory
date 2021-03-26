@@ -28,4 +28,5 @@ public class OrderSlot : MonoBehaviour
         icon.sprite = null;
         icon.enabled = false;
     }
+
 }
