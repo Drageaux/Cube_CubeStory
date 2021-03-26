@@ -40,13 +40,9 @@ public class Orders : MonoBehaviour
 
     private void Start()
     {
-        // test orders
-        orders.Add(new Order(menu[1]));
-        orders.Add(new Order(menu[1]));
-        orders.Add(new Order(menu[0]));
-        orders.Add(new Order(menu[1]));
-        orders.Add(new Order(menu[0]));
     }
+
+    
 
     private void Update()
     {

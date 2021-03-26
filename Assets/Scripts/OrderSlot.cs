@@ -7,6 +7,12 @@ public class OrderSlot : MonoBehaviour
 
     Order order;
 
+    public void Awake()
+    {
+        GameObject iconObj = transform.GetChild(0).gameObject;
+        icon = iconObj.GetComponent<Image>();
+    }
+
     public void AddOrder(Order newOrder)
     {
         order = newOrder;
