@@ -23,6 +23,8 @@ public class Orders : MonoBehaviour
     public OnOrdersChanged onOrdersChangedCallback;
 
 
+    public List<Recipe> menu = new List<Recipe>();
+
     public List<Order> orders = new List<Order>();
     public void Add(Order order)
     {
@@ -34,7 +36,14 @@ public class Orders : MonoBehaviour
     public void Remove(Order order)
     {
         orders.Remove(order);
+        onOrdersChangedCallback.Invoke();
     }
+
+    private void Start()
+    {
+    }
+
+    
 
     private void Update()
     {
@@ -49,13 +58,15 @@ public class Orders : MonoBehaviour
 
     public void FinishOrder()
     {
+        // currently complete the 1st incomplete order
         foreach (Order o in orders)
         {
             if (!o.completed)
             {
                 o.completed = true;
+                onOrdersChangedCallback.Invoke();
+                break;
             }
-            break;
         }
     }
 }
@@ -67,8 +78,14 @@ public class Order
     [HideInInspector]
     public string name = "Order";
     public Recipe dish;
-    public float timeToComplete = 60f;
+    public float timeToComplete;
     public bool completed = false;
+
+    public Order(Recipe dish, float time = 60f)
+    {
+        this.dish = dish;
+        this.timeToComplete = time;
+    }
 
     public float RemainingTime
     {
