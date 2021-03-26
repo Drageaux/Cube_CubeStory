@@ -46,6 +46,18 @@ public class Orders : MonoBehaviour
             }
         }
     }
+
+    public void FinishOrder()
+    {
+        foreach (Order o in orders)
+        {
+            if (!o.completed)
+            {
+                o.completed = true;
+            }
+            break;
+        }
+    }
 }
 
 

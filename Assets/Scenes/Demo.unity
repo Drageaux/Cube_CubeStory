@@ -648,7 +648,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130448496}
-  m_LocalRotation: {x: 0.12218326, y: -0.000000004269366, z: 5.25583e-10, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218326, y: 0.000000004269366, z: -5.25583e-10, w: 0.9925076}
   m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9535,9 +9535,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orders:
-  - {fileID: 11400000, guid: 23360c6dbfdd0114abc946b8c1c99c8d, type: 2}
-  - {fileID: 11400000, guid: 23360c6dbfdd0114abc946b8c1c99c8d, type: 2}
-  - {fileID: 11400000, guid: 7aff124afb29fdf41bc59b2349635a2b, type: 2}
+  - name: Order
+    dish: {fileID: 11400000, guid: 23360c6dbfdd0114abc946b8c1c99c8d, type: 2}
+    timeToComplete: 60
+    completed: 0
+  - name: Order
+    dish: {fileID: 11400000, guid: 7aff124afb29fdf41bc59b2349635a2b, type: 2}
+    timeToComplete: 60
+    completed: 0
+  - name: Order
+    dish: {fileID: 11400000, guid: 23360c6dbfdd0114abc946b8c1c99c8d, type: 2}
+    timeToComplete: 60
+    completed: 0
 --- !u!4 &1341648444
 Transform:
   m_ObjectHideFlags: 0
@@ -11169,6 +11178,7 @@ GameObject:
   - component: {fileID: 1782967674}
   - component: {fileID: 1782967673}
   - component: {fileID: 1782967675}
+  - component: {fileID: 1782967676}
   m_Layer: 5
   m_Name: Order Panel
   m_TagString: Untagged
@@ -11259,6 +11269,18 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1782967676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782967671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd55781cc0017a3439e7a1f71afc5635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1843886526
 GameObject:
   m_ObjectHideFlags: 0
@@ -11662,6 +11684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cookingTime: 4
+  hasIngredients: 0
   cooking: 0
   cookingStandingSpot: {fileID: 1547751397}
   cookingCloseEnoughDistance: 2
@@ -11706,6 +11729,7 @@ MonoBehaviour:
   eggStorage: {fileID: 2068752836}
   lackIngredient: {fileID: 88144477}
   storagePanel: {fileID: 222406603}
+  ordersSystem: {fileID: 0}
 --- !u!114 &1865023761
 MonoBehaviour:
   m_ObjectHideFlags: 0

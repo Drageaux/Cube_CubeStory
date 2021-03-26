@@ -8,14 +8,14 @@ using UnityEditor;
 
 //require some things the bot control needs
 [RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
-[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(CharacterInputController), typeof(Health), typeof(Inventory))]
 public class RootMotionControlScript : MonoBehaviour
 {
     private Animator anim;
     private Rigidbody rbody;
     private CharacterInputController cinput;
-
     private Health healthScript;
+    private Inventory inventory;
 
     private Transform leftFoot;
     private Transform rightFoot;
@@ -23,6 +23,7 @@ public class RootMotionControlScript : MonoBehaviour
     public float cookingTime = 4f; // in seconds
     private float remainingTimer;
 
+    public bool hasIngredients;
     public bool cooking;
     public GameObject cookingStandingSpot;
     //public float buttonCloseEnoughForMatchDistance = 2f;
@@ -71,6 +72,10 @@ public class RootMotionControlScript : MonoBehaviour
         healthScript = GetComponent<Health>();
         if (healthScript == null)
             Debug.Log("Health script could not be found");
+
+        inventory = GetComponent<Inventory>();
+        if (inventory == null)
+            Debug.Log("Inventory could not be found");
     }
 
 
@@ -95,9 +100,10 @@ public class RootMotionControlScript : MonoBehaviour
         {
             return;
         }
-        if (Time.time > remainingTimer)
+        if (cooking && Time.time > remainingTimer)
         {
             cooking = false;
+            inventory.FinishCooking();
         }
         //bool doMatchToButtonPress = false;
 
@@ -119,7 +125,7 @@ public class RootMotionControlScript : MonoBehaviour
             //Debug.Log("distance to cook " + buttonDistance);
             //Debug.Log("angle to cook " + buttonAngleDegrees);
         } 
-        if (cinput.Action)
+        if (cinput.Action && inventory.HasEnoughIngredients())
         {
             Debug.Log("Action pressed");
 

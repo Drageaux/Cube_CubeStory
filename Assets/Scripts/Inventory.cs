@@ -170,21 +170,22 @@ public class Inventory : MonoBehaviour
     {
         if (ordersSystem.orders.Count > 0)
         {
-            Order order = null;
+            cookingOrder = null;
             foreach (Order o in ordersSystem.orders)
             {
+                Debug.Log("checking for order: " + o.dish + " (completed: " + o.completed + ")");
                 // cook if not completed or not failed to do on time
                 if (!o.completed && o.RemainingTime > 0)
                 {
-                    order = o;
+                    cookingOrder = o;
                     break;
                 }
             }
             bool hasEnough = true;
-            if (order != null)
+            if (cookingOrder != null)
             {
-                Debug.Log("current order: " + order.dish);
-                foreach (RequiredIngredient req in order.dish.requiredIngredients)
+                Debug.Log("current order: " + cookingOrder.dish);
+                foreach (RequiredIngredient req in cookingOrder.dish.requiredIngredients)
                 {
                     if (ingredientList.ContainsKey(req.ingredient.name))
                     {
@@ -241,28 +242,33 @@ public class Inventory : MonoBehaviour
         //}
     }
 
-    private void FinishCooking(Order order)
+    public void FinishCooking()
     {
-        foreach (RequiredIngredient req in order.dish.requiredIngredients)
+        if (cookingOrder != null)
         {
-            int quantity = req.quantity;
-            string ingredientName = req.ingredient.name;
-            ingredientList[ingredientName] -= quantity;
-            if (ingredientName == "Potato")
+            foreach (RequiredIngredient req in cookingOrder.dish.requiredIngredients)
             {
-                potatoStorage.text = "+" + ingredientList[ingredientName];
+                int quantity = req.quantity;
+                string ingredientName = req.ingredient.name;
+                ingredientList[ingredientName] -= quantity;
+                if (ingredientName == "Potato")
+                {
+                    potatoStorage.text = "+" + ingredientList[ingredientName];
+                }
+                else if (ingredientName == "Egg")
+                {
+                    eggStorage.text = "+" + ingredientList[ingredientName];
+                }
+                if (ingredientList[ingredientName] <= 0)
+                {
+                    ingredientList.Remove(ingredientName);
+                }
             }
-            else if (ingredientName == "Egg")
-            {
-                eggStorage.text = "+" + ingredientList[ingredientName];
-            }
-            if (ingredientList[ingredientName] <= 0)
-            {
-                ingredientList.Remove(ingredientName);
-            }
+            //orders.RemoveAt(0);
+            ordersSystem.FinishOrder();
+            cookingOrder = null;
+            print("worked");
+            //anim cook
         }
-        orders.RemoveAt(0);
-        print("worked");
-        //anim cook
     }
 }
