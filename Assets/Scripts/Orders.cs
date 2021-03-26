@@ -58,13 +58,15 @@ public class Orders : MonoBehaviour
 
     public void FinishOrder()
     {
+        // currently complete the 1st incomplete order
         foreach (Order o in orders)
         {
             if (!o.completed)
             {
                 o.completed = true;
+                onOrdersChangedCallback.Invoke();
+                break;
             }
-            break;
         }
     }
 }

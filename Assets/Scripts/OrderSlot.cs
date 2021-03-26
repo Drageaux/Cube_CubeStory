@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class OrderSlot : MonoBehaviour
 {
     public Image icon;
+    public Image done;
 
     Order order;
 
@@ -11,6 +12,7 @@ public class OrderSlot : MonoBehaviour
     {
         GameObject iconObj = transform.GetChild(0).gameObject;
         icon = iconObj.GetComponent<Image>();
+        
     }
 
     public void AddOrder(Order newOrder)
@@ -19,6 +21,7 @@ public class OrderSlot : MonoBehaviour
 
         icon.sprite = order.dish.icon;
         icon.enabled = true;
+        done.enabled = newOrder.completed;
     }
 
     public void ClearSlot()

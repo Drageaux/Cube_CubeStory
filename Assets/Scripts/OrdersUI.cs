@@ -17,11 +17,12 @@ public class OrdersUI : MonoBehaviour
 
         // test orders
         orders.Add(new Order(orders.menu[1]));
-        orders.Add(new Order(orders.menu[1]));
         orders.Add(new Order(orders.menu[0]));
         orders.Add(new Order(orders.menu[1]));
         orders.Add(new Order(orders.menu[0]));
         orders.Add(new Order(orders.menu[0]));
+        orders.Add(new Order(orders.menu[1]));
+
 
         // test to see if can update ordering when removed 1 element
         //orders.Remove(orders.orders[0]);
@@ -35,7 +36,6 @@ public class OrdersUI : MonoBehaviour
 
     void UpdateUI()
     {
-        Debug.Log("test");
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < orders.orders.Count)
