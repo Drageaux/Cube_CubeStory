@@ -44,72 +44,6 @@ public class Inventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if pan close enough
-        // if action is hit
-        
-            
-
-
-                
-
-                //Debug.Log("Does ingredient to make " + )
-
-                //if (!(orders.Count > 0))
-                //{
-                //    return;
-                //}
-                //Dictionary<string, int> ordercurr = orders[0];
-                //bool iscompleted = true;
-                //foreach (KeyValuePair<string, int> entry in ordercurr)
-                //{
-                //    int quantity = entry.Value;
-                //    if (ingredientList.ContainsKey(entry.Key))
-                //    {
-                //        if (!(ingredientList[entry.Key] >= quantity))
-                //        {
-                //            iscompleted = false;
-                //            break;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        iscompleted = false;
-                //        break;
-                //    }
-                //}
-                //print(iscompleted);
-
-
-                //if (iscompleted)
-                //{
-                //    foreach (KeyValuePair<string, int> entry in ordercurr)
-                //    {
-                //        int quantity = entry.Value;
-                //        ingredientList[entry.Key] -= quantity;
-                //        if (entry.Key == "Potato")
-                //        {
-                //            potatoStorage.text = "+" + ingredientList[entry.Key];
-
-                //        }
-                //        else if (entry.Key == "Egg")
-                //        {
-                //            eggStorage.text = "+" + ingredientList[entry.Key];
-                //        }
-                //        if (ingredientList[entry.Key] <= 0)
-                //        {
-                //            ingredientList.Remove(entry.Key);
-                //        }
-                //    }
-                //    orders.RemoveAt(0);
-                //    print("worked");
-                //    //anim cook
-                //}
-                //else
-                //{
-                //    lackIngredient.SetActive(true);
-                //    print("not enough ingredients");
-                //    // UI message to User
-                //}
         //if s it hit
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -173,14 +107,15 @@ public class Inventory : MonoBehaviour
             cookingOrder = null;
             foreach (Order o in ordersSystem.orders)
             {
-                Debug.Log("checking for order: " + o.dish + " (completed: " + o.completed + ")");
                 // cook if not completed or not failed to do on time
                 if (!o.completed && o.RemainingTime > 0)
                 {
+                    //Debug.Log("checking for order: " + o.dish + " (completed: " + o.completed + ")");
                     cookingOrder = o;
                     break;
                 }
             }
+            Debug.Log(ordersSystem.orders);
             bool hasEnough = true;
             if (cookingOrder != null)
             {
@@ -213,34 +148,6 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    public void StartCooking()
-    {
-        //if (ordersSystem.orders.Count > 0)
-        //{
-        //    Order currentOrder = null;
-        //    foreach (Order o in ordersSystem.orders)
-        //    {
-        //        // cook if not completed or not failed to do on time
-        //        if (!o.completed && o.RemainingTime > 0)
-        //        {
-        //            currentOrder = o;
-        //            break;
-        //        }
-        //    }
-
-        //    bool canCook = HasEnoughIngredients(currentOrder);
-
-        //    if (canCook)
-        //    {
-        //    }
-        //    else
-        //    {
-        //        lackIngredient.SetActive(true);
-        //        print("not enough ingredients");
-        //        // UI message to User
-        //    }
-        //}
-    }
 
     public void FinishCooking()
     {
@@ -264,11 +171,9 @@ public class Inventory : MonoBehaviour
                     ingredientList.Remove(ingredientName);
                 }
             }
-            //orders.RemoveAt(0);
             ordersSystem.FinishOrder();
             cookingOrder = null;
             print("worked");
-            //anim cook
         }
     }
 }
