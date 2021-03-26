@@ -98,6 +98,8 @@ public class Inventory : MonoBehaviour
                     print(entry.Value);
                 }
 
+        
+
     }
 
     public bool HasEnoughIngredients()
@@ -176,4 +178,6 @@ public class Inventory : MonoBehaviour
             print("worked");
         }
     }
+
+   
 }

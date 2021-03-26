@@ -148,6 +148,11 @@ public class RootMotionControlScript : MonoBehaviour
 
             //}
         }
+        if (cinput.Action&&!inventory.HasEnoughIngredients())
+        {
+            inventory.lackIngredient.SetActive(true);
+            StartCoroutine("WaitForSec");
+        }
         if (buttonDistance > cookingCloseEnoughDistance ||
                     buttonAngleDegrees > cookingCloseEnoughAngle){
             cooking = false;
@@ -273,5 +278,12 @@ public class RootMotionControlScript : MonoBehaviour
         }
     }
 
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(3);
+        inventory.lackIngredient.SetActive(false);
 
+
+
+    }
 }
