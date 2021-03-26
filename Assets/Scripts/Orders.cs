@@ -23,6 +23,8 @@ public class Orders : MonoBehaviour
     public OnOrdersChanged onOrdersChangedCallback;
 
 
+    public List<Recipe> menu = new List<Recipe>();
+
     public List<Order> orders = new List<Order>();
     public void Add(Order order)
     {
@@ -34,6 +36,16 @@ public class Orders : MonoBehaviour
     public void Remove(Order order)
     {
         orders.Remove(order);
+    }
+
+    private void Start()
+    {
+        // test orders
+        orders.Add(new Order(menu[1]));
+        orders.Add(new Order(menu[1]));
+        orders.Add(new Order(menu[0]));
+        orders.Add(new Order(menu[1]));
+        orders.Add(new Order(menu[0]));
     }
 
     private void Update()
@@ -67,8 +79,14 @@ public class Order
     [HideInInspector]
     public string name = "Order";
     public Recipe dish;
-    public float timeToComplete = 60f;
+    public float timeToComplete;
     public bool completed = false;
+
+    public Order(Recipe dish, float time = 60f)
+    {
+        this.dish = dish;
+        this.timeToComplete = time;
+    }
 
     public float RemainingTime
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrdersUI : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class OrdersUI : MonoBehaviour
     void Start()
     {
         orders = Orders.instance;
+        orders.onOrdersChangedCallback += UpdateUI;
     }
 
     // Update is called once per frame
