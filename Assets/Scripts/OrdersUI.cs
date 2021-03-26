@@ -19,8 +19,6 @@ public class OrdersUI : MonoBehaviour
         orders.Add(new Order(orders.menu[1]));
         orders.Add(new Order(orders.menu[0]));
         orders.Add(new Order(orders.menu[1]));
-        orders.Add(new Order(orders.menu[0]));
-        orders.Add(new Order(orders.menu[0]));
         orders.Add(new Order(orders.menu[1]));
 
 

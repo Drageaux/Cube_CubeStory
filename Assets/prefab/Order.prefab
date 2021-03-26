@@ -159,7 +159,6 @@ GameObject:
   - component: {fileID: 2839547727473688221}
   - component: {fileID: 2839547727473688223}
   - component: {fileID: 2839547727473688222}
-  - component: {fileID: 2839547727473688208}
   m_Layer: 5
   m_Name: Ingredient
   m_TagString: Untagged
@@ -225,30 +224,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2839547727473688208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2839547727473688220}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 25, y: 25}
-  m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
 --- !u!1 &2839547728079123569
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +236,7 @@ GameObject:
   - component: {fileID: 2839547728079123572}
   - component: {fileID: 2839547728079123571}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: Ingredient Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,4 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 2839547727419415177}
-  done: {fileID: 8441195985758980921}
+  doneIcon: {fileID: 8441195985758980921}
+  requiredIngredientsUI: {fileID: 2839547728190740079}
+  firstIngredientIcon: {fileID: 2839547728079123571}
+  firstIngredientQuantityText: {fileID: 2839547728361008780}
