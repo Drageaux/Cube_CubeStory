@@ -8,13 +8,13 @@ public class StartQuitGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartGame()
@@ -25,5 +25,11 @@ public class StartQuitGame : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Demo");
+        Time.timeScale = 1f;
     }
 }
