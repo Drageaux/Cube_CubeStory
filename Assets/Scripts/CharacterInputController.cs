@@ -144,7 +144,7 @@ public class CharacterInputController : MonoBehaviour
 
         //Capture "fire" button for action event
         
-        Action = Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space);
+        Action = Input.GetKeyDown(KeyCode.Space);
 
         Jump = Input.GetButtonDown("Jump");
 
