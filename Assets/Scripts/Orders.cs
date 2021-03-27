@@ -26,6 +26,8 @@ public class Orders : MonoBehaviour
     public List<Recipe> menu = new List<Recipe>();
 
     public List<Order> orders = new List<Order>();
+
+    private int count;
     public void Add(Order order)
     {
         orders.Add(order);
@@ -41,6 +43,7 @@ public class Orders : MonoBehaviour
 
     private void Start()
     {
+        this.count = 0;
     }
 
     
@@ -65,10 +68,23 @@ public class Orders : MonoBehaviour
             {
                 o.completed = true;
                 onOrdersChangedCallback.Invoke();
+                this.count++;
                 break;
             }
         }
     }
+
+    public bool IsCompleted()
+    {
+        if (this.count == this.orders.Count)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
 }
 
 
