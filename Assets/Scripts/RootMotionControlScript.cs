@@ -8,7 +8,7 @@ using UnityEditor;
 
 //require some things the bot control needs
 [RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
-[RequireComponent(typeof(CharacterInputController), typeof(Health), typeof(Inventory))]
+[RequireComponent(typeof(Health), typeof(Inventory))]
 public class RootMotionControlScript : MonoBehaviour
 {
     private Animator anim;
@@ -125,36 +125,43 @@ public class RootMotionControlScript : MonoBehaviour
             //Debug.Log("distance to cook " + buttonDistance);
             //Debug.Log("angle to cook " + buttonAngleDegrees);
         } 
-        if (cinput.Action && inventory.HasEnoughIngredients())
+        if (cinput.Action)
         {
-            Debug.Log("Action pressed");
-
-            //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
-            //{
-                if (buttonDistance <= cookingCloseEnoughDistance &&
+            if (buttonDistance <= cookingCloseEnoughDistance &&
                     buttonAngleDegrees <= cookingCloseEnoughAngle)
+            {
+
+                if (inventory.HasEnoughIngredients())
                 {
-                    Debug.Log("Cooking initiated");
-                
-                    cooking = true;
-                    remainingTimer = Time.time + cookingTime;
-                }
+                    Debug.Log("Action pressed");
+
+                    //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
+                    //{
+
+                    {
+                        Debug.Log("Cooking initiated");
+
+                        cooking = true;
+                        remainingTimer = Time.time + cookingTime;
+                    }
+                } 
                 else
                 {
-                    cooking = false;
-                    //Debug.Log("match to button initiated");
-                    //doMatchToButtonPress = true;
+                    inventory.lackIngredient.SetActive(true);
+                    StartCoroutine("WaitForSec");
                 }
+            }
+            else
+            {
+                cooking = false;
+                //Debug.Log("match to button initiated");
+                //doMatchToButtonPress = true;
+            }
 
             //}
         }
-        if (cinput.Action&&!inventory.HasEnoughIngredients())
-        {
-            inventory.lackIngredient.SetActive(true);
-            StartCoroutine("WaitForSec");
-        }
         if (buttonDistance > cookingCloseEnoughDistance ||
-                    buttonAngleDegrees > cookingCloseEnoughAngle){
+                    buttonAngleDegrees > cookingCloseEnoughAngle) {
             cooking = false;
         }
 

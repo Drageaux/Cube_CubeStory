@@ -19,20 +19,17 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        // game over
         if (health <= 0)
         {
             anim.SetBool("dead", true);
-            Destroy(GetComponent<CharacterInputController>());
+            //Destroy(GetComponent<CharacterInputController>());
         } 
-    }
-
-    private void LateUpdate()
-    {
-        anim.ResetTrigger("hurt");
     }
 
     public void GetHit(float dmgDone)
     {
+        anim.ResetTrigger("hurt");
         if (dmgDone > 0)
         {
             health -= dmgDone;
