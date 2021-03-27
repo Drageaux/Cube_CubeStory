@@ -16,10 +16,10 @@ public class OrdersUI : MonoBehaviour
         slots = GetComponentsInChildren<OrderSlot>();
 
         // test orders
-        orders.Add(new Order(orders.menu[1]));
-        orders.Add(new Order(orders.menu[0]));
-        orders.Add(new Order(orders.menu[1]));
-        orders.Add(new Order(orders.menu[1]));
+        orders.Add(new Order(orders.menu[1], 500f));
+        orders.Add(new Order(orders.menu[0], 500f));
+        orders.Add(new Order(orders.menu[1], 500f));
+        orders.Add(new Order(orders.menu[1], 500f));
 
 
         // test to see if can update ordering when removed 1 element

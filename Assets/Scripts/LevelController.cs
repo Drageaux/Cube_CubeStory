@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class LevelController : MonoBehaviour
@@ -14,8 +15,10 @@ public class LevelController : MonoBehaviour
     private CanvasGroup mainCanvasGroup;
     public GameObject mainCanvas;
 
-    public GameObject gameManager;
     private Orders orders;
+
+    public GameObject character;
+    private Health health;
 
     private MusicController musicController;
 
@@ -27,22 +30,27 @@ public class LevelController : MonoBehaviour
         this.levelEndCanvasGroup = levelEndCanvas.GetComponent<CanvasGroup>();
         this.mainCanvasGroup = mainCanvas.GetComponent<CanvasGroup>();
         this.musicController = gameObject.GetComponent<MusicController>();
-        this.orders = gameManager.GetComponent<Orders>();
+        this.health = character.GetComponent<Health>();
+        this.orders = Orders.instance;
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
-        if (this.levelTimer.GetCurrTimer() <= 0 && this.levelTimer.IsTimerActive())
+        if ((!this.health.Alive() || this.levelTimer.GetCurrTimer() <= 0) && this.levelTimer.IsTimerActive())
         {
+            if (!this.health.Alive())
+            {
+                await Task.Delay(4000);
+            }
             this.levelTimer.SetTimerActive(false);
             this.levelStarReward.ComputeStarReward(false, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
             this.levelStarReward.SetStarRewardText();
             this.musicController.TriggerEndLevelMusic();
             EndLevel();
         }
-
-        if (this.orders.orders.Count == 0)
+        
+        if (this.orders.IsCompleted() && this.levelTimer.IsTimerActive())
         {
             this.levelTimer.SetTimerActive(false);
             this.levelStarReward.ComputeStarReward(true, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
