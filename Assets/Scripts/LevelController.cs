@@ -14,6 +14,9 @@ public class LevelController : MonoBehaviour
     private CanvasGroup mainCanvasGroup;
     public GameObject mainCanvas;
 
+    public GameObject gameManager;
+    private Orders orders;
+
     private MusicController musicController;
 
     // Start is called before the first frame update
@@ -24,6 +27,7 @@ public class LevelController : MonoBehaviour
         this.levelEndCanvasGroup = levelEndCanvas.GetComponent<CanvasGroup>();
         this.mainCanvasGroup = mainCanvas.GetComponent<CanvasGroup>();
         this.musicController = gameObject.GetComponent<MusicController>();
+        this.orders = gameManager.GetComponent<Orders>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,15 @@ public class LevelController : MonoBehaviour
         {
             this.levelTimer.SetTimerActive(false);
             this.levelStarReward.ComputeStarReward(false, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
+            this.levelStarReward.SetStarRewardText();
+            this.musicController.TriggerEndLevelMusic();
+            EndLevel();
+        }
+
+        if (this.orders.orders.Count == 0)
+        {
+            this.levelTimer.SetTimerActive(false);
+            this.levelStarReward.ComputeStarReward(true, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
             this.levelStarReward.SetStarRewardText();
             this.musicController.TriggerEndLevelMusic();
             EndLevel();
