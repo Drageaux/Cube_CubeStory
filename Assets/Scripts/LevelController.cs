@@ -14,7 +14,7 @@ public class LevelController : MonoBehaviour
     private CanvasGroup mainCanvasGroup;
     public GameObject mainCanvas;
 
-    public MusicController musicController;
+    private MusicController musicController;
 
     // Start is called before the first frame update
     void Start()
