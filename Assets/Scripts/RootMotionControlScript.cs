@@ -8,7 +8,7 @@ using UnityEditor;
 
 //require some things the bot control needs
 [RequireComponent(typeof(Animator), typeof(Rigidbody), typeof(CapsuleCollider))]
-[RequireComponent(typeof(CharacterInputController), typeof(Health), typeof(Inventory))]
+[RequireComponent(typeof(Health), typeof(Inventory))]
 public class RootMotionControlScript : MonoBehaviour
 {
     private Animator anim;

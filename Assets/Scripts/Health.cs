@@ -19,10 +19,11 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        // game over
         if (health <= 0)
         {
             anim.SetBool("dead", true);
-            Destroy(GetComponent<CharacterInputController>());
+            //Destroy(GetComponent<CharacterInputController>());
         } 
     }
 
