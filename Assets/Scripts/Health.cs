@@ -27,13 +27,9 @@ public class Health : MonoBehaviour
         } 
     }
 
-    private void FixedUpdate()
-    {
-        anim.ResetTrigger("hurt");
-    }
-
     public void GetHit(float dmgDone)
     {
+        anim.ResetTrigger("hurt");
         if (dmgDone > 0)
         {
             health -= dmgDone;
