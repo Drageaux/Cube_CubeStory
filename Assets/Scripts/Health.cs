@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
         } 
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         anim.ResetTrigger("hurt");
     }
