@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class PlayerDetection_Animal : MonoBehaviour
 {
@@ -9,68 +10,159 @@ public class PlayerDetection_Animal : MonoBehaviour
     private float distance = 0;
     private Animator anim;
     private Text Storagetext;
-    Ingredient_Collider col_script;
-    private bool added=false;
+    public Text chickenStorage;
+    Inventory invertory_script;
+    private bool added = false;
+    private float catchTimer = 120.0f;
+
+    private Vector3 chickenPos = Vector3.zero;
+    private Vector3 playerPos = Vector3.zero;
+    private Vector3 directionOfCharacter;
+    private int numOfChicken;
+
+    private NavMeshAgent agent;
+    public GameObject[] waypoint;
+    int curentWaypoint = -1;
+    public AIState aistate;
+
+    public enum AIState
+    {
+        wander,//wander among waypoints
+        lay,
+        runAngry,
+        run,
+        getHit
+    }
+
     void Awake()
     {
         anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        distance = Vector3.Distance(gameObject.transform.position,player.transform.position);
-        col_script = GameObject.Find("Cube").GetComponent<Ingredient_Collider>();
+        // invertory_script = GameObject.Find("Cube").GetComponent<Inventory>();
+        invertory_script = player.GetComponent<Inventory>();
+        numOfChicken = 0;
+        aistate = AIState.wander;
+        setNextWayPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+        chickenPos = gameObject.transform.position;
+        playerPos = player.transform.position;
+        distance = Vector3.Distance(chickenPos, playerPos);
 
-        
-        if (distance < 5)
+        if (Time.time > catchTimer && distance >= 5)
+        {
+            aistate = AIState.lay;
+        }
+        else if (distance < 1.0f)
+        {
+            Debug.Log("chicken_collected");
+            Debug.Log("distance less than 1");
+            aistate = AIState.getHit;
+            StartCoroutine("WaitForSec");
+            Destroy(this.gameObject);
+            if (invertory_script.ingredientList != null)
+            {
+                if (!invertory_script.ingredientList.ContainsKey("Chicken"))
+                {
+                    invertory_script.ingredientList.Add("Chicken", 1);
+                }
+                else
+                {
+                    invertory_script.ingredientList["Chicken"]++;
+
+                }
+
+                chickenStorage.text = "+" + invertory_script.ingredientList["Chicken"];
+            }
+            else
+            {
+                Debug.Log("can't find ingredient list");
+            }
+           
+        }
+        else if (distance < 2.0f)
+        {
+            Debug.Log("distance less than 2");
+            aistate = AIState.runAngry;
+
+        }
+        else if (distance < 5.0f)
         {
             //close to chicken, chicken will run away
             //anim.speed = 10;
-            anim.Play("Run_RM");
-            if(distance < 2)
-            {
-                float horizontalInput = Input.GetAxis("Horizontal");
-                float verticalInput = Input.GetAxis("Vertical");
-
-                Vector3 movementDirection = new Vector3(horizontalInput, 0, verticalInput);
-                movementDirection.Normalize();
-
-                transform.Translate(movementDirection * anim.speed * Time.deltaTime, Space.World);
-                anim.Play("RunAngry_RM");
-            }
+            Debug.Log("distance less than 5");
+            aistate = AIState.run;
         }
         else
         {
             //far from chicken, chicken will wandaring
             // anim.speed = 1;
-            anim.Play("Walk_RM");
+            aistate = AIState.wander;
+
         }
 
 
-        if (distance < 1.5)
+        /* AI Switch states */
+        switch (aistate)
         {
-           Debug.Log("chicken_collected");
-            anim.Play("GetHit");
-            StartCoroutine("WaitForSec");
-            // Destroy(this.gameObject);
-            if (added == false)
-            {
-                col_script.Storagetext.text += this.name;
-                col_script.Storagetext.text += '\n';
-                added = true;
-            }
+            case AIState.wander:
+                agent.isStopped = false;
+                anim.Play("Walk_RM");
+                if (agent.remainingDistance - agent.stoppingDistance <= 0 && agent.pathPending == false)
+                {
+                    setNextWayPoint();
+                }
+                break;
+            case AIState.runAngry:
+                anim.Play("RunAngry_RM");
+                if (agent.remainingDistance - agent.stoppingDistance <= 0 && agent.pathPending == false)
+                {
+                    setNextWayPoint();
+                }
+                break;
+            case AIState.run:
+                anim.Play("Run_RM");
+                if (agent.remainingDistance - agent.stoppingDistance <= 0 && agent.pathPending == false)
+                {
+                    setNextWayPoint();
+                }
+                break;
+            case AIState.lay:
+                Debug.Log("Lay Egg");
+                agent.isStopped = true;
+                anim.Play("IdleLay");
+                break;
+            default:
+                break;
         }
 
-        
-   
+
+    }
 
 
+
+    void setNextWayPoint()
+    {
+        curentWaypoint++;
+        if (waypoint.Length == 0)
+        {
+            Debug.LogError("waypoints has no object");
+            return;
+        }
+        if (curentWaypoint == waypoint.Length)
+        {
+            curentWaypoint = 0;
+        }
+        //Debug.Log(curentWaypoint);
+        agent.SetDestination(waypoint[curentWaypoint].transform.position);
     }
 
     //touched chicken, chicken collected
@@ -79,12 +171,12 @@ public class PlayerDetection_Animal : MonoBehaviour
     //    Debug.Log("chicken_collected");
     //    Destroy(this.gameObject);
     //}
-   
     IEnumerator WaitForSec()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
+        numOfChicken++;
         Destroy(this.gameObject);
-
-
     }
 }
+
+
