@@ -49,7 +49,7 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
@@ -58,7 +58,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000000000000000000000000000001000000000000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.38207546
+        functionName: ThrowRock
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 046267982da9f8249ae8adba479568ac,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
