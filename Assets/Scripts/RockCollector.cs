@@ -25,16 +25,20 @@ public class RockCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.ReceiveRock();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currRock != null && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            this.ReceiveRock();
             anim.SetBool("throw", true);
-        else 
+        }
+        else
+        {
             anim.SetBool("throw", false);
+        }
     }
 
     void ReceiveRock()
@@ -56,9 +60,17 @@ public class RockCollector : MonoBehaviour
 
         // apply force
         print(transform.forward);
-        currRock.AddForce(transform.forward * 30, ForceMode.VelocityChange);
-        
+        Vector3 forceApplied = new Vector3(0, Mathf.Sin(45 * Mathf.Deg2Rad) * 10, 0);
+        currRock.AddForce(transform.forward * 20 + forceApplied, ForceMode.VelocityChange);
+
         // to be picked up later
         this.currRock = null;
+    }
+
+    private void AddForceAtAngle(Rigidbody rb, float force, float angle)
+    {
+        Vector3 forceApplied = new Vector3(0, Mathf.Sin(angle * Mathf.Deg2Rad) * force, 0);
+
+        rb.AddForce(transform.forward * 20 + forceApplied, ForceMode.VelocityChange);
     }
 }
