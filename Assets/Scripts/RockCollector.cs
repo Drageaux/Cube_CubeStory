@@ -56,7 +56,7 @@ public class RockCollector : MonoBehaviour
 
         // apply force
         print(transform.forward);
-        currRock.AddForce(transform.forward * 10);
+        currRock.AddForce(transform.forward * 30, ForceMode.VelocityChange);
         
         // to be picked up later
         this.currRock = null;
