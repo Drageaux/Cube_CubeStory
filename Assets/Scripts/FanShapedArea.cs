@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class FanShapedArea : MonoBehaviour
 {
-    public static GameObject go;
-    public static MeshFilter mf;
-    public static MeshRenderer mr;
+    private GameObject go;
+    private MeshFilter mf;
+    private MeshRenderer mr;
     public Shader shader;
+    public int num_wolf = 1;
     // Update is called once per frame
 
     void Update()
@@ -35,7 +36,7 @@ public class FanShapedArea : MonoBehaviour
         if (go == null)
 
         {
-            go = new GameObject("mesh");
+            go = new GameObject("mesh"+num_wolf);
             go.transform.position = new Vector3(0, 0.5f+yPos, 0);
             mf = go.AddComponent<MeshFilter>();
             mr = go.AddComponent<MeshRenderer>();
