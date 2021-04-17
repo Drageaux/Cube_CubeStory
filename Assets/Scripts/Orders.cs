@@ -5,6 +5,7 @@ using UnityEngine;
 public class Orders : MonoBehaviour
 {
     #region Singleton
+
     public static Orders instance;
     
     private void Awake()
@@ -22,9 +23,7 @@ public class Orders : MonoBehaviour
     public delegate void OnOrdersChanged();
     public OnOrdersChanged onOrdersChangedCallback;
 
-
     public List<Recipe> menu = new List<Recipe>();
-
     public List<Order> orders = new List<Order>();
 
     private int count;
@@ -45,8 +44,6 @@ public class Orders : MonoBehaviour
     {
         this.count = 0;
     }
-
-    
 
     private void Update()
     {

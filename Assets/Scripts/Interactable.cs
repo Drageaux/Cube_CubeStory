@@ -4,18 +4,22 @@ using UnityEngine.UI;
 public class Interactable : MonoBehaviour
 {
     // reference: https://www.youtube.com/watch?v=9tePzyL6dgc&list=PLPV2KyIb3jR4KLGCCAciWQ5qHudKtYeP7&index=3
-    new public string name;
+    new public string name = "Interactable";
     public float radius = 3f;
-
     bool isFocus = false;
-    Transform player;
-
     bool hasInteracted = false;
+
+    protected InteractionManager interactionManager;
 
     public virtual void Interact()
     {
         // This method is meant to be overwritten
         Debug.Log("Interacting " + transform.name);
+    }
+
+    private void Start()
+    {
+        interactionManager = InteractionManager.instance;
     }
 
     private void Update()
@@ -29,18 +33,19 @@ public class Interactable : MonoBehaviour
     public void OnInteracted()
     {
         this.hasInteracted = true;
+        interactionManager.onInteractableDefocused.Invoke(name);
     }
 
     public void OnFocused()
     {
         isFocus = true;
-        onInteractableFocusedCallback.Invoke(name);
+        interactionManager.onInteractableFocused.Invoke(name);
     }
 
     public void OnDefocused()
     {
         isFocus = false;
-        onInteractableDefocusedCallback.Invoke(name);
+        interactionManager.onInteractableDefocused.Invoke(name);
     }
 
     void OnDrawGizmosSelected()

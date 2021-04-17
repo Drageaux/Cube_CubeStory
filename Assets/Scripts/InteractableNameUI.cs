@@ -5,28 +5,32 @@ public class InteractableNameUI : MonoBehaviour
 {
     private string str = "";
     private Text textObj;
-    public CanvasGroup ui;
 
+    InteractionManager interactionManager;
 
     private void Start()
     {
-        this.textObj = GetComponentInChildren<Text>();
+        interactionManager = InteractionManager.instance;
+        interactionManager.onInteractableFocused += DisplayUI;
+        interactionManager.onInteractableDefocused += HideUI;
+        textObj = GetComponentInChildren<Text>();
+        gameObject.SetActive(false);
     }
 
-    void OnInteractableFocused(string name)
+    public void DisplayUI(string name)
     {
+        gameObject.SetActive(true);
         str = name;
         textObj.text = name;
-        ui.alpha = 1f;
     }
 
-    void OnInteractableDefocused(string name)
+    public void HideUI(string name)
     {
         if (str == name)
         {
+            gameObject.SetActive(false);
             str = "";
             textObj.text = "";
-            ui.alpha = 0f;
         }
     }
 }
