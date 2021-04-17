@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     public GameObject storagePanel;
 
     private CharacterInputController cinput;
-    public Orders ordersSystem;
+    private Orders ordersSystem;
     private Order cookingOrder;
 
 
