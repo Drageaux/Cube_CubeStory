@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public Dictionary<string, int> ingredientList;
     public Text potatoStorage;
     public Text eggStorage;
     public GameObject lackIngredient;
@@ -29,11 +30,6 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         this.ingredientList = new Dictionary<string, int>();
-        this.order1 = new Dictionary<string, int>();
-        this.order1.Add("Potato", 1);
-        this.order1.Add("Egg", 1);
-        orders = new List<Dictionary<string, int>>();
-        orders.Add(this.order1);
         lackIngredient.SetActive(false);
         storagePanel.SetActive(false);
     }
