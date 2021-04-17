@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public Dictionary<string, int> ingredientList;
-    public List<Dictionary<string, int>> orders;
-    public Dictionary<string, int> order1;
     public Text potatoStorage;
     public Text eggStorage;
     public GameObject lackIngredient;
