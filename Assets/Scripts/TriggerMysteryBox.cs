@@ -5,8 +5,16 @@ using UnityEngine;
 public class TriggerMysteryBox : MonoBehaviour
 {
     private bool isRotate = false;
-    private double maxHeight = 1.5;
+    private double maxHeight;
+    private bool isGrounded = false;
+    private double initialY;
 
+
+    private void Start()
+    {
+        initialY = transform.position.y;
+        maxHeight = initialY + 1.5;
+    }
     private void Update()
     {
         if (isRotate)
@@ -19,7 +27,7 @@ public class TriggerMysteryBox : MonoBehaviour
         }
         else
         { 
-            if (transform.position.y > 0.8)
+            if (transform.position.y > initialY)
             {
                 transform.Translate(0, -2 * Time.deltaTime, 0);
             }
