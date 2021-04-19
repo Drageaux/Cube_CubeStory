@@ -6,9 +6,9 @@ public class Interactable : MonoBehaviour
     // reference: https://www.youtube.com/watch?v=9tePzyL6dgc&list=PLPV2KyIb3jR4KLGCCAciWQ5qHudKtYeP7&index=3
     public float radius = 3f;
     new public string name = "Interactable";
-    protected InteractableType type;
-    bool isFocus = false;
-    bool hasInteracted = false;
+    public InteractableType type;
+    protected bool isFocus = false;
+    protected bool hasInteracted = false;
 
     protected InteractionManager interactionManager;
 
@@ -18,23 +18,9 @@ public class Interactable : MonoBehaviour
         Debug.Log("Interacting " + transform.name);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         interactionManager = InteractionManager.instance;
-    }
-
-    private void Update()
-    {
-        if (isFocus)
-        {
-            // TODO: change color
-        }
-    }
-
-    public void OnInteracted()
-    {
-        this.hasInteracted = true;
-        interactionManager.onInteractableDefocused.Invoke(this);
     }
 
     public void OnFocused()

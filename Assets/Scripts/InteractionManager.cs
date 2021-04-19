@@ -10,6 +10,11 @@ public class InteractionManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Debug.LogWarning("More than one instance of Interaction Manager found!");
+            return;
+        }
         instance = this;
     }
 
@@ -19,4 +24,24 @@ public class InteractionManager : MonoBehaviour
     public OnInteractableFocused onInteractableFocused;
     public delegate void OnInteractableDefocused(Interactable i);
     public OnInteractableDefocused onInteractableDefocused;
+    public Interactable CurrentTarget
+    {
+        get;
+        private set;
+    }
+
+    void FocusNewTarget(Interactable i)
+    {
+        CurrentTarget = i;
+        onInteractableFocused.Invoke(i);
+    }
+
+    void DefocusCurrentTarget(Interactable i)
+    {
+        if (CurrentTarget == i)
+        {
+            CurrentTarget = null;
+            onInteractableDefocused.Invoke(i);
+        }
+    }
 }

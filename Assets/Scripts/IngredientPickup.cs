@@ -5,11 +5,9 @@ using UnityEngine;
 public class IngredientPickup : ItemPickup {
     public Ingredient ingredient;
 
-    private void Start()
+    protected override void Start()
     {
-        interactionManager = InteractionManager.instance;
-        SphereCollider pickUpCollider = GetComponent<SphereCollider>();
-        pickUpCollider.radius = radius;
+        base.Start();
         name = ingredient.name;
         type = InteractableType.Ingredient;
     }
