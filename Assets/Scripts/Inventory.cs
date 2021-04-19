@@ -52,10 +52,11 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E) 
-            && interactionManager.CurrentTarget 
+        if (cinput.Interact 
+            && interactionManager.CurrentTarget != null
             && interactionManager.CurrentTarget.type == InteractableType.Ingredient)
         {
+            print("test");
             this.PickUpIngredient(interactionManager.CurrentTarget);
         }
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];

@@ -26,13 +26,13 @@ public class Interactable : MonoBehaviour
     public void OnFocused()
     {
         isFocus = true;
-        interactionManager.onInteractableFocused.Invoke(this);
+        interactionManager.FocusNewTarget(this);
     }
 
     public void OnDefocused()
     {
         isFocus = false;
-        interactionManager.onInteractableDefocused.Invoke(this);
+        interactionManager.DefocusCurrentTarget(this);
     }
 
     void OnDrawGizmosSelected()
@@ -46,5 +46,4 @@ public enum InteractableType
 {
     Tool,
     Ingredient,
-
 }

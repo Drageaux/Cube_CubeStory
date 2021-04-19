@@ -30,13 +30,13 @@ public class InteractionManager : MonoBehaviour
         private set;
     }
 
-    void FocusNewTarget(Interactable i)
+    public void FocusNewTarget(Interactable i)
     {
         CurrentTarget = i;
         onInteractableFocused.Invoke(i);
     }
 
-    void DefocusCurrentTarget(Interactable i)
+    public void DefocusCurrentTarget(Interactable i)
     {
         if (CurrentTarget == i)
         {
