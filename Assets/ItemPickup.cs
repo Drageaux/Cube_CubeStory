@@ -19,6 +19,14 @@ public class ItemPickup : Interactable
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            this.OnDefocused();
+        }
+    }
+
     private void OnDestroy()
     {
         interactionManager.onInteractableDefocused(this.ingredient.name);

@@ -56,40 +56,40 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
-        string name = c.gameObject.tag;
-        switch (name)
-        {
-            case "Potato":
-                if (!this.ingredientList.ContainsKey("Potato"))
-                {
-                    this.ingredientList.Add("Potato", 1);
-                }
-                else
-                {
-                    this.ingredientList[name]++;
+        //string name = c.gameObject.tag;
+        //switch (name)
+        //{
+        //    case "Potato":
+        //        if (!this.ingredientList.ContainsKey("Potato"))
+        //        {
+        //            this.ingredientList.Add("Potato", 1);
+        //        }
+        //        else
+        //        {
+        //            this.ingredientList[name]++;
 
-                }
-                Destroy(c.gameObject);
-                potatoStorage.text = "+" + this.ingredientList[name];
-                break;
-            case "Egg":
-                if (!this.ingredientList.ContainsKey("Egg"))
-                {
-                    this.ingredientList.Add("Egg", 1);
-                }
-                else
-                {
-                    this.ingredientList[name]++;
-                }
-                Destroy(c.gameObject);
-                eggStorage.text = "+" + this.ingredientList[name];
-                break;
-        }
-         foreach (KeyValuePair<string, int> entry in ingredientList)
-                {
-                    print(entry.Key);
-                    print(entry.Value);
-                }
+        //        }
+        //        Destroy(c.gameObject);
+        //        potatoStorage.text = "+" + this.ingredientList[name];
+        //        break;
+        //    case "Egg":
+        //        if (!this.ingredientList.ContainsKey("Egg"))
+        //        {
+        //            this.ingredientList.Add("Egg", 1);
+        //        }
+        //        else
+        //        {
+        //            this.ingredientList[name]++;
+        //        }
+        //        Destroy(c.gameObject);
+        //        eggStorage.text = "+" + this.ingredientList[name];
+        //        break;
+        //}
+        //    foreach (KeyValuePair<string, int> entry in ingredientList)
+        //        {
+        //            print(entry.Key);
+        //            print(entry.Value);
+        //        }
 
         
 

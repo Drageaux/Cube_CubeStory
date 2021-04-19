@@ -33,13 +33,13 @@ public class Interactable : MonoBehaviour
     public void OnInteracted()
     {
         this.hasInteracted = true;
-        interactionManager.onInteractableDefocused.Invoke(name);
+        interactionManager.onInteractableDefocused.Invoke(this.name);
     }
 
     public void OnFocused()
     {
         isFocus = true;
-        interactionManager.onInteractableFocused.Invoke(name);
+        interactionManager.onInteractableFocused.Invoke(this.name);
     }
 
     public void OnDefocused()
