@@ -1296,7 +1296,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130448496}
-  m_LocalRotation: {x: 0.12218326, y: -0.000000004269366, z: 5.25583e-10, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218326, y: 0.000000004269366, z: -5.25583e-10, w: 0.9925076}
   m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -20794,7 +20794,6 @@ MonoBehaviour:
   eggStorage: {fileID: 2068752836}
   lackIngredient: {fileID: 88144477}
   storagePanel: {fileID: 222406603}
-  ordersSystem: {fileID: 0}
 --- !u!4 &1865023755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7464646722456733631, guid: 9da0f18063101694cb43dda184fa4920,
@@ -20817,20 +20816,6 @@ MonoBehaviour:
     type: 3}
   currRock: {fileID: 0}
   hasBall: 0
---- !u!136 &1865023757
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865023750}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.825, z: 0}
 --- !u!114 &1865023761
 MonoBehaviour:
   m_ObjectHideFlags: 0
