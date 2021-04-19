@@ -64,6 +64,7 @@ public class LevelController : MonoBehaviour
     {
         if (!levelEndCanvasGroup.interactable)
         {
+            Cursor.visible = true;
             ToggleCanvas(levelEndCanvasGroup, true);
             ToggleCanvas(mainCanvasGroup, false);
             Time.timeScale = 0f;
