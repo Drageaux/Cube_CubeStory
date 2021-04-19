@@ -15,8 +15,8 @@ public class InteractionManager : MonoBehaviour
 
     #endregion
 
-    public delegate void OnInteractableFocused(string name);
+    public delegate void OnInteractableFocused(Interactable i);
     public OnInteractableFocused onInteractableFocused;
-    public delegate void OnInteractableDefocused(string name);
+    public delegate void OnInteractableDefocused(Interactable i);
     public OnInteractableDefocused onInteractableDefocused;
 }

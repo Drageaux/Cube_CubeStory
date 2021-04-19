@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class InteractableNameUI : MonoBehaviour
 {
-    private string str = "";
+    private Interactable focusedTarget;
     private Text textObj;
 
     InteractionManager interactionManager;
@@ -17,19 +17,19 @@ public class InteractableNameUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void DisplayUI(string name)
+    public void DisplayUI(Interactable i)
     {
         gameObject.SetActive(true);
-        str = name;
-        textObj.text = name;
+        focusedTarget = i;
+        textObj.text = i.name;
     }
 
-    public void HideUI(string name)
+    public void HideUI(Interactable i)
     {
-        if (str == name)
+        if (focusedTarget == i)
         {
             gameObject.SetActive(false);
-            str = "";
+            focusedTarget = null;
             textObj.text = "";
         }
     }

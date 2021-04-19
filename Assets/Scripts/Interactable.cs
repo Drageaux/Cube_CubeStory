@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class Interactable : MonoBehaviour
 {
     // reference: https://www.youtube.com/watch?v=9tePzyL6dgc&list=PLPV2KyIb3jR4KLGCCAciWQ5qHudKtYeP7&index=3
-    new public string name = "Interactable";
     public float radius = 3f;
+    new public string name = "Interactable";
+    protected InteractableType type;
     bool isFocus = false;
     bool hasInteracted = false;
 
@@ -33,19 +34,19 @@ public class Interactable : MonoBehaviour
     public void OnInteracted()
     {
         this.hasInteracted = true;
-        interactionManager.onInteractableDefocused.Invoke(this.name);
+        interactionManager.onInteractableDefocused.Invoke(this);
     }
 
     public void OnFocused()
     {
         isFocus = true;
-        interactionManager.onInteractableFocused.Invoke(this.name);
+        interactionManager.onInteractableFocused.Invoke(this);
     }
 
     public void OnDefocused()
     {
         isFocus = false;
-        interactionManager.onInteractableDefocused.Invoke(name);
+        interactionManager.onInteractableDefocused.Invoke(this);
     }
 
     void OnDrawGizmosSelected()
@@ -53,4 +54,11 @@ public class Interactable : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+}
+
+public enum InteractableType
+{
+    Tool,
+    Ingredient,
+
 }

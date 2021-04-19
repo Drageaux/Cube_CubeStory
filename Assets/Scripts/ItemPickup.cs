@@ -7,13 +7,14 @@ public class ItemPickup : Interactable
     private void Awake()
     {
         name = ingredient.name;
+        type = InteractableType.Ingredient;
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             this.OnFocused();
         }
@@ -21,7 +22,7 @@ public class ItemPickup : Interactable
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             this.OnDefocused();
         }
@@ -29,6 +30,6 @@ public class ItemPickup : Interactable
 
     private void OnDestroy()
     {
-        interactionManager.onInteractableDefocused(this.ingredient.name);
+        interactionManager.onInteractableDefocused(this);
     }
 }
