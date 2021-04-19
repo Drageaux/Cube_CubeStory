@@ -56,7 +56,6 @@ public class Inventory : MonoBehaviour
             && interactionManager.CurrentTarget != null
             && interactionManager.CurrentTarget.type == InteractableType.Ingredient)
         {
-            print("test");
             this.PickUpIngredient(interactionManager.CurrentTarget);
         }
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];
@@ -70,6 +69,7 @@ public class Inventory : MonoBehaviour
             return;
 
         string ingrName = pickup.name;
+
         switch (ingrName)
         {
             case "Potato":
@@ -91,7 +91,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    this.ingredientList[name]++;
+                    this.ingredientList[ingrName]++;
                 }
                 pickup.Interact();
                 eggStorage.text = "+" + this.ingredientList[ingrName];

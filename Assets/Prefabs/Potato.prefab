@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5029987939816180643}
   - component: {fileID: 4407136934707557224}
   - component: {fileID: 636438826574274722}
-  - component: {fileID: 4337885410302899105}
   - component: {fileID: 1908764412393484703}
   m_Layer: 0
   m_Name: Potato
@@ -67,21 +66,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4337885410302899105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5029987939816180645}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e670551b73d6e4991808e93f579795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 3
-  name: Interactable
-  quantity: 1
 --- !u!114 &1908764412393484703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   name: Interactable
+  type: 1
   quantity: 1
   ingredient: {fileID: 11400000, guid: 7fbe9f2f9234ac34c81756c1570ec796, type: 2}
 --- !u!1001 &5029987939574516991

@@ -81,6 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   name: Interactable
+  type: 1
   quantity: 1
   ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
 --- !u!1 &3161222958445136069
