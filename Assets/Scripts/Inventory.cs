@@ -15,11 +15,13 @@ public class Inventory : MonoBehaviour
     private CharacterInputController cinput;
     private Orders ordersSystem;
     private Order cookingOrder;
+    private InteractionManager interactionManager;
 
 
     private void Awake()
     {
         ordersSystem = Orders.instance;
+        interactionManager = InteractionManager.instance;
 
         cinput = GetComponent<CharacterInputController>();
         if (cinput == null)
@@ -49,49 +51,58 @@ public class Inventory : MonoBehaviour
                 storagePanel.SetActive(false);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.E) 
+            && interactionManager.CurrentTarget 
+            && interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+        {
+            this.PickUpIngredient(interactionManager.CurrentTarget);
+        }
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];
       //  eggStorage.text = "+" + this.ingredientList["Egg"];
     }
 
 
-    private void OnTriggerEnter(Collider c)
+    private void PickUpIngredient(Interactable pickup)
     {
-        //string name = c.gameObject.tag;
-        //switch (name)
-        //{
-        //    case "Potato":
-        //        if (!this.ingredientList.ContainsKey("Potato"))
-        //        {
-        //            this.ingredientList.Add("Potato", 1);
-        //        }
-        //        else
-        //        {
-        //            this.ingredientList[name]++;
+        if (pickup.type != InteractableType.Ingredient)
+            return;
 
-        //        }
-        //        Destroy(c.gameObject);
-        //        potatoStorage.text = "+" + this.ingredientList[name];
-        //        break;
-        //    case "Egg":
-        //        if (!this.ingredientList.ContainsKey("Egg"))
-        //        {
-        //            this.ingredientList.Add("Egg", 1);
-        //        }
-        //        else
-        //        {
-        //            this.ingredientList[name]++;
-        //        }
-        //        Destroy(c.gameObject);
-        //        eggStorage.text = "+" + this.ingredientList[name];
-        //        break;
-        //}
-        //    foreach (KeyValuePair<string, int> entry in ingredientList)
-        //        {
-        //            print(entry.Key);
-        //            print(entry.Value);
-        //        }
+        string ingrName = pickup.name;
+        switch (ingrName)
+        {
+            case "Potato":
+                if (!this.ingredientList.ContainsKey("Potato"))
+                {
+                    this.ingredientList.Add("Potato", 1);
+                }
+                else
+                {
+                    this.ingredientList[ingrName]++;
+                }
+                pickup.Interact();
+                potatoStorage.text = "+" + this.ingredientList[ingrName];
+                break;
+            case "Egg":
+                if (!this.ingredientList.ContainsKey("Egg"))
+                {
+                    this.ingredientList.Add("Egg", 1);
+                }
+                else
+                {
+                    this.ingredientList[name]++;
+                }
+                pickup.Interact();
+                eggStorage.text = "+" + this.ingredientList[ingrName];
+                break;
+        }
+        foreach (KeyValuePair<string, int> entry in ingredientList)
+        {
+            print(entry.Key);
+            print(entry.Value);
+        }
 
-        
+
 
     }
 
