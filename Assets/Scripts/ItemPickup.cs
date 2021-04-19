@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 public class ItemPickup : Interactable
 {
-    public Ingredient ingredient;
     public int quantity = 1;
 
-    private void Awake()
+    public override void Interact()
     {
-        name = ingredient.name;
-        type = InteractableType.Ingredient;
-        SphereCollider pickUpCollider = GetComponent<SphereCollider>();
-        pickUpCollider.radius = radius;
+        this.hasInteracted = true;
+        interactionManager.onInteractableDefocused.Invoke(this);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,8 +26,4 @@ public class ItemPickup : Interactable
         }
     }
 
-    private void OnDestroy()
-    {
-        interactionManager.onInteractableDefocused(this);
-    }
 }

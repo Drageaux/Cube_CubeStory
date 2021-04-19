@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3161222957997528821}
   - component: {fileID: 4810974639686778743}
   - component: {fileID: 2538176995565936927}
-  - component: {fileID: 5666895252469131000}
+  - component: {fileID: 3080186575520473579}
   m_Layer: 0
   m_Name: Egg
   m_TagString: Egg
@@ -67,7 +67,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5666895252469131000
+--- !u!114 &3080186575520473579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,13 +76,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3161222957997528820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e670551b73d6e4991808e93f579795, type: 3}
+  m_Script: {fileID: 11500000, guid: 239a3dfaff1e0a74cabae1274ea3e19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Interactable
   radius: 3
-  ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
+  name: Interactable
   quantity: 1
+  ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
 --- !u!1 &3161222958445136069
 GameObject:
   m_ObjectHideFlags: 0

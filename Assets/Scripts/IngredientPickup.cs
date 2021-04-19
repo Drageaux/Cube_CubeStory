@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientPickup : MonoBehaviour
-{
+public class IngredientPickup : ItemPickup {
     public Ingredient ingredient;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        interactionManager = InteractionManager.instance;
+        SphereCollider pickUpCollider = GetComponent<SphereCollider>();
+        pickUpCollider.radius = radius;
+        name = ingredient.name;
+        type = InteractableType.Ingredient;
     }
 }
