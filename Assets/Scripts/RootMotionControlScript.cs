@@ -125,7 +125,7 @@ public class RootMotionControlScript : MonoBehaviour
             //Debug.Log("distance to cook " + buttonDistance);
             //Debug.Log("angle to cook " + buttonAngleDegrees);
         } 
-        if (cinput.Action)
+        if (cinput.Interact)
         {
             if (buttonDistance <= cookingCloseEnoughDistance &&
                     buttonAngleDegrees <= cookingCloseEnoughAngle)

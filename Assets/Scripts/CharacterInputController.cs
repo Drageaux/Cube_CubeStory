@@ -37,7 +37,13 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-    public bool Action
+    public bool Throw
+    {
+        get;
+        private set;
+    }
+
+    public bool Interact
     {
         get;
         private set;
@@ -90,10 +96,10 @@ public class CharacterInputController : MonoBehaviour
 
 
         //BEGIN ANALOG ON KEYBOARD DEMO CODE
-        if (Input.GetKey(KeyCode.Q))
-            h = -0.5f;
-        else if (Input.GetKey(KeyCode.E))
-            h = 0.5f;
+        //if (Input.GetKey(KeyCode.Q))
+        //    h = -0.5f;
+        //else if (Input.GetKey(KeyCode.E))
+        //    h = 0.5f;
 
         this.Run = false;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -141,11 +147,8 @@ public class CharacterInputController : MonoBehaviour
         Forward = filteredForwardInput;
         Turn = filteredTurnInput;
 
-
-        //Capture "fire" button for action event
-        
-        Action = Input.GetKeyDown(KeyCode.Space);
-
+        Interact = Input.GetKeyDown(KeyCode.E);
+        Throw = Input.GetButtonDown("Fire1");
         Jump = Input.GetButtonDown("Jump");
 
     }
