@@ -27,19 +27,12 @@ public class RootMotionControlScript : MonoBehaviour
 
     public bool picking;
     public bool cooking;
-    //public GameObject interactionSpot;
-    public GameObject cookingStandingSpot;
-    //public float buttonCloseEnoughForMatchDistance = 2f;
-    public float interactCloseEnoughDistance = 2f;
-    public float interactCloseEnoughAngle = 30f;
-
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
     public float animationSpeed = 1f;
     public float rootMovementSpeed = 1f;
     public float rootTurnSpeed = 1f;
-    public GameObject cookingObject;
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
@@ -128,19 +121,6 @@ public class RootMotionControlScript : MonoBehaviour
         //work
         bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
-
-        float buttonDistance = float.MaxValue;
-        float buttonAngleDegrees = float.MaxValue;
-        //float targetDistance = float.MaxValue;
-        //float targetAngleDegrees = float.MaxValue;
-        if (cookingStandingSpot != null)
-        {
-            buttonDistance = Vector3.Distance(transform.position, cookingStandingSpot.transform.position);
-            buttonAngleDegrees = Quaternion.Angle(transform.rotation, cookingStandingSpot.transform.rotation);
-            //    //Debug.Log("distance to cook " + buttonDistance);
-            //    //Debug.Log("angle to cook " + buttonAngleDegrees);
-        }
-
         if (cinput.Interact)
         {
             if (interactionManager.CurrentTarget != null)
@@ -154,36 +134,31 @@ public class RootMotionControlScript : MonoBehaviour
                     picking = true;
                     remainingTimer = Time.time + pickupTime;
                 }
-            }
-            if (buttonDistance <= interactCloseEnoughDistance &&
-                    buttonAngleDegrees <= interactCloseEnoughAngle)
-            {
-                if (inventory.HasEnoughIngredients())
+                else if (interactionManager.CurrentTarget.type == InteractableType.Tool)
                 {
-                    Debug.Log("Action pressed");
-                    //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
-                    //{
+                    if (interactionManager.CurrentTarget.name == "Pan")
                     {
-                        Debug.Log("Cooking initiated");
+                        if (inventory.HasEnoughIngredients())
+                        {
+                            Debug.Log("Action pressed");
+                            //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
+                            //{
+                            {
+                                Debug.Log("Cooking initiated");
 
-                        cooking = true;
-                        remainingTimer = Time.time + cookingTime;
+                                cooking = true;
+                                remainingTimer = Time.time + cookingTime;
+                            }
+                        }
+                        else
+                        {
+                            inventory.lackIngredient.SetActive(true);
+                            StartCoroutine("WaitForSec");
+                        }
                     }
-                } 
-                else
-                {
-                    inventory.lackIngredient.SetActive(true);
-                    StartCoroutine("WaitForSec");
                 }
             }
-            else
-            {
-                cooking = false;
-                //Debug.Log("match to button initiated");
-                //doMatchToButtonPress = true;
-            }
-
-            //}
+            
         }
         if (cinput.Moving)
         {
