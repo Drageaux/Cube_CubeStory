@@ -16,21 +16,4 @@ public class ItemPickup : Interactable
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            this.OnFocused();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            this.OnDefocused();
-        }
-    }
-
 }
