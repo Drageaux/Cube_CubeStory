@@ -259,35 +259,6 @@ public class RootMotionControlScript : MonoBehaviour
         this.transform.rotation = newRootRotation;
     }
 
-    private void OnAnimatorIK(int layerIndex)
-    {
-        if (anim)
-        {
-            AnimatorStateInfo astate = anim.GetCurrentAnimatorStateInfo(0);
-
-            if (astate.IsName("ButtonPress"))
-            {
-                float buttonWeight = anim.GetFloat("buttonClose");
-
-                // Set the look target position, if one has been assigned
-                if (cookingObject != null)
-                {
-                    anim.SetLookAtWeight(buttonWeight);
-                    anim.SetLookAtPosition(cookingObject.transform.position);
-                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, buttonWeight);
-                    anim.SetIKPosition(AvatarIKGoal.RightHand,
-                    cookingObject.transform.position);
-
-                }
-            }
-            else
-            {
-                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-                anim.SetLookAtWeight(0);
-            }
-        }
-    }
-
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(3);
