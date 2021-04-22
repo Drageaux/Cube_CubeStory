@@ -21,16 +21,17 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
-    public float pickupTime = 3f;
+    public float pickupTime = 4f;
     public float cookingTime = 4f; // in seconds
     private float remainingTimer;
 
     public bool picking;
     public bool cooking;
+    //public GameObject interactionSpot;
     public GameObject cookingStandingSpot;
     //public float buttonCloseEnoughForMatchDistance = 2f;
-    public float cookingCloseEnoughDistance = 0.22f;
-    public float cookingCloseEnoughAngle = 5f;
+    public float interactCloseEnoughDistance = 2f;
+    public float interactCloseEnoughAngle = 30f;
 
 
     public float initalMatchTargetsAnimTime = 0.25f;
@@ -109,6 +110,15 @@ public class RootMotionControlScript : MonoBehaviour
             cooking = false;
             inventory.FinishCooking();
         }
+        if (picking && Time.time > remainingTimer)
+        {
+            picking = false;
+            if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+            {
+                inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+            }
+        }
+
         //bool doMatchToButtonPress = false;
 
         //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
@@ -121,36 +131,38 @@ public class RootMotionControlScript : MonoBehaviour
 
         float buttonDistance = float.MaxValue;
         float buttonAngleDegrees = float.MaxValue;
-
+        //float targetDistance = float.MaxValue;
+        //float targetAngleDegrees = float.MaxValue;
         if (cookingStandingSpot != null)
         {
             buttonDistance = Vector3.Distance(transform.position, cookingStandingSpot.transform.position);
             buttonAngleDegrees = Quaternion.Angle(transform.rotation, cookingStandingSpot.transform.rotation);
-            //Debug.Log("distance to cook " + buttonDistance);
-            //Debug.Log("angle to cook " + buttonAngleDegrees);
-        } 
+            //    //Debug.Log("distance to cook " + buttonDistance);
+            //    //Debug.Log("angle to cook " + buttonAngleDegrees);
+        }
+
         if (cinput.Interact)
         {
             if (interactionManager.CurrentTarget != null)
             {
                 this.RotateTowards(interactionManager.CurrentTarget.transform);
-                //transform.LookAt(interactionManager.CurrentTarget.transform);
                 if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
                 {
-                    inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                    //transform.LookAt(interactionManager.CurrentTarget.transform);
+                    Debug.Log("Picking initiated");
+
+                    picking = true;
+                    remainingTimer = Time.time + pickupTime;
                 }
             }
-            if (buttonDistance <= cookingCloseEnoughDistance &&
-                    buttonAngleDegrees <= cookingCloseEnoughAngle)
+            if (buttonDistance <= interactCloseEnoughDistance &&
+                    buttonAngleDegrees <= interactCloseEnoughAngle)
             {
-
                 if (inventory.HasEnoughIngredients())
                 {
                     Debug.Log("Action pressed");
-
                     //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
                     //{
-
                     {
                         Debug.Log("Cooking initiated");
 
@@ -173,32 +185,33 @@ public class RootMotionControlScript : MonoBehaviour
 
             //}
         }
-        if (buttonDistance > cookingCloseEnoughDistance ||
-                    buttonAngleDegrees > cookingCloseEnoughAngle) {
+        if (cinput.Moving)
+        {
             cooking = false;
+            picking = false;
         }
 
-            //// get info about current animation
-            //var animState = anim.GetCurrentAnimatorStateInfo(0);
-            //// If the transition to button press has been initiated then we want
-            //// to correct the character position to the correct place
-            //if (animState.IsName("MatchToButtonPress")
-            //&& !anim.IsInTransition(0) && !anim.isMatchingTarget)
-            //{
-            //    if (buttonPressStandingSpot != null)
-            //    {
-            //        Debug.Log("Target matching correction started");
+        //// get info about current animation
+        //var animState = anim.GetCurrentAnimatorStateInfo(0);
+        //// If the transition to button press has been initiated then we want
+        //// to correct the character position to the correct place
+        //if (animState.IsName("MatchToButtonPress")
+        //&& !anim.IsInTransition(0) && !anim.isMatchingTarget)
+        //{
+        //    if (buttonPressStandingSpot != null)
+        //    {
+        //        Debug.Log("Target matching correction started");
 
-            //        initalMatchTargetsAnimTime = animState.normalizedTime;
+        //        initalMatchTargetsAnimTime = animState.normalizedTime;
 
-            //        var t = buttonPressStandingSpot.transform;
-            //        anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
-            //        new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
-            //        1f),
-            //        initalMatchTargetsAnimTime,
-            //        exitMatchTargetsAnimTime);
-            //    }
-            //}
+        //        var t = buttonPressStandingSpot.transform;
+        //        anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
+        //        new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
+        //        1f),
+        //        initalMatchTargetsAnimTime,
+        //        exitMatchTargetsAnimTime);
+        //    }
+        //}
 
         anim.speed = this.animationSpeed;
         anim.SetFloat("velx", Mathf.Abs(cinput.Turn));
@@ -207,12 +220,11 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
         anim.SetBool("cooking", cooking);
+        anim.SetBool("picking", picking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
     }
 
-
-    float turnSmoothVelocity;
     private void RotateTowards(Transform target)
     {
         Vector3 targetPostition = new Vector3(target.position.x,
@@ -220,7 +232,6 @@ public class RootMotionControlScript : MonoBehaviour
                                         target.position.z);
         this.transform.LookAt(targetPostition);
     }
-
 
     //This is a physics callback
     void OnCollisionEnter(Collision collision)
@@ -233,24 +244,19 @@ public class RootMotionControlScript : MonoBehaviour
 
             // Generate an event that might play a sound, generate a particle effect, etc.
             //EventManager.TriggerEvent<PlayerLandsEvent, Vector3, float>(collision.contacts[0].point, collision.impulse.magnitude);
-
         }
-
     }
 
     private void OnCollisionExit(Collision collision)
     {
-
         if (collision.transform.gameObject.tag == "ground")
         {
             --groundContactCount;
         }
-
     }
 
     void OnAnimatorMove()
     {
-
         Vector3 newRootPosition;
         Quaternion newRootRotation;
 
@@ -276,7 +282,6 @@ public class RootMotionControlScript : MonoBehaviour
 
         this.transform.position = newRootPosition;
         this.transform.rotation = newRootRotation;
-
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -312,8 +317,5 @@ public class RootMotionControlScript : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         inventory.lackIngredient.SetActive(false);
-
-
-
     }
 }

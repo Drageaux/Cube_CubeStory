@@ -19,13 +19,19 @@ public class CharacterInputController : MonoBehaviour
     private float forwardSpeedLimit = 1f;
 
 
-    public float Forward
+    public Vector3 Direction
     {
         get;
         private set;
     }
 
-    public Vector3 Direction
+    public bool Moving
+    {
+        get;
+        private set;
+    }
+
+    public float Forward
     {
         get;
         private set;
@@ -61,12 +67,12 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-
     public bool Run
     {
         get;
         private set;
     }
+
 
     float turnSmoothVelocity;
 
@@ -112,8 +118,6 @@ public class CharacterInputController : MonoBehaviour
             this.Crouch = !this.Crouch;
         }
 
-
-
         //if (Input.GetKeyUp(KeyCode.Alpha1))
         //    forwardSpeedLimit = 0.1f;
         //else if (Input.GetKeyUp(KeyCode.Alpha2))
@@ -151,5 +155,9 @@ public class CharacterInputController : MonoBehaviour
         Throw = Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
+        Moving = Input.GetKeyDown(KeyCode.A) 
+            || Input.GetKeyDown(KeyCode.W) 
+            || Input.GetKeyDown(KeyCode.S)
+            || Input.GetKeyDown(KeyCode.D);
     }
 }
