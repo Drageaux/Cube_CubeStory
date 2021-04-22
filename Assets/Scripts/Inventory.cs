@@ -52,18 +52,13 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (cinput.Interact 
-            && interactionManager.CurrentTarget != null
-            && interactionManager.CurrentTarget.type == InteractableType.Ingredient)
-        {
-            this.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
-        }
+        
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];
       //  eggStorage.text = "+" + this.ingredientList["Egg"];
     }
 
 
-    private void PickUpIngredient(IngredientPickup pickup)
+    public void PickUpIngredient(IngredientPickup pickup)
     {
         if (pickup.type != InteractableType.Ingredient)
             return;
