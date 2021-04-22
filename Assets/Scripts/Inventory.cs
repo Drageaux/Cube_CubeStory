@@ -56,14 +56,14 @@ public class Inventory : MonoBehaviour
             && interactionManager.CurrentTarget != null
             && interactionManager.CurrentTarget.type == InteractableType.Ingredient)
         {
-            this.PickUpIngredient(interactionManager.CurrentTarget);
+            this.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
         }
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];
       //  eggStorage.text = "+" + this.ingredientList["Egg"];
     }
 
 
-    private void PickUpIngredient(Interactable pickup)
+    private void PickUpIngredient(IngredientPickup pickup)
     {
         if (pickup.type != InteractableType.Ingredient)
             return;
@@ -102,9 +102,6 @@ public class Inventory : MonoBehaviour
             print(entry.Key);
             print(entry.Value);
         }
-
-
-
     }
 
     public bool HasEnoughIngredients()

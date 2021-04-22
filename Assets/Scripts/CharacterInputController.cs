@@ -148,7 +148,7 @@ public class CharacterInputController : MonoBehaviour
         Turn = filteredTurnInput;
 
         Interact = Input.GetKeyDown(KeyCode.E);
-        Throw = Input.GetButtonDown("Fire1");
+        Throw = Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
     }
