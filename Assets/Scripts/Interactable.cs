@@ -55,6 +55,17 @@ public class Interactable : MonoBehaviour
             this.OnDefocused();
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (interactionManager.CurrentTarget == null)
+            {
+                this.OnFocused();
+            } 
+        }
+    }
 }
 
 public enum InteractableType
