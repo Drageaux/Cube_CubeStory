@@ -11,6 +11,7 @@ using UnityEditor;
 [RequireComponent(typeof(Health), typeof(Inventory))]
 public class RootMotionControlScript : MonoBehaviour
 {
+    InteractionManager interactionManager;
     private Animator anim;
     private Rigidbody rbody;
     private CharacterInputController cinput;
@@ -20,15 +21,18 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
+    public float pickupTime = 3f;
     public float cookingTime = 4f; // in seconds
     private float remainingTimer;
 
-    public bool hasIngredients;
+    public bool picking;
     public bool cooking;
     public GameObject cookingStandingSpot;
     //public float buttonCloseEnoughForMatchDistance = 2f;
     public float cookingCloseEnoughDistance = 0.22f;
     public float cookingCloseEnoughAngle = 5f;
+
+
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
     public float animationSpeed = 1f;
@@ -53,7 +57,7 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Awake()
     {
-
+        interactionManager = InteractionManager.instance;
         anim = GetComponent<Animator>();
 
         if (anim == null)
@@ -83,8 +87,8 @@ public class RootMotionControlScript : MonoBehaviour
     void Start()
     {
         //example of how to get access to certain limbs
-        leftFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
-        rightFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
+        leftFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
+        rightFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
@@ -127,6 +131,15 @@ public class RootMotionControlScript : MonoBehaviour
         } 
         if (cinput.Interact)
         {
+            if (interactionManager.CurrentTarget != null)
+            {
+                this.RotateTowards(interactionManager.CurrentTarget.transform);
+                //transform.LookAt(interactionManager.CurrentTarget.transform);
+                if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+                {
+                    inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                }
+            }
             if (buttonDistance <= cookingCloseEnoughDistance &&
                     buttonAngleDegrees <= cookingCloseEnoughAngle)
             {
@@ -196,6 +209,16 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("cooking", cooking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
+    }
+
+
+    float turnSmoothVelocity;
+    private void RotateTowards(Transform target)
+    {
+        Vector3 targetPostition = new Vector3(target.position.x,
+                                        this.transform.position.y,
+                                        target.position.z);
+        this.transform.LookAt(targetPostition);
     }
 
 
