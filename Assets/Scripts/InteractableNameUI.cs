@@ -26,11 +26,11 @@ public class InteractableNameUI : MonoBehaviour
 
     public void HideUI(Interactable i)
     {
-        if (focusedTarget == i)
-        {
+        //if (focusedTarget == i)
+        //{
             gameObject.SetActive(false);
             focusedTarget = null;
             textObj.text = "";
-        }
+        //}
     }
 }
