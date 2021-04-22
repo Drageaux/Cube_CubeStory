@@ -38,6 +38,8 @@ public class InteractionManager : MonoBehaviour
 
     public void DefocusCurrentTarget(Interactable i)
     {
+        print(CurrentTarget);
+        print(i);
         if (CurrentTarget == i)
         {
             CurrentTarget = null;

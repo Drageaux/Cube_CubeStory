@@ -6,7 +6,7 @@ public class ItemPickup : Interactable
     public override void Interact()
     {
         this.hasInteracted = true;
-        interactionManager.onInteractableDefocused.Invoke(this);
+        this.OnDefocused();
         gameObject.SetActive(false);
     }
 
