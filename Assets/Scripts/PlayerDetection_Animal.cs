@@ -160,7 +160,6 @@ public class PlayerDetection_Animal : MonoBehaviour
 
                         updateInventory("Chicken");
                         updateInventory("superIngredient");
-
                     }
                     else
                     {

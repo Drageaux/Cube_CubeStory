@@ -156,6 +156,8 @@ public class RootMotionControlScript : MonoBehaviour
                             StartCoroutine("WaitForSec");
                         }
                     }
+                } else if (interactionManager.CurrentTarget.type == InteractableType.AnimalIngredient) {
+                    anim.Play("Dive Catch");
                 }
             }
             
