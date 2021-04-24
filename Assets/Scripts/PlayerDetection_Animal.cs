@@ -44,6 +44,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
         player_anim = player.GetComponent<Animator>();
 
 
@@ -86,9 +87,9 @@ public class PlayerDetection_Animal : MonoBehaviour
                 Debug.Log("distance less than 1");
                 aistate = AIState.getHit;
                 StartCoroutine("WaitForSec");
-                GetComponent<NavMeshAgent>().enabled = false;
+                //agent.enabled = false;
                 //Destroy(this.gameObject);
-                this.gameObject.SetActive(false);
+                //this.gameObject.SetActive(false);
                 //if (invertory_script.ingredientList != null)
                 //{
                 //    if (!invertory_script.ingredientList.ContainsKey("Chicken"))
@@ -150,7 +151,7 @@ public class PlayerDetection_Animal : MonoBehaviour
                     if (distance < 1.0f)
                     {
                         Debug.Log("get gold egg and chicken");
-                        GetComponent<NavMeshAgent>().enabled = false;
+                        agent.enabled = false;
                         Destroy(this.gameObject);
                        
                         updateInventory("Chicken");
@@ -198,12 +199,19 @@ public class PlayerDetection_Animal : MonoBehaviour
                 break;
             case AIState.lay:
                 Debug.Log("Lay Egg");
-                if (this.gameObject.activeSelf==true)
+                try
                 {
-                    agent.isStopped = true;
+                    if (this.gameObject.activeSelf == true)
+                    {
+                        agent.enabled = true;
+                        agent.isStopped = true;
+                    }
+                    anim.Play("IdleLay");
+                    goldEgg.SetActive(true);
                 }
-                anim.Play("IdleLay");
-                goldEgg.SetActive(true);
+                catch{
+                    Debug.Log("isStopped");
+                }
                 break;
             default:
                 break;
@@ -269,7 +277,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         numOfChicken++;
-        GetComponent<NavMeshAgent>().enabled = false;
+        agent.enabled = false;
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
     }

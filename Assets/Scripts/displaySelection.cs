@@ -28,7 +28,7 @@ public class displaySelection : MonoBehaviour
         //checking whether have mystery
         if (invertory_script.ingredientList.ContainsKey("superIngredient") && invertory_script.ingredientList["superIngredient"] >0) {
             Debug.Log("contain super");
-            if (Input.GetKeyUp(KeyCode.C))
+            if (Input.GetKeyUp(KeyCode.K))
             {
 
                 if (canvasGroup.interactable)
