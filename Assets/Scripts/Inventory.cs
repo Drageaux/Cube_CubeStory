@@ -63,7 +63,12 @@ public class Inventory : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
+        if (c.gameObject.CompareTag("MysteryBox"))
+        {
+            return;
+        }
         string name = c.gameObject.tag;
+        print(name);
         switch (name)
         {
             case "Potato":
