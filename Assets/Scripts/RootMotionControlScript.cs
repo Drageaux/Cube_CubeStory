@@ -21,7 +21,7 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
-    public float pickupTime = 4f;
+    public float pickupTime = 1.6f;
     public float cookingTime = 4f; // in seconds
     private float remainingTimer;
 
