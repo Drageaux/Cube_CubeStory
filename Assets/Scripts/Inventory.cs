@@ -56,16 +56,16 @@ public class Inventory : MonoBehaviour
     }
 
 
-    public void PickUpIngredient(IngredientPickup pickup)
+    public void PickUpIngredient(ItemPickup pickup)
     {
         if (pickup.type != InteractableType.Ingredient)
             return;
-	// TODO: fix MysteryBox pickup
-	if (c.gameObject.CompareTag("MysteryBox"))
+	    // TODO: fix MysteryBox pickup
+	    if (pickup.gameObject.CompareTag("MysteryBox"))
         {
             return;
         }
-        string tag = c.gameObject.tag;
+        string tag = pickup.gameObject.tag;
         print(tag);
 
         string ingrName = pickup.name;
