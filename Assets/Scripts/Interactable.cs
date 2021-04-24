@@ -41,14 +41,14 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             this.OnFocused();
         }
     }
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -56,7 +56,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
