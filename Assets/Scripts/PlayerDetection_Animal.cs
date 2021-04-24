@@ -17,7 +17,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     public Text s_ingStorage;
     Inventory invertory_script;
     private bool added = false;
-    private float catchTimer = 5.0f;
+    private float catchTimer = 15.0f;
 
     private Vector3 chickenPos = Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
@@ -44,6 +44,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
         player_anim = player.GetComponent<Animator>();
 
 
@@ -86,7 +87,9 @@ public class PlayerDetection_Animal : MonoBehaviour
                 Debug.Log("distance less than 1");
                 aistate = AIState.getHit;
                 StartCoroutine("WaitForSec");
-                Destroy(this.gameObject);
+                //agent.enabled = false;
+                //Destroy(this.gameObject);
+                //this.gameObject.SetActive(false);
                 //if (invertory_script.ingredientList != null)
                 //{
                 //    if (!invertory_script.ingredientList.ContainsKey("Chicken"))
@@ -135,7 +138,6 @@ public class PlayerDetection_Animal : MonoBehaviour
                 Debug.Log("isCrouching" + player_anim.GetBool("crouching"));
                 if (player_anim.GetBool("crouching") ==false)
                 {
-              
                     catchTimer = Time.time + 20;
                     agent.isStopped = false;
                     chickenRun = true;
@@ -145,10 +147,13 @@ public class PlayerDetection_Animal : MonoBehaviour
                 {
                     Debug.Log("crouching");
                     //chickenRun = false;
+                    // if (distance < 1.0f&& Input.GetKeyUp(KeyCode.E))
                     if (distance < 1.0f)
                     {
                         Debug.Log("get gold egg and chicken");
+                        agent.enabled = false;
                         Destroy(this.gameObject);
+                       
                         updateInventory("Chicken");
                         updateInventory("superIngredient");
 
@@ -172,7 +177,6 @@ public class PlayerDetection_Animal : MonoBehaviour
         switch (aistate)
         {
             case AIState.wander:
-                agent.isStopped = false;
                 anim.Play("Walk_RM");
                 if (agent.remainingDistance - agent.stoppingDistance <= 0 && agent.pathPending == false)
                 {
@@ -195,12 +199,19 @@ public class PlayerDetection_Animal : MonoBehaviour
                 break;
             case AIState.lay:
                 Debug.Log("Lay Egg");
-                if (agent.isStopped == false)
+                try
                 {
-                    agent.isStopped = true;
+                    if (this.gameObject.activeSelf == true)
+                    {
+                        agent.enabled = true;
+                        agent.isStopped = true;
+                    }
+                    anim.Play("IdleLay");
+                    goldEgg.SetActive(true);
                 }
-                anim.Play("IdleLay");
-                goldEgg.SetActive(true);
+                catch{
+                    Debug.Log("isStopped");
+                }
                 break;
             default:
                 break;
@@ -234,7 +245,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     //    Destroy(this.gameObject);
     //}
 
-    private void updateInventory(string key)
+    public void updateInventory(string key)
     {
         if (invertory_script.ingredientList != null)
         {
@@ -260,11 +271,15 @@ public class PlayerDetection_Animal : MonoBehaviour
             Debug.Log("can't find ingredient list");
         }
     }
+
+   
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(0.5f);
         numOfChicken++;
-        Destroy(this.gameObject);
+        agent.enabled = false;
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }
 
