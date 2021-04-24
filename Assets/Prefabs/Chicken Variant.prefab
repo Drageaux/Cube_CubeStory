@@ -120,7 +120,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 3
   m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &307586373
 MonoBehaviour:
@@ -182,6 +182,19 @@ MonoBehaviour:
   type: 2
   quantity: 1
   ingredient: {fileID: 11400000, guid: 887c346089cd6fc4a9730ad4479aec86, type: 2}
+--- !u!135 &3630740743555929170
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894614338859961286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4894614338860133970
 PrefabInstance:
   m_ObjectHideFlags: 0
