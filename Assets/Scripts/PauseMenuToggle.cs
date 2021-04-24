@@ -24,13 +24,13 @@ public class PauseMenuToggle : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            
             if (canvasGroup.interactable)
             {
                 Time.timeScale = 1f;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.alpha = 0f;
+                Cursor.visible = false;
             }
             else
             {
@@ -38,6 +38,7 @@ public class PauseMenuToggle : MonoBehaviour
                 canvasGroup.interactable = true;
                 canvasGroup.blocksRaycasts = true;
                 canvasGroup.alpha = 1f;
+                Cursor.visible = true;
             }
         }
 

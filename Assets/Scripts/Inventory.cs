@@ -7,21 +7,21 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public Dictionary<string, int> ingredientList;
-    public List<Dictionary<string, int>> orders;
-    public Dictionary<string, int> order1;
     public Text potatoStorage;
     public Text eggStorage;
     public GameObject lackIngredient;
     public GameObject storagePanel;
 
     private CharacterInputController cinput;
-    public Orders ordersSystem;
+    private Orders ordersSystem;
     private Order cookingOrder;
+    private InteractionManager interactionManager;
 
 
     private void Awake()
     {
         ordersSystem = Orders.instance;
+        interactionManager = InteractionManager.instance;
 
         cinput = GetComponent<CharacterInputController>();
         if (cinput == null)
@@ -32,11 +32,6 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         this.ingredientList = new Dictionary<string, int>();
-        this.order1 = new Dictionary<string, int>();
-        this.order1.Add("Potato", 1);
-        this.order1.Add("Egg", 1);
-        orders = new List<Dictionary<string, int>>();
-        orders.Add(this.order1);
         lackIngredient.SetActive(false);
         storagePanel.SetActive(false);
     }
@@ -61,15 +56,21 @@ public class Inventory : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider c)
+    public void PickUpIngredient(IngredientPickup pickup)
     {
-        if (c.gameObject.CompareTag("MysteryBox"))
+        if (pickup.type != InteractableType.Ingredient)
+            return;
+	// TODO: fix MysteryBox pickup
+	if (c.gameObject.CompareTag("MysteryBox"))
         {
             return;
         }
-        string name = c.gameObject.tag;
-        print(name);
-        switch (name)
+        string tag = c.gameObject.tag;
+        print(tag);
+
+        string ingrName = pickup.name;
+
+        switch (ingrName)
         {
             case "Potato":
                 if (!this.ingredientList.ContainsKey("Potato"))
@@ -78,11 +79,10 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    this.ingredientList[name]++;
-
+                    this.ingredientList[ingrName]++;
                 }
-                Destroy(c.gameObject);
-                potatoStorage.text = "+" + this.ingredientList[name];
+                pickup.Interact();
+                potatoStorage.text = "+" + this.ingredientList[ingrName];
                 break;
             case "Egg":
                 if (!this.ingredientList.ContainsKey("Egg"))
@@ -91,20 +91,17 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    this.ingredientList[name]++;
+                    this.ingredientList[ingrName]++;
                 }
-                Destroy(c.gameObject);
-                eggStorage.text = "+" + this.ingredientList[name];
+                pickup.Interact();
+                eggStorage.text = "+" + this.ingredientList[ingrName];
                 break;
         }
-         foreach (KeyValuePair<string, int> entry in ingredientList)
-                {
-                    print(entry.Key);
-                    print(entry.Value);
-                }
-
-        
-
+        foreach (KeyValuePair<string, int> entry in ingredientList)
+        {
+            print(entry.Key);
+            print(entry.Value);
+        }
     }
 
     public bool HasEnoughIngredients()

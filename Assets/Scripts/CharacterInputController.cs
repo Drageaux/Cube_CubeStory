@@ -19,13 +19,19 @@ public class CharacterInputController : MonoBehaviour
     private float forwardSpeedLimit = 1f;
 
 
-    public float Forward
+    public Vector3 Direction
     {
         get;
         private set;
     }
 
-    public Vector3 Direction
+    public bool Moving
+    {
+        get;
+        private set;
+    }
+
+    public float Forward
     {
         get;
         private set;
@@ -37,7 +43,13 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-    public bool Action
+    public bool Throw
+    {
+        get;
+        private set;
+    }
+
+    public bool Interact
     {
         get;
         private set;
@@ -55,12 +67,12 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-
     public bool Run
     {
         get;
         private set;
     }
+
 
     float turnSmoothVelocity;
 
@@ -90,10 +102,10 @@ public class CharacterInputController : MonoBehaviour
 
 
         //BEGIN ANALOG ON KEYBOARD DEMO CODE
-        if (Input.GetKey(KeyCode.Q))
-            h = -0.5f;
-        else if (Input.GetKey(KeyCode.E))
-            h = 0.5f;
+        //if (Input.GetKey(KeyCode.Q))
+        //    h = -0.5f;
+        //else if (Input.GetKey(KeyCode.E))
+        //    h = 0.5f;
 
         this.Run = false;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -105,8 +117,6 @@ public class CharacterInputController : MonoBehaviour
         {
             this.Crouch = !this.Crouch;
         }
-
-
 
         //if (Input.GetKeyUp(KeyCode.Alpha1))
         //    forwardSpeedLimit = 0.1f;
@@ -141,12 +151,13 @@ public class CharacterInputController : MonoBehaviour
         Forward = filteredForwardInput;
         Turn = filteredTurnInput;
 
-
-        //Capture "fire" button for action event
-        
-        Action = Input.GetKeyDown(KeyCode.Space);
-
+        Interact = Input.GetKeyDown(KeyCode.E);
+        Throw = Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
+        Moving = Input.GetKeyDown(KeyCode.A) 
+            || Input.GetKeyDown(KeyCode.W) 
+            || Input.GetKeyDown(KeyCode.S)
+            || Input.GetKeyDown(KeyCode.D);
     }
 }

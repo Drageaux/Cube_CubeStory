@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5029987939816180643}
   - component: {fileID: 4407136934707557224}
+  - component: {fileID: 636438826574274722}
+  - component: {fileID: 1908764412393484703}
   m_Layer: 0
   m_Name: Potato
   m_TagString: Potato
@@ -47,10 +49,40 @@ BoxCollider:
   m_GameObject: {fileID: 5029987939816180645}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1, z: 1.5}
   m_Center: {x: 0.2, y: 0.3, z: 0.3}
+--- !u!135 &636438826574274722
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029987939816180645}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1908764412393484703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029987939816180645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239a3dfaff1e0a74cabae1274ea3e19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  name: Interactable
+  type: 1
+  quantity: 1
+  ingredient: {fileID: 11400000, guid: 7fbe9f2f9234ac34c81756c1570ec796, type: 2}
 --- !u!1001 &5029987939574516991
 PrefabInstance:
   m_ObjectHideFlags: 0

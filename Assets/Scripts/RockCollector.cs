@@ -12,11 +12,13 @@ public class RockCollector : MonoBehaviour
     public bool hasBall = false;
 
     private Animator anim;
+    private CharacterInputController cinput;
 
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        cinput = GetComponent<CharacterInputController>();
         holdSpot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_C_Spine/J_Bip_C_Chest/J_Bip_C_UpperChest/J_Bip_R_Shoulder/J_Bip_R_UpperArm/J_Bip_R_LowerArm/J_Bip_R_Hand/RockHoldSpot");
         if (holdSpot == null)
             Debug.LogError("Rock hold spot not found");
@@ -30,7 +32,7 @@ public class RockCollector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (cinput.Throw)
         {
             this.ReceiveRock();
             anim.SetBool("throw", true);
