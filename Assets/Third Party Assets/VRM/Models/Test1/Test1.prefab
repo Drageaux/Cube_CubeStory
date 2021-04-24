@@ -547,9 +547,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 6368379665715190384}
   m_AABB:
-    m_Center: {x: -0.00046315044, y: 1.2806938, z: -0.015629828}
-    m_Extent: {x: 0.14912906, y: 0.12649131, z: 0.1269179}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &482783643623909495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3398,9 +3398,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 6368379665715190384}
   m_AABB:
-    m_Center: {x: 0.00023770332, y: 0.6929575, z: -0.020186342}
-    m_Extent: {x: 0.5801145, y: 0.693069, z: 0.2102581}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &5059349485298998350
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,9 +5663,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 5179217686413954596}
   m_AABB:
-    m_Center: {x: -0.000000014901161, y: 0.07737833, z: 0.037910737}
-    m_Extent: {x: 0.09689778, y: 0.10745865, z: 0.06708338}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &7960798115292488913
 GameObject:
   m_ObjectHideFlags: 0
