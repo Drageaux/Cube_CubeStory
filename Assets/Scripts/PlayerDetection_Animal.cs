@@ -63,11 +63,15 @@ public class PlayerDetection_Animal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
         chickenPos = gameObject.transform.position;
         playerPos = player.transform.position;
         eggPos = goldEgg.transform.position;
         distance = Vector3.Distance(chickenPos, playerPos);
-      //  egg_distance= Vector3.Distance(playerPos, eggPos);
+        //  egg_distance= Vector3.Distance(playerPos, eggPos);
 
         if (aistate != AIState.lay|| chickenRun)
         {
@@ -153,7 +157,7 @@ public class PlayerDetection_Animal : MonoBehaviour
                         Debug.Log("get gold egg and chicken");
                         agent.enabled = false;
                         Destroy(this.gameObject);
-                       
+
                         updateInventory("Chicken");
                         updateInventory("superIngredient");
 
@@ -278,8 +282,8 @@ public class PlayerDetection_Animal : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         numOfChicken++;
         agent.enabled = false;
-        //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
+        //this.gameObject.SetActive(false);
     }
 }
 
