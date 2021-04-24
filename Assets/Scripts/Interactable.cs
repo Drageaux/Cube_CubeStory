@@ -72,4 +72,5 @@ public enum InteractableType
 {
     Tool,
     Ingredient,
+    AnimalIngredient
 }
