@@ -15,8 +15,9 @@ public class AnimalIngredient: ItemPickup
         pickUpCollider.radius = radius;
     }
 
-    protected void OnCollisionEnter(Collider other) 
+    protected void OnCollisionEnter(Collision collision)
     {
+        GameObject other = collision.gameObject;
         if (other.CompareTag("Player"))
         {
             try
