@@ -3672,6 +3672,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1782967672}
     m_Modifications:
+    - target: {fileID: 1922502932803033264, guid: f9483eebc21c3dc4cbc47fae5eb1bd1a,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 04eb2ca605de3a7449059cc5425a2ad1, type: 3}
     - target: {fileID: 4725603828666048076, guid: f9483eebc21c3dc4cbc47fae5eb1bd1a,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4737,7 +4742,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 880858a5d807537429fc7dd365df5897, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f35de9fa4b23b340854d1127e8fa848, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5536,6 +5541,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1922502932803033264, guid: f9483eebc21c3dc4cbc47fae5eb1bd1a,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 04eb2ca605de3a7449059cc5425a2ad1, type: 3}
     - target: {fileID: 3763494736159497615, guid: f9483eebc21c3dc4cbc47fae5eb1bd1a,
         type: 3}
       propertyPath: m_IsActive
@@ -17264,6 +17274,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1782967672}
     m_Modifications:
+    - target: {fileID: 1922502932803033264, guid: 7331e1450df490c4bb916aca082e96cf,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 9749827487426934088b95c97eacc6a9, type: 3}
     - target: {fileID: 4725603828666048076, guid: 7331e1450df490c4bb916aca082e96cf,
         type: 3}
       propertyPath: m_Pivot.x
@@ -17869,7 +17884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 880858a5d807537429fc7dd365df5897, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f35de9fa4b23b340854d1127e8fa848, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18370,7 +18385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 880858a5d807537429fc7dd365df5897, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f35de9fa4b23b340854d1127e8fa848, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19772,7 +19787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 880858a5d807537429fc7dd365df5897, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f35de9fa4b23b340854d1127e8fa848, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21465,6 +21480,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1782967672}
     m_Modifications:
+    - target: {fileID: 1922502932803033264, guid: 7331e1450df490c4bb916aca082e96cf,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 9749827487426934088b95c97eacc6a9, type: 3}
     - target: {fileID: 4605035488792915269, guid: 7331e1450df490c4bb916aca082e96cf,
         type: 3}
       propertyPath: m_CullTransparentMesh
@@ -22714,6 +22734,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1922502932803033264, guid: 7331e1450df490c4bb916aca082e96cf,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 9749827487426934088b95c97eacc6a9, type: 3}
     - target: {fileID: 3763494736159497615, guid: 7331e1450df490c4bb916aca082e96cf,
         type: 3}
       propertyPath: m_IsActive
