@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fried Eggs
   m_EditorClassIdentifier: 
   name: Fried Eggs
-  icon: {fileID: 21300000, guid: 3bf5387af5dbf154eaa77640ee810df4, type: 3}
-  isDefaultOrder: 0
+  icon: {fileID: 21300000, guid: ff47361e6103fde4e8088c19c7b0ee98, type: 3}
+  isDefaultRecipe: 0
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
     quantity: 2

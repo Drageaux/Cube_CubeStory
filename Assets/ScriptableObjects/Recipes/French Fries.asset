@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: French Fries
   m_EditorClassIdentifier: 
   name: French Fries
-  icon: {fileID: 21300000, guid: 836f50d3e333dfe49ae596229861b63f, type: 3}
-  isDefaultOrder: 0
+  icon: {fileID: 21300000, guid: 9749827487426934088b95c97eacc6a9, type: 3}
+  isDefaultRecipe: 0
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: 7fbe9f2f9234ac34c81756c1570ec796, type: 2}
     quantity: 3
