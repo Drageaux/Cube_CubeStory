@@ -30,6 +30,8 @@ public class PlayerDetection_Animal : MonoBehaviour
     int curentWaypoint = -1;
     public AIState aistate;
     private bool chickenRun=false;
+    private Vector3 ini_pos;
+    private bool collect=false;
 
     public enum AIState
     {
@@ -55,6 +57,7 @@ public class PlayerDetection_Animal : MonoBehaviour
         // invertory_script = GameObject.Find("Cube").GetComponent<Inventory>();
         invertory_script = player.GetComponent<Inventory>();
         goldEgg.SetActive(false);
+        ini_pos = goldEgg.transform.position; 
         numOfChicken = 0;
         aistate = AIState.wander;
         setNextWayPoint();
@@ -65,7 +68,10 @@ public class PlayerDetection_Animal : MonoBehaviour
     {
         chickenPos = gameObject.transform.position;
         playerPos = player.transform.position;
-        eggPos = goldEgg.transform.position;
+        if (goldEgg != null)
+        {
+            goldEgg.transform.position = chickenPos + new Vector3(0.6f, 0.1f, 0.6f);
+        }
         distance = Vector3.Distance(chickenPos, playerPos);
       //  egg_distance= Vector3.Distance(playerPos, eggPos);
 
@@ -77,7 +83,7 @@ public class PlayerDetection_Animal : MonoBehaviour
             {
                 agent.isStopped = false;
             }
-            if (Time.time > catchTimer && distance >= 5)
+            if (Time.time > catchTimer && distance >= 5&&!collect)
             {
                 aistate = AIState.lay;
             }
@@ -147,15 +153,18 @@ public class PlayerDetection_Animal : MonoBehaviour
                 {
                     Debug.Log("crouching");
                     //chickenRun = false;
-                    // if (distance < 1.0f&& Input.GetKeyUp(KeyCode.E))
-                    if (distance < 1.0f)
+                     if (distance < 1.0f&& Input.GetKeyUp(KeyCode.E))
+                   // if (distance < 1.0f)
                     {
-                        Debug.Log("get gold egg and chicken");
+                        Debug.Log("get gold egg");
                         agent.enabled = false;
-                        Destroy(this.gameObject);
-                       
-                        updateInventory("Chicken");
+                        //Destroy(this.gameObject);
+                        //   Destroy(goldEgg);
+                        collect = true;
+                        goldEgg.SetActive(false);
+                       // updateInventory("Chicken");
                         updateInventory("superIngredient");
+                       
 
                     }
                     else
@@ -207,7 +216,10 @@ public class PlayerDetection_Animal : MonoBehaviour
                         agent.isStopped = true;
                     }
                     anim.Play("IdleLay");
-                    goldEgg.SetActive(true);
+                    if (collect==false)
+                    {
+                        goldEgg.SetActive(true);
+                    }
                 }
                 catch{
                     Debug.Log("isStopped");
