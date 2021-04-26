@@ -12,7 +12,6 @@ public class MysteryBoxCollector : MonoBehaviour
     private bool showEggText = false;
     private bool showPotatoText = false;
 
-    private GameObject mysteryBox;
     private Inventory inventory;
     private InteractionManager interactionManager;
 
@@ -20,7 +19,6 @@ public class MysteryBoxCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mysteryBox = null;
         inventory = gameObject.GetComponent<Inventory>();
         interactionManager = InteractionManager.instance;
     }
