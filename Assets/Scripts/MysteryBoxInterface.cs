@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MysteryBoxInterface : Interactable
+public class MysteryBoxInterface : ItemPickup
 {
     private string[] ingredients = { "Egg", "Potato" };
     MysteryBoxRandomItem mysteryBoxRandomItem;
@@ -24,7 +24,7 @@ public class MysteryBoxInterface : Interactable
         base.Start();
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
-
+        type = InteractableType.MysteryBox;
 
         mysteryBoxRandomItem = gameObject.GetComponent<MysteryBoxRandomItem>();
         triggerMysteryBox = gameObject.GetComponent<TriggerMysteryBox>();
