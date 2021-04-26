@@ -94,7 +94,6 @@ public class RootMotionControlScript : MonoBehaviour
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
-
     }
 
 
@@ -106,27 +105,34 @@ public class RootMotionControlScript : MonoBehaviour
         {
             return;
         }
-        if (cooking && Time.time > remainingTimer)
+        if (interactionManager.CurrentTarget != null)
         {
-            cooking = false;
-            inventory.FinishCooking();
-        }
-        if (picking && Time.time > remainingTimer)
-        {
-            picking = false;
-            if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+            if (cooking && Time.time > remainingTimer)
             {
-                inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                cooking = false;
+                inventory.FinishCooking();
             }
-        }
-        if (openingMysteryBox && Time.time > remainingTimer)
-        {
-            openingMysteryBox = false;
-            if (interactionManager.CurrentTarget.name == "Mystery Box")
+            if (picking && Time.time > remainingTimer)
             {
-                print("opening box");
-                mysteryBoxCollector.CollectBox();
+                picking = false;
+                if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+                {
+                    inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                }
             }
+            if (openingMysteryBox && Time.time > remainingTimer)
+            {
+                openingMysteryBox = false;
+                if (interactionManager.CurrentTarget.name == "Mystery Box")
+                {
+                    print("opening box");
+                    mysteryBoxCollector.CollectBox();
+                }
+            }
+        } 
+        else
+        {
+            CancelInteraction();
         }
 
         //bool doMatchToButtonPress = false;
@@ -184,10 +190,7 @@ public class RootMotionControlScript : MonoBehaviour
         }
         if (cinput.Moving)
         {
-            cooking = false;
-            picking = false;
-            openingMysteryBox = false;
-            remainingTimer = Time.time;
+            CancelInteraction();
         }
 
         //// get info about current animation
@@ -222,6 +225,14 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("picking", picking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
+    }
+
+    private void CancelInteraction()
+    {
+        cooking = false;
+        picking = false;
+        openingMysteryBox = false;
+        remainingTimer = Time.time;
     }
 
     private void RotateTowards(Transform target)
