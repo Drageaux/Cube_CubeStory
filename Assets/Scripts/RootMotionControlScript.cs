@@ -24,10 +24,12 @@ public class RootMotionControlScript : MonoBehaviour
 
     public float pickupTime = 1.6f;
     public float cookingTime = 4f; // in seconds
+    public float mysteryBoxOpenTime = 4f;
     private float remainingTimer;
 
     public bool picking;
     public bool cooking;
+    public bool openingMysteryBox;
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
@@ -75,6 +77,11 @@ public class RootMotionControlScript : MonoBehaviour
         inventory = GetComponent<Inventory>();
         if (inventory == null)
             Debug.Log("Inventory could not be found");
+
+        mysteryBoxCollector = GetComponent<MysteryBoxCollector>();
+        if (mysteryBoxCollector == null)
+            Debug.Log("MysteryBoxCollector could not be found");
+
     }
 
 
@@ -110,6 +117,15 @@ public class RootMotionControlScript : MonoBehaviour
             if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
             {
                 inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+            }
+        }
+        if (openingMysteryBox && Time.time > remainingTimer)
+        {
+            openingMysteryBox = false;
+            if (interactionManager.CurrentTarget.name == "Mystery Box")
+            {
+                print("opening box");
+                mysteryBoxCollector.CollectBox();
             }
         }
 
@@ -156,11 +172,12 @@ public class RootMotionControlScript : MonoBehaviour
                             inventory.lackIngredient.SetActive(true);
                             StartCoroutine("WaitForSec");
                         }
+                    } 
+                    else if (interactionManager.CurrentTarget.name == "Mystery Box")
+                    {
+                        openingMysteryBox = true;
+                        remainingTimer = Time.time + mysteryBoxOpenTime;
                     }
-                } 
-                else if (interactionManager.CurrentTarget.type == InteractableType.MysteryBox)
-                {
-
                 }
             }
             
@@ -169,6 +186,8 @@ public class RootMotionControlScript : MonoBehaviour
         {
             cooking = false;
             picking = false;
+            openingMysteryBox = false;
+            remainingTimer = Time.time;
         }
 
         //// get info about current animation
@@ -199,7 +218,7 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
-        anim.SetBool("cooking", cooking);
+        anim.SetBool("usingTool", cooking || openingMysteryBox);
         anim.SetBool("picking", picking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 

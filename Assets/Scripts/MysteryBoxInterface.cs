@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class MysteryBoxInterface : ItemPickup
+public class MysteryBoxInterface : Interactable
 {
     private string[] ingredients = { "Egg", "Potato" };
     MysteryBoxRandomItem mysteryBoxRandomItem;
     TriggerMysteryBox triggerMysteryBox;
+
     public string RandomItem
     {
         get;
@@ -24,7 +24,8 @@ public class MysteryBoxInterface : ItemPickup
         base.Start();
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
-        type = InteractableType.MysteryBox;
+        name = "Mystery Box";
+        type = InteractableType.Tool;
 
         mysteryBoxRandomItem = gameObject.GetComponent<MysteryBoxRandomItem>();
         triggerMysteryBox = gameObject.GetComponent<TriggerMysteryBox>();
@@ -33,12 +34,20 @@ public class MysteryBoxInterface : ItemPickup
         RandomItemQuantity = mysteryBoxRandomItem.getRandomIndex(1, 4);
     }
 
-    public void OpenBox()
+    public void Interact(Inventory inventory)
     {
-    }
+        string ingr = RandomItem;
+        int ingrQuantity = RandomItemQuantity;
 
-    public override void Interact()
-    {
+        if (!inventory.ingredientList.ContainsKey(ingr))
+        {
+            inventory.ingredientList.Add(ingr, ingrQuantity);
+        }
+        else
+        {
+            inventory.ingredientList[ingr] += ingrQuantity;
+        }
+
         this.hasInteracted = true;
         this.OnDefocused();
         gameObject.SetActive(false);

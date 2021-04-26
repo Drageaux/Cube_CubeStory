@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130448496}
-  m_LocalRotation: {x: 0.12218326, y: 0.000000004269366, z: -5.25583e-10, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218326, y: -0.000000004269366, z: 5.25583e-10, w: 0.9925076}
   m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5760,11 +5760,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 976705653}
     m_Modifications:
-    - target: {fileID: 989241084036780999, guid: d0d59e0defa233c42a4af7736e363328,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2545119515195330221, guid: d0d59e0defa233c42a4af7736e363328,
         type: 3}
       propertyPath: m_Enabled
@@ -20814,8 +20809,7 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2962440936134114152, guid: d0d59e0defa233c42a4af7736e363328,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: name
       value: Mystery Box
       objectReference: {fileID: 0}
@@ -21039,8 +21033,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupTime: 3
   cookingTime: 4
+  mysteryBoxOpenTime: 4
   picking: 0
   cooking: 0
+  openingMysteryBox: 0
   initalMatchTargetsAnimTime: 0.25
   exitMatchTargetsAnimTime: 0.75
   animationSpeed: 1.25
@@ -21161,10 +21157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2abde3558cae141b6104f6e5ba532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggText: {fileID: 68161042}
-  potatoText: {fileID: 911398056}
   potatoStorage: {fileID: 1435635051}
   eggStorage: {fileID: 2068752836}
+  eggText: {fileID: 68161042}
+  potatoText: {fileID: 911398056}
 --- !u!4 &1874974546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400010, guid: 7d0701320ee303d439feed9498b8d336,
