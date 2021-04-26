@@ -17,6 +17,7 @@ public class RootMotionControlScript : MonoBehaviour
     private CharacterInputController cinput;
     private Health healthScript;
     private Inventory inventory;
+    private MysteryBoxCollector mysteryBoxCollector;
 
     private Transform leftFoot;
     private Transform rightFoot;
@@ -156,6 +157,10 @@ public class RootMotionControlScript : MonoBehaviour
                             StartCoroutine("WaitForSec");
                         }
                     }
+                } 
+                else if (interactionManager.CurrentTarget.type == InteractableType.MysteryBox)
+                {
+
                 }
             }
             

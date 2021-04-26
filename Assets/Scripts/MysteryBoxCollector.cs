@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MysteryBoxController : MonoBehaviour
+public class MysteryBoxCollector : MonoBehaviour
 {
     public Text eggText;
     public Text potatoText;
@@ -14,6 +14,7 @@ public class MysteryBoxController : MonoBehaviour
     private GameObject mysteryBox;
     private MysteryBoxInterface mysteryBoxInterface;
     private Inventory inventory;
+    private InteractionManager interactionManager;
 
     private bool showEggText = false;
     private bool showPotatoText = false;
@@ -24,40 +25,12 @@ public class MysteryBoxController : MonoBehaviour
         mysteryBox = null;
         mysteryBoxInterface = null;
         inventory = gameObject.GetComponent<Inventory>();
+        interactionManager = InteractionManager.instance;
     }
 
     private void Update()
     {
-        if (mysteryBoxInterface != null && Input.GetKeyDown(KeyCode.Space))
-        {
-            if (mysteryBoxInterface.isActive()) 
-            {
-                string randomItem = mysteryBoxInterface.getRandomItem();
-                int randomItemQuantity = mysteryBoxInterface.getRandomQuantity();
-                if (!inventory.ingredientList.ContainsKey(randomItem))
-                {
-                    inventory.ingredientList.Add(randomItem, randomItemQuantity);
-                }
-                else
-                {
-                    inventory.ingredientList[randomItem] += randomItemQuantity;
-
-                }
-                Destroy(mysteryBox.gameObject);
-                if (randomItem.Equals("Egg"))
-                {
-                    eggStorage.text = "+" + inventory.ingredientList[randomItem];
-                    eggText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
-                    showEggText = true;
-                }
-                if (randomItem.Equals("Potato"))
-                {
-                    potatoStorage.text = "+" + inventory.ingredientList[randomItem];
-                    potatoText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
-                    showPotatoText = true;
-                }
-            }
-        }
+        
 
         if (showEggText)
         {
@@ -90,6 +63,37 @@ public class MysteryBoxController : MonoBehaviour
                 timer = 4.0;
                 potatoText.gameObject.SetActive(false);
                 potatoText.transform.position = new Vector3(543.1f, 219.5f, 0);
+            }
+        }
+    }
+
+    public void CollectBox()
+    {
+        Interactable mysteryBox = interactionManager.CurrentTarget;
+        if (mysteryBox != null && mysteryBox.type == InteractableType.MysteryBox)
+        {
+            string randomItem = mysteryBoxInterface.getRandomItem();
+            int randomItemQuantity = mysteryBoxInterface.getRandomQuantity();
+            if (!inventory.ingredientList.ContainsKey(randomItem))
+            {
+                inventory.ingredientList.Add(randomItem, randomItemQuantity);
+            }
+            else
+            {
+                inventory.ingredientList[randomItem] += randomItemQuantity;
+            }
+            Destroy(mysteryBox.gameObject);
+            if (randomItem.Equals("Egg"))
+            {
+                eggStorage.text = "+" + inventory.ingredientList[randomItem];
+                eggText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
+                showEggText = true;
+            }
+            if (randomItem.Equals("Potato"))
+            {
+                potatoStorage.text = "+" + inventory.ingredientList[randomItem];
+                potatoText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
+                showPotatoText = true;
             }
         }
     }
