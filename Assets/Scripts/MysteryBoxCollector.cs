@@ -69,30 +69,31 @@ public class MysteryBoxCollector : MonoBehaviour
 
     public void CollectBox()
     {
-        Interactable mysteryBox = interactionManager.CurrentTarget;
+        MysteryBoxInterface mysteryBox = (MysteryBoxInterface)interactionManager.CurrentTarget;
         if (mysteryBox != null && mysteryBox.type == InteractableType.MysteryBox)
         {
-            string randomItem = mysteryBoxInterface.getRandomItem();
-            int randomItemQuantity = mysteryBoxInterface.getRandomQuantity();
-            if (!inventory.ingredientList.ContainsKey(randomItem))
+            string ingr = mysteryBox.RandomItem;
+            int ingrQuantity = mysteryBox.RandomItemQuantity;
+
+            if (!inventory.ingredientList.ContainsKey(ingr))
             {
-                inventory.ingredientList.Add(randomItem, randomItemQuantity);
+                inventory.ingredientList.Add(ingr, ingrQuantity);
             }
             else
             {
-                inventory.ingredientList[randomItem] += randomItemQuantity;
+                inventory.ingredientList[ingr] += ingrQuantity;
             }
-            Destroy(mysteryBox.gameObject);
-            if (randomItem.Equals("Egg"))
+            mysteryBox.Interact();
+            if (ingr.Equals("Egg"))
             {
-                eggStorage.text = "+" + inventory.ingredientList[randomItem];
-                eggText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
+                eggStorage.text = "+" + inventory.ingredientList[ingr];
+                eggText.text = "You found " + ingrQuantity + " " + ingr + " in the mystery box!";
                 showEggText = true;
             }
-            if (randomItem.Equals("Potato"))
+            if (ingr.Equals("Potato"))
             {
-                potatoStorage.text = "+" + inventory.ingredientList[randomItem];
-                potatoText.text = "You found " + randomItemQuantity + " " + randomItem + " in the mystery box!";
+                potatoStorage.text = "+" + inventory.ingredientList[ingr];
+                potatoText.text = "You found " + ingrQuantity + " " + ingr + " in the mystery box!";
                 showPotatoText = true;
             }
         }

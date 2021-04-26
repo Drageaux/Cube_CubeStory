@@ -7,6 +7,17 @@ public class MysteryBoxInterface : Interactable
     private string[] ingredients = { "Egg", "Potato" };
     MysteryBoxRandomItem mysteryBoxRandomItem;
     TriggerMysteryBox triggerMysteryBox;
+    public string RandomItem
+    {
+        get;
+        private set;
+    }
+
+    public int RandomItemQuantity
+    {
+        get;
+        private set;
+    }
 
     protected override void Start()
     {
@@ -14,8 +25,16 @@ public class MysteryBoxInterface : Interactable
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
 
+
         mysteryBoxRandomItem = gameObject.GetComponent<MysteryBoxRandomItem>();
         triggerMysteryBox = gameObject.GetComponent<TriggerMysteryBox>();
+
+        RandomItem = mysteryBoxRandomItem.getRandomItem(ingredients); 
+        RandomItemQuantity = mysteryBoxRandomItem.getRandomIndex(1, 4);
+    }
+
+    public void OpenBox()
+    {
     }
 
     public override void Interact()
@@ -23,16 +42,6 @@ public class MysteryBoxInterface : Interactable
         this.hasInteracted = true;
         this.OnDefocused();
         gameObject.SetActive(false);
-    }
-
-    public string getRandomItem()
-    {
-        return mysteryBoxRandomItem.getRandomItem(ingredients);
-    }
-
-    public int getRandomQuantity()
-    {
-        return mysteryBoxRandomItem.getRandomIndex(1, 4);
     }
 
     public bool isActive()
