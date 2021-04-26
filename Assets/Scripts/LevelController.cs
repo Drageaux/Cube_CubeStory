@@ -32,36 +32,55 @@ public class LevelController : MonoBehaviour
         this.musicController = gameObject.GetComponent<MusicController>();
         this.health = character.GetComponent<Health>();
         this.orders = Orders.instance;
+
+        StartLevel();
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         if ((!this.health.Alive() || this.levelTimer.GetCurrTimer() <= 0) && this.levelTimer.IsTimerActive())
         {
             if (!this.health.Alive())
             {
-                await Task.Delay(4000);
+                StartCoroutine(DieAndEndLevel());
             }
-            this.levelTimer.SetTimerActive(false);
-            this.levelStarReward.ComputeStarReward(false, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
-            this.levelStarReward.SetStarRewardText();
-            this.musicController.TriggerEndLevelMusic();
-            EndLevel();
+            else
+            {
+                EndLevel(false);
+            }
+            return;
         }
         
         if (this.orders.IsCompleted() && this.levelTimer.IsTimerActive())
         {
-            this.levelTimer.SetTimerActive(false);
-            this.levelStarReward.ComputeStarReward(true, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
-            this.levelStarReward.SetStarRewardText();
-            this.musicController.TriggerEndLevelMusic();
-            EndLevel();
+            EndLevel(true);
+            return;
         }
     }
 
-    void EndLevel()
+    IEnumerator DieAndEndLevel()
     {
+        this.levelTimer.SetTimerActive(false);
+        yield return new WaitForSeconds(4);
+        EndLevel(false);
+    }
+
+    void StartLevel()
+    {
+        this.levelTimer.SetTimerActive(true);
+        Cursor.visible = false;
+        ToggleCanvas(levelEndCanvasGroup, false);
+        ToggleCanvas(mainCanvasGroup, true);
+        Time.timeScale = 1f;
+    }
+
+    void EndLevel(bool doesComputeStar = false)
+    {
+        this.levelTimer.SetTimerActive(false);
+        this.levelStarReward.ComputeStarReward(doesComputeStar, this.levelTimer.GetCurrTimer(), this.levelTimer.startTime);
+        this.levelStarReward.SetStarRewardText();
+        this.musicController.TriggerEndLevelMusic();
         if (!levelEndCanvasGroup.interactable)
         {
             Cursor.visible = true;
