@@ -8,10 +8,10 @@ public class updateInventory : MonoBehaviour
     // Start is called before the first frame update
     public GameObject player;
     Inventory invertory_script;
-    public Text potatoStorage;
+    public Text chickenStorage;
     public Text eggStorage;
     public Text s_ingStorage;
-    public CanvasGroup canvasGroup;
+  //  public CanvasGroup canvasGroup;
     void Start()
     {
         
@@ -23,20 +23,20 @@ public class updateInventory : MonoBehaviour
         invertory_script = player.GetComponent<Inventory>();
     }
 
-    public void updatePotato()
+    public void updateChicken()
     {
         if (invertory_script.ingredientList != null)
         {
-            if (!invertory_script.ingredientList.ContainsKey("Potato"))
+            if (!invertory_script.ingredientList.ContainsKey("Chicken"))
             {
-                invertory_script.ingredientList.Add("Potato", 1);
+                invertory_script.ingredientList.Add("Chicken", 1);
             }
             else
             {
-                invertory_script.ingredientList["Potato"]++;
+                invertory_script.ingredientList["Chicken"]++;
 
             }
-            potatoStorage.text = "+" + invertory_script.ingredientList["Potato"];
+            chickenStorage.text = "+" + invertory_script.ingredientList["Chicken"];
             //remove mystery ingredient
             if (invertory_script.ingredientList.ContainsKey("superIngredient")) {
                 invertory_script.ingredientList["superIngredient"]--;
@@ -52,10 +52,8 @@ public class updateInventory : MonoBehaviour
             Debug.Log("can't find ingredient list");
         }
 
-        Time.timeScale = 1f;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0f;
+        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        pop.close();
     }
 
     public void updateEgg()
@@ -64,11 +62,11 @@ public class updateInventory : MonoBehaviour
         {
             if (!invertory_script.ingredientList.ContainsKey("Egg"))
             {
-                invertory_script.ingredientList.Add("Egg", 1);
+                invertory_script.ingredientList.Add("Egg", 3);
             }
             else
             {
-                invertory_script.ingredientList["Egg"]++;
+                invertory_script.ingredientList["Egg"]=+3;
 
             }
             eggStorage.text = "+" + invertory_script.ingredientList["Egg"];
@@ -87,9 +85,14 @@ public class updateInventory : MonoBehaviour
         {
             Debug.Log("can't find ingredient list");
         }
-        Time.timeScale = 1f;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0f;
+        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        pop.close();
+
+    }
+
+    public void closeUI()
+    {
+        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        pop.close();
     }
 }

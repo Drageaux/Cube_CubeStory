@@ -8,6 +8,8 @@ public class displaySelection : MonoBehaviour
     private CanvasGroup canvasGroup;
     Inventory invertory_script;
     public GameObject player;
+    public GameObject chicken;
+    PlayerDetectionAnimal chicken_script;
 
     private void Awake()
     {
@@ -20,6 +22,7 @@ public class displaySelection : MonoBehaviour
             Debug.LogError("component is null");
         }
         invertory_script = player.GetComponent<Inventory>();
+        chicken_script = chicken.GetComponent<PlayerDetectionAnimal>();
     }
 
     // Update is called once per frame
@@ -28,23 +31,11 @@ public class displaySelection : MonoBehaviour
         //checking whether have mystery
         if (invertory_script.ingredientList.ContainsKey("superIngredient") && invertory_script.ingredientList["superIngredient"] >0) {
             Debug.Log("contain super");
-            if (Input.GetKeyUp(KeyCode.K))
+            if (Input.GetKeyUp(KeyCode.Q)&& chicken_script.collect==true)
             {
+                popUp pop = chicken.GetComponent<popUp>();
+                pop.PopUp();
 
-                if (canvasGroup.interactable)
-                {
-                    Time.timeScale = 1f;
-                    canvasGroup.interactable = false;
-                    canvasGroup.blocksRaycasts = false;
-                    canvasGroup.alpha = 0f;
-                }
-                else
-                {
-                    Time.timeScale = 0f;
-                    canvasGroup.interactable = true;
-                    canvasGroup.blocksRaycasts = true;
-                    canvasGroup.alpha = 1f;
-                }
             }
         }
         else

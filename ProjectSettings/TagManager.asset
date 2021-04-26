@@ -9,6 +9,7 @@ TagManager:
   - Egg
   - MysteryBox
   - Projectile
+  - chicken
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,6 @@ TagManager:
   - chicken
   - mysterybox
   - Projectile
-  - 
   - 
   - 
   - 

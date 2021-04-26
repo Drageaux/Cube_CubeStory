@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
-public class PlayerDetection_Animal : MonoBehaviour
+public class PlayerDetectionAnimal : MonoBehaviour
 {
     public GameObject player;
     public GameObject goldEgg;
@@ -31,7 +31,7 @@ public class PlayerDetection_Animal : MonoBehaviour
     public AIState aistate;
     private bool chickenRun=false;
     private Vector3 ini_pos;
-    private bool collect=false;
+    public bool collect=false;
 
     public enum AIState
     {
@@ -48,7 +48,7 @@ public class PlayerDetection_Animal : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
         player_anim = player.GetComponent<Animator>();
-
+    
 
     }
     // Start is called before the first frame update
@@ -153,7 +153,7 @@ public class PlayerDetection_Animal : MonoBehaviour
                 {
                     Debug.Log("crouching");
                     //chickenRun = false;
-                     if (distance < 1.0f&& Input.GetKeyUp(KeyCode.E))
+                     if (distance < 1.5f&& Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
                    // if (distance < 1.0f)
                     {
                         Debug.Log("get gold egg");
@@ -164,7 +164,9 @@ public class PlayerDetection_Animal : MonoBehaviour
                         goldEgg.SetActive(false);
                        // updateInventory("Chicken");
                         updateInventory("superIngredient");
-                       
+                        popUp pop = GetComponent<popUp>();
+                        pop.PopUp();
+                        Debug.Log("pop works");
 
                     }
                     else
@@ -288,7 +290,8 @@ public class PlayerDetection_Animal : MonoBehaviour
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(0.5f);
-        numOfChicken++;
+        // numOfChicken++;
+        updateInventory("Chicken");
         agent.enabled = false;
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
