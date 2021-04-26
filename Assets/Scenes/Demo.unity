@@ -1568,7 +1568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130448496}
-  m_LocalRotation: {x: 0.12218326, y: 0.000000004269366, z: -5.25583e-10, w: 0.9925076}
+  m_LocalRotation: {x: 0.12218326, y: -0.000000004269366, z: 5.25583e-10, w: 0.9925076}
   m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10224,6 +10224,7 @@ GameObject:
   - component: {fileID: 978728621}
   - component: {fileID: 978728620}
   - component: {fileID: 978728619}
+  - component: {fileID: 978728622}
   m_Layer: 5
   m_Name: Restart Level
   m_TagString: Untagged
@@ -10293,7 +10294,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 978728620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191094919}
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: restart()
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &978728620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10331,6 +10343,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978728617}
   m_CullTransparentMesh: 0
+--- !u!114 &978728622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978728617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b434d54e9f8b48a478fc737ea86aeaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &983784559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 425874, guid: 6bea119038cba374387862a060db5358,
