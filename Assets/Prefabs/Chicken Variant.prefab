@@ -29,6 +29,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!65 &5284483042092544286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894614338859961286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &307586373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,19 +103,7 @@ MonoBehaviour:
   type: 3
   quantity: 1
   ingredient: {fileID: 11400000, guid: 887c346089cd6fc4a9730ad4479aec86, type: 2}
---- !u!65 &5284483042092544286
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4894614338859961286}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0.25, z: 0}
+  caught: 0
 --- !u!1001 &4894614338860133970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2138,7 +2139,8 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c82925c83e42faa4c8fea19511c5669a, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8932836287732299220, guid: 10fc04f9a7ae553419bcd0f1a260a273, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 10fc04f9a7ae553419bcd0f1a260a273, type: 3}
 --- !u!1 &4894614338859961286 stripped
 GameObject:
