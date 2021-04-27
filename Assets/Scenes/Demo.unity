@@ -20886,6 +20886,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potatoStorage: {fileID: 1435635051}
   eggStorage: {fileID: 2068752836}
+  goldEggStorage: {fileID: 1054866645}
+  chickenStorage: {fileID: 1368049548}
   lackIngredient: {fileID: 88144477}
   storagePanel: {fileID: 222406603}
 --- !u!4 &1865023755 stripped
@@ -21064,8 +21066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2abde3558cae141b6104f6e5ba532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potatoStorage: {fileID: 1435635051}
-  eggStorage: {fileID: 2068752836}
   eggText: {fileID: 68161042}
   potatoText: {fileID: 911398056}
 --- !u!1 &1872310766 stripped

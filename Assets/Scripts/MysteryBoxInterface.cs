@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MysteryBoxInterface : Interactable
 {
-    private string[] ingredients = { "Egg", "Potato" };
+    private string[] ingredients = { "Egg", "Potato", "Gold Egg", "Chicken" };
     MysteryBoxRandomItem mysteryBoxRandomItem;
     TriggerMysteryBox triggerMysteryBox;
 
