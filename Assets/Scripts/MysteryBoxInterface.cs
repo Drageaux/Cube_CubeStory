@@ -30,14 +30,14 @@ public class MysteryBoxInterface : Interactable
         mysteryBoxRandomItem = gameObject.GetComponent<MysteryBoxRandomItem>();
         triggerMysteryBox = gameObject.GetComponent<TriggerMysteryBox>();
 
-        RandomItem = mysteryBoxRandomItem.getRandomItem(ingredients); 
+        RandomItem = mysteryBoxRandomItem.getRandomItem(ingredients);
         RandomItemQuantity = mysteryBoxRandomItem.getRandomIndex(1, 4);
     }
 
     public void Interact(Inventory inventory)
     {
-        string ingr = RandomItem;
-        int ingrQuantity = RandomItemQuantity;
+        string ingr = mysteryBoxRandomItem.getRandomItem(ingredients);
+        int ingrQuantity = mysteryBoxRandomItem.getRandomIndex(1, 4);
 
         if (!inventory.ingredientList.ContainsKey(ingr))
         {
@@ -48,6 +48,8 @@ public class MysteryBoxInterface : Interactable
             inventory.ingredientList[ingr] += ingrQuantity;
         }
 
+        RandomItem = ingr;
+        RandomItemQuantity = ingrQuantity;
         this.hasInteracted = true;
         this.OnDefocused();
         gameObject.SetActive(false);

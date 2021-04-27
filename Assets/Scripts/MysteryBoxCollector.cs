@@ -65,10 +65,9 @@ public class MysteryBoxCollector : MonoBehaviour
         MysteryBoxInterface mysteryBox = (MysteryBoxInterface) interactionManager.CurrentTarget;
         if (mysteryBox != null && mysteryBox.name == "Mystery Box")
         {
+            mysteryBox.Interact(inventory); // this must occur before referencing random item and randomitemquantity
             string ingr = mysteryBox.RandomItem;
             int ingrQuantity = mysteryBox.RandomItemQuantity;
-
-            mysteryBox.Interact(inventory);
 
             if (ingr.Equals("Egg"))
             {
