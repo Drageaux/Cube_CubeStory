@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   name: Potato
-  icon: {fileID: 21300000, guid: 5e8a60fecdefd2c4b8d81d6817ed39af, type: 3}
+  icon: {fileID: 21300000, guid: 705d75321bac4492db032e33f1a6d860, type: 3}
   isDefaultIngredient: 0

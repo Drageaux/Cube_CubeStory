@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Chicken
   m_EditorClassIdentifier: 
   name: Chicken
-  icon: {fileID: 21300000, guid: db7e0b3cc7abc0645a71a91388aa0169, type: 3}
+  icon: {fileID: 21300000, guid: c99d1895c3b5b4567b2874324a55e248, type: 3}
   isDefaultIngredient: 0

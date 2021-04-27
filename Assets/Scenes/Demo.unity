@@ -9209,7 +9209,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 5e8a60fecdefd2c4b8d81d6817ed39af, type: 3}
+  m_Texture: {fileID: 2800000, guid: 705d75321bac4492db032e33f1a6d860, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -10934,7 +10934,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: db7e0b3cc7abc0645a71a91388aa0169, type: 3}
+  m_Texture: {fileID: 2800000, guid: c99d1895c3b5b4567b2874324a55e248, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -17043,7 +17043,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: a8d758392ca8371428ddb62c9586381c, type: 3}
+  m_Texture: {fileID: 2800000, guid: fb3276533986f4bccbc9cc9812c50cb5, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -19975,7 +19975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 5e864c6acfad2644a86a90b329a472e1, type: 3}
+  m_Texture: {fileID: 2800000, guid: 8b36dfe74846641b998186b0e4fd749e, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -20756,10 +20756,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2abde3558cae141b6104f6e5ba532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggText: {fileID: 68161042}
-  potatoText: {fileID: 911398056}
   potatoStorage: {fileID: 1435635051}
   eggStorage: {fileID: 2068752836}
+  eggText: {fileID: 68161042}
+  potatoText: {fileID: 911398056}
 --- !u!4 &1874974546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400010, guid: 7d0701320ee303d439feed9498b8d336,
