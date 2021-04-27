@@ -13,7 +13,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
     private float attackTimer;
 
     float minDistance = 10f;//if change, change FanShapedArea.cs as well
-    float minAngle = 90f;//if change, change FanShapedArea.cs as well
+    float minAngle = 100f;//if change, change FanShapedArea.cs as well
 
     private Vector3 wolfPos=Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
@@ -90,7 +90,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
             /* Attack condition */
             //wolf caught
-            if (distance < 1.2f)
+            if (distance < 2.4f)
             {
                 if(Time.time > attackTimer)
                 {
