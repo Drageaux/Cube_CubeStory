@@ -38,9 +38,9 @@ public class updateInventory : MonoBehaviour
             }
             chickenStorage.text = "+" + invertory_script.ingredientList["Chicken"];
             //remove mystery ingredient
-            if (invertory_script.ingredientList.ContainsKey("superIngredient")) {
-                invertory_script.ingredientList["superIngredient"]--;
-                s_ingStorage.text = "+" + invertory_script.ingredientList["superIngredient"];
+            if (invertory_script.ingredientList.ContainsKey("Gold Egg")) {
+                invertory_script.ingredientList["Gold Egg"]--;
+                s_ingStorage.text = "+" + invertory_script.ingredientList["Gold Egg"];
             }
             else
             {
@@ -71,10 +71,10 @@ public class updateInventory : MonoBehaviour
             }
             eggStorage.text = "+" + invertory_script.ingredientList["Egg"];
             //remove mystery ingredient
-            if (invertory_script.ingredientList.ContainsKey("superIngredient"))
+            if (invertory_script.ingredientList.ContainsKey("Gold Egg"))
             {
-                invertory_script.ingredientList["superIngredient"]--;
-                s_ingStorage.text = "+" + invertory_script.ingredientList["superIngredient"];
+                invertory_script.ingredientList["Gold Egg"]--;
+                s_ingStorage.text = "+" + invertory_script.ingredientList["Gold Egg"];
             }
             else
             {

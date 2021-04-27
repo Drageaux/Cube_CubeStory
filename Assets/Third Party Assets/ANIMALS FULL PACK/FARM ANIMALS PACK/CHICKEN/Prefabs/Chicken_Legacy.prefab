@@ -1221,6 +1221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435618}
   - component: {fileID: 9596984}
+  - component: {fileID: 8932836287732299220}
   - component: {fileID: 20599572}
   m_Layer: 0
   m_Name: Chicken_Legacy
@@ -1265,6 +1266,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8932836287732299220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8786cf5ef904d844a99e3b46cf6ef631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUpBox: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!205 &20599572
 LODGroup:
   m_ObjectHideFlags: 0

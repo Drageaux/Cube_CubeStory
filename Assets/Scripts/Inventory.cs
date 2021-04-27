@@ -33,24 +33,24 @@ public class Inventory : MonoBehaviour
     {
         this.ingredientList = new Dictionary<string, int>();
         lackIngredient.SetActive(false);
-        storagePanel.SetActive(false);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         //if s it hit
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (storagePanel.activeSelf== false)
-            {
-                storagePanel.SetActive(true);
-            }
-            else
-            {
-                storagePanel.SetActive(false);
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    if (storagePanel.activeSelf== false)
+        //    {
+        //        storagePanel.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        storagePanel.SetActive(false);
+        //    }
+        //}
       //  potatoStorage.text = "+" + this.ingredientList["Potato"];
       //  eggStorage.text = "+" + this.ingredientList["Egg"];
     }
