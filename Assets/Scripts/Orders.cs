@@ -27,6 +27,8 @@ public class Orders : MonoBehaviour
     public List<Order> orders = new List<Order>();
 
     private int count;
+    private AudioSource audioData;
+
     public void Add(Order order)
     {
         orders.Add(order);
@@ -49,6 +51,7 @@ public class Orders : MonoBehaviour
     private void Start()
     {
         this.count = 0;
+        audioData = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -66,6 +69,7 @@ public class Orders : MonoBehaviour
     {
         // currently complete the 1st incomplete order
         RemoveAt(0);
+        audioData.Play(0);
         //foreach (Order o in orders)
         //{
         //    if (!o.completed)
