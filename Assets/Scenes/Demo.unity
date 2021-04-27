@@ -8849,32 +8849,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.18300001
       objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959882, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: m_Radius
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959882, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: radius
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: ingredient
-      value: 
-      objectReference: {fileID: 11400000, guid: 77123ac299bc6e24cb2ad69ee4560746,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf5616b64398cd49a1c8665d381622f, type: 3}
 --- !u!208 &603635669
@@ -22135,6 +22109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potatoStorage: {fileID: 1435635051}
   eggStorage: {fileID: 2068752836}
+  chickenStorage: {fileID: 1368049548}
   superIngredientStorage: {fileID: 1054866645}
   lackIngredient: {fileID: 88144477}
   storagePanel: {fileID: 222406603}
@@ -24529,32 +24504,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.18300001
       objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959882, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959882, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: radius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813076499157959893, guid: bdf5616b64398cd49a1c8665d381622f,
-        type: 3}
-      propertyPath: ingredient
-      value: 
-      objectReference: {fileID: 11400000, guid: 77123ac299bc6e24cb2ad69ee4560746,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf5616b64398cd49a1c8665d381622f, type: 3}
 --- !u!1001 &2839547729167869112
