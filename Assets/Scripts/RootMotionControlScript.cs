@@ -17,16 +17,19 @@ public class RootMotionControlScript : MonoBehaviour
     private CharacterInputController cinput;
     private Health healthScript;
     private Inventory inventory;
+    private MysteryBoxCollector mysteryBoxCollector;
 
     private Transform leftFoot;
     private Transform rightFoot;
 
     public float pickupTime = 1.6f;
     public float cookingTime = 4f; // in seconds
+    public float mysteryBoxOpenTime = 4f;
     private float remainingTimer;
 
     public bool picking;
     public bool cooking;
+    public bool openingMysteryBox;
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
@@ -74,6 +77,11 @@ public class RootMotionControlScript : MonoBehaviour
         inventory = GetComponent<Inventory>();
         if (inventory == null)
             Debug.Log("Inventory could not be found");
+
+        mysteryBoxCollector = GetComponent<MysteryBoxCollector>();
+        if (mysteryBoxCollector == null)
+            Debug.Log("MysteryBoxCollector could not be found");
+
     }
 
 
@@ -86,7 +94,6 @@ public class RootMotionControlScript : MonoBehaviour
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
-
     }
 
 
@@ -98,18 +105,34 @@ public class RootMotionControlScript : MonoBehaviour
         {
             return;
         }
-        if (cooking && Time.time > remainingTimer)
+        if (interactionManager.CurrentTarget != null)
         {
-            cooking = false;
-            inventory.FinishCooking();
-        }
-        if (picking && Time.time > remainingTimer)
-        {
-            picking = false;
-            if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+            if (cooking && Time.time > remainingTimer)
             {
-                inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                cooking = false;
+                inventory.FinishCooking();
             }
+            if (picking && Time.time > remainingTimer)
+            {
+                picking = false;
+                if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+                {
+                    inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                }
+            }
+            if (openingMysteryBox && Time.time > remainingTimer)
+            {
+                openingMysteryBox = false;
+                if (interactionManager.CurrentTarget.name == "Mystery Box")
+                {
+                    print("opening box");
+                    mysteryBoxCollector.CollectBox();
+                }
+            }
+        } 
+        else
+        {
+            CancelInteraction();
         }
 
         //bool doMatchToButtonPress = false;
@@ -155,6 +178,11 @@ public class RootMotionControlScript : MonoBehaviour
                             inventory.lackIngredient.SetActive(true);
                             StartCoroutine("WaitForSec");
                         }
+                    } 
+                    else if (interactionManager.CurrentTarget.name == "Mystery Box")
+                    {
+                        openingMysteryBox = true;
+                        remainingTimer = Time.time + mysteryBoxOpenTime;
                     }
                 } else if (interactionManager.CurrentTarget.type == InteractableType.AnimalIngredient) {
                     anim.Play("Dive Catch");
@@ -164,8 +192,7 @@ public class RootMotionControlScript : MonoBehaviour
         }
         if (cinput.Moving)
         {
-            cooking = false;
-            picking = false;
+            CancelInteraction();
         }
 
         //// get info about current animation
@@ -196,10 +223,18 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
-        anim.SetBool("cooking", cooking);
+        anim.SetBool("usingTool", cooking || openingMysteryBox);
         anim.SetBool("picking", picking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
+    }
+
+    private void CancelInteraction()
+    {
+        cooking = false;
+        picking = false;
+        openingMysteryBox = false;
+        remainingTimer = Time.time;
     }
 
     private void RotateTowards(Transform target)

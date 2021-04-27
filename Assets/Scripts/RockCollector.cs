@@ -9,7 +9,6 @@ public class RockCollector : MonoBehaviour
     Transform holdSpot;
     public Rigidbody rockPrefab;
     public Rigidbody currRock;
-    public bool hasBall = false;
 
     private Animator anim;
     private CharacterInputController cinput;
@@ -34,6 +33,7 @@ public class RockCollector : MonoBehaviour
     {
         if (cinput.Throw)
         {
+            print("Throw");
             this.ReceiveRock();
             anim.SetBool("throw", true);
         }
@@ -45,7 +45,6 @@ public class RockCollector : MonoBehaviour
 
     void ReceiveRock()
     {
-        hasBall = true;
         currRock = Instantiate<Rigidbody>(rockPrefab, holdSpot);
         currRock.transform.localPosition = Vector3.zero;
         currRock.isKinematic = true;

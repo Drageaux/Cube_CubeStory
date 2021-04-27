@@ -70,6 +70,7 @@ public class Interactable : MonoBehaviour
 
 public enum InteractableType
 {
+    MysteryBox,
     Tool,
     Ingredient,
     AnimalIngredient

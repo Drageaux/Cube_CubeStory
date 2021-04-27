@@ -1254,6 +1254,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 733c9f99aae6b2a4387b2583f86820e3, type: 3}
+--- !u!1 &75744309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 75744310}
+  m_Layer: 0
+  m_Name: RockHoldSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &75744310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75744309}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.077, y: -0.052, z: -0.017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1865023755}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &81409052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4288,36 +4318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &187641862
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 187641863}
-  m_Layer: 0
-  m_Name: RockHoldSpot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &187641863
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187641862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.077, y: -0.052, z: -0.017}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1865023755}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &215489008
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,11 +6177,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 976705653}
     m_Modifications:
-    - target: {fileID: 989241084036780999, guid: d0d59e0defa233c42a4af7736e363328,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2545119515195330221, guid: d0d59e0defa233c42a4af7736e363328,
         type: 3}
       propertyPath: m_Enabled
@@ -20542,8 +20537,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupTime: 3
   cookingTime: 4
+  mysteryBoxOpenTime: 4
   picking: 0
   cooking: 0
+  openingMysteryBox: 0
   initalMatchTargetsAnimTime: 0.25
   exitMatchTargetsAnimTime: 0.75
   animationSpeed: 1.25
@@ -20604,7 +20601,6 @@ MonoBehaviour:
   rockPrefab: {fileID: 941711933621543192, guid: 785a65eaf7de3f245a7001f122a9a8f5,
     type: 3}
   currRock: {fileID: 0}
-  hasBall: 0
 --- !u!82 &1865023757
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23183,8 +23179,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2351181822099558607, guid: 785a65eaf7de3f245a7001f122a9a8f5,
         type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2351181822099558607, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817367544104434681, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7489681065342548879, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7819654413127677339, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846456803137954749, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8865797780830077492, guid: 785a65eaf7de3f245a7001f122a9a8f5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 785a65eaf7de3f245a7001f122a9a8f5, type: 3}

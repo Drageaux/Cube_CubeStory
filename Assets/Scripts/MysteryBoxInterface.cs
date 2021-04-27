@@ -1,27 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class MysteryBoxInterface : MonoBehaviour
+public class MysteryBoxInterface : Interactable
 {
     private string[] ingredients = { "Egg", "Potato" };
     MysteryBoxRandomItem mysteryBoxRandomItem;
     TriggerMysteryBox triggerMysteryBox;
-    // Start is called before the first frame update
-    void Start()
+
+    public string RandomItem
     {
+        get;
+        private set;
+    }
+
+    public int RandomItemQuantity
+    {
+        get;
+        private set;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        SphereCollider pickUpCollider = GetComponent<SphereCollider>();
+        pickUpCollider.radius = radius;
+        name = "Mystery Box";
+        type = InteractableType.Tool;
+
         mysteryBoxRandomItem = gameObject.GetComponent<MysteryBoxRandomItem>();
         triggerMysteryBox = gameObject.GetComponent<TriggerMysteryBox>();
+
+        RandomItem = mysteryBoxRandomItem.getRandomItem(ingredients); 
+        RandomItemQuantity = mysteryBoxRandomItem.getRandomIndex(1, 4);
     }
 
-    public string getRandomItem()
+    public void Interact(Inventory inventory)
     {
-        return mysteryBoxRandomItem.getRandomItem(ingredients);
-    }
+        string ingr = RandomItem;
+        int ingrQuantity = RandomItemQuantity;
 
-    public int getRandomQuantity()
-    {
-        return mysteryBoxRandomItem.getRandomIndex(1, 4);
+        if (!inventory.ingredientList.ContainsKey(ingr))
+        {
+            inventory.ingredientList.Add(ingr, ingrQuantity);
+        }
+        else
+        {
+            inventory.ingredientList[ingr] += ingrQuantity;
+        }
+
+        this.hasInteracted = true;
+        this.OnDefocused();
+        gameObject.SetActive(false);
     }
 
     public bool isActive()
