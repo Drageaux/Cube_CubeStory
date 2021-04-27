@@ -14,7 +14,7 @@ public class FanShapedArea : MonoBehaviour
     void Update()
     {
         
-         ToDrawSectorSolid(transform, transform.localPosition, 90, 10);//if change value, change Player Detection.cs Wolf as well
+         ToDrawSectorSolid(transform, transform.localPosition, 100, 10);//if change value, change Player Detection.cs Wolf as well
 
     }
 
@@ -37,7 +37,7 @@ public class FanShapedArea : MonoBehaviour
 
         {
             go = new GameObject("mesh"+num_wolf);
-            go.transform.position = new Vector3(0, 0.5f+yPos, 0);
+            go.transform.position = new Vector3(0, 1.0f+yPos, 0);
             mf = go.AddComponent<MeshFilter>();
             mr = go.AddComponent<MeshRenderer>();
             //shader = Shader.Find("UniGLTF/UniUnlit");
@@ -49,7 +49,7 @@ public class FanShapedArea : MonoBehaviour
         mf.mesh = mesh;
         mr.material.shader = shader;
         //mr.material.color = Color.red;
-        mr.material.color = new Color32(255,0,0,150);
+        mr.material.color = new Color32(255,0,0,80);
         return go;
     }  
 
