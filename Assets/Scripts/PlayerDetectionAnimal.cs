@@ -85,9 +85,9 @@ public class PlayerDetectionAnimal : MonoBehaviour
             chickenRun = false;
             GetComponent<AnimalIngredient>().enabled = true;
             //GetComponent<SphereCollider>().enabled = true;
-            GetComponent<SphereCollider>().isTrigger = true;
-            GetComponent<Rigidbody>().isKinematic = true;
-            GetComponent<SphereCollider>().radius = 3.0f;
+            //GetComponent<SphereCollider>().isTrigger = true;
+            //GetComponent<Rigidbody>().isKinematic = true;
+            //GetComponent<SphereCollider>().radius = 3.0f;
             if (agent.isStopped == true)
             {
                 agent.isStopped = false;
@@ -161,29 +161,29 @@ public class PlayerDetectionAnimal : MonoBehaviour
                 else
                 {
                     Debug.Log("crouching");
-                    //chickenRun = false;
-                     if (distance < 1.5f&& Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
-                   // if (distance < 1.0f)
-                    {
-                        Debug.Log("get gold egg");
-                        agent.enabled = false;
-                        //Destroy(this.gameObject);
-                        //   Destroy(goldEgg);
-                        // collect = true;
-                        // goldEgg.SetActive(false);
-                        //// updateInventory("Chicken");
-                        // updateInventory("Gold Egg");
-                        // popUp pop = GetComponent<popUp>();
-                        // pop.PopUp();
-                        // Debug.Log("pop works");
-                        StartCoroutine("WaitFor2Sec");
+                    chickenRun = false;
+                    //  if (distance < 1.5f&& Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
+                    //// if (distance < 1.0f)
+                    // {
+                    //     Debug.Log("get gold egg");
+                    //     agent.enabled = false;
+                    //     //Destroy(this.gameObject);
+                    //     //   Destroy(goldEgg);
+                    //     // collect = true;
+                    //     // goldEgg.SetActive(false);
+                    //     //// updateInventory("Chicken");
+                    //     // updateInventory("Gold Egg");
+                    //     // popUp pop = GetComponent<popUp>();
+                    //     // pop.PopUp();
+                    //     // Debug.Log("pop works");
+                    //     StartCoroutine("WaitFor2Sec");
 
-                    }
-                    else
-                    {
-                        catchTimer = Time.time + 20;
-                    }
-                   
+                    // }
+                    // else
+                    // {
+                    //     catchTimer = Time.time + 20;
+                    // }
+
                 }
             }
             else
@@ -228,10 +228,10 @@ public class PlayerDetectionAnimal : MonoBehaviour
                         agent.isStopped = true;
                     }
                     anim.Play("IdleLay");
-                   // GetComponent<SphereCollider>().enabled = false;
-                    GetComponent<SphereCollider>().isTrigger = false;
-                    GetComponent<SphereCollider>().radius = 0.5f;
-                    GetComponent<Rigidbody>().isKinematic = true;
+                    GetComponent<SphereCollider>().enabled = false;
+                    //GetComponent<SphereCollider>().isTrigger = false;
+                    //GetComponent<SphereCollider>().radius = 0.5f;
+                    //GetComponent<Rigidbody>().isKinematic = true;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
                     // GetComponent<Collider>().
                     GetComponent<AnimalIngredient>().enabled = false;
