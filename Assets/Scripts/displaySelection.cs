@@ -29,7 +29,7 @@ public class displaySelection : MonoBehaviour
     void Update()
     {
         //checking whether have mystery
-        if (invertory_script.ingredientList.ContainsKey("superIngredient") && invertory_script.ingredientList["superIngredient"] >0) {
+        if (invertory_script.ingredientList.ContainsKey("Gold Egg") && invertory_script.ingredientList["Gold Egg"] >0) {
             Debug.Log("contain super");
             if (Input.GetKeyUp(KeyCode.Q)&& chicken_script.collect==true)
             {
