@@ -105,6 +105,7 @@ public class RootMotionControlScript : MonoBehaviour
         {
             return;
         }
+        // Interact and Stop Animation
         if (interactionManager.CurrentTarget != null)
         {
             // Catching Animal
@@ -154,6 +155,8 @@ public class RootMotionControlScript : MonoBehaviour
         //work
         bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
+
+        // Play Animation
         if (cinput.Interact)
         {
             if (interactionManager.CurrentTarget != null)

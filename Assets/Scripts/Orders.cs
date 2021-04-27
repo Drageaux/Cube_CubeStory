@@ -40,6 +40,12 @@ public class Orders : MonoBehaviour
         onOrdersChangedCallback.Invoke();
     }
 
+    public void RemoveAt(int index)
+    {
+        orders.RemoveAt(index);
+        onOrdersChangedCallback.Invoke();
+    }
+
     private void Start()
     {
         this.count = 0;
@@ -59,27 +65,22 @@ public class Orders : MonoBehaviour
     public void FinishOrder()
     {
         // currently complete the 1st incomplete order
-        foreach (Order o in orders)
-        {
-            if (!o.completed)
-            {
-                o.completed = true;
-                onOrdersChangedCallback.Invoke();
-                this.count++;
-                break;
-            }
-        }
+        RemoveAt(0);
+        //foreach (Order o in orders)
+        //{
+        //    if (!o.completed)
+        //    {
+        //        o.completed = true;
+        //        onOrdersChangedCallback.Invoke();
+        //        this.count++;
+        //        break;
+        //    }
+        //}
     }
 
     public bool IsCompleted()
     {
-        if (this.count == this.orders.Count)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
+        return this.orders.Count == 0;
     }
 
 }
