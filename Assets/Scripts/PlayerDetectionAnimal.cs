@@ -96,12 +96,12 @@ public class PlayerDetectionAnimal : MonoBehaviour
             {
                 aistate = AIState.lay;
             }
-            else if (distance < 1.0f&& Input.GetKeyUp(KeyCode.E))
-            {
-                Debug.Log("chicken_collected");
-                Debug.Log("distance less than 1");
-                aistate = AIState.getHit;
-               StartCoroutine("WaitForSec");
+            //else if (distance < 1.0f && Input.GetKeyUp(KeyCode.E))
+            //{
+            //    Debug.Log("chicken_collected");
+            //    Debug.Log("distance less than 1");
+            //    aistate = AIState.getHit;
+            //    StartCoroutine("WaitForSec");
                 //agent.enabled = false;
                 //Destroy(this.gameObject);
                 //this.gameObject.SetActive(false);
@@ -123,9 +123,9 @@ public class PlayerDetectionAnimal : MonoBehaviour
                 //{
                 //    Debug.Log("can't find ingredient list");
                 //}
-                updateInventory("Chicken");
+            //    updateInventory("Chicken");
 
-            }
+            //}
             else if (distance < 2.0f)
             {
                 Debug.Log("distance less than 2");
