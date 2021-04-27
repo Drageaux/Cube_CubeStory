@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
     public Dictionary<string, int> ingredientList;
     public Text potatoStorage;
     public Text eggStorage;
+    public Text chickenStorage;
+    public Text superIngredientStorage;
     public GameObject lackIngredient;
     public GameObject storagePanel;
 
@@ -58,42 +60,31 @@ public class Inventory : MonoBehaviour
 
     public void PickUpIngredient(ItemPickup pickup)
     {
-        if (pickup.type != InteractableType.Ingredient)
+        if (pickup.type != InteractableType.Ingredient || pickup.type != InteractableType.AnimalIngredient)
             return;
-	    // TODO: fix MysteryBox pickup
-	    if (pickup.gameObject.CompareTag("MysteryBox"))
-        {
-            return;
-        }
-        string tag = pickup.gameObject.tag;
-        print(tag);
-
         string ingrName = pickup.name;
 
+        if (!this.ingredientList.ContainsKey(ingrName))
+        {
+            this.ingredientList.Add(ingrName, 1);
+        }
+        else
+        {
+            this.ingredientList[ingrName]++;
+        }
+        pickup.Interact();
         switch (ingrName)
         {
             case "Potato":
-                if (!this.ingredientList.ContainsKey("Potato"))
-                {
-                    this.ingredientList.Add("Potato", 1);
-                }
-                else
-                {
-                    this.ingredientList[ingrName]++;
-                }
-                pickup.Interact();
                 potatoStorage.text = "+" + this.ingredientList[ingrName];
                 break;
             case "Egg":
-                if (!this.ingredientList.ContainsKey("Egg"))
-                {
-                    this.ingredientList.Add("Egg", 1);
-                }
-                else
-                {
-                    this.ingredientList[ingrName]++;
-                }
-                pickup.Interact();
+                eggStorage.text = "+" + this.ingredientList[ingrName];
+                break;
+            case "Chicken":
+                chickenStorage.text = "+" + this.ingredientList[ingrName];
+                break;
+            case "Gold Egg":
                 eggStorage.text = "+" + this.ingredientList[ingrName];
                 break;
         }
