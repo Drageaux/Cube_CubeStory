@@ -11,6 +11,7 @@ using UnityEditor;
 [RequireComponent(typeof(Health), typeof(Inventory))]
 public class RootMotionControlScript : MonoBehaviour
 {
+    InteractionManager interactionManager;
     private Animator anim;
     private Rigidbody rbody;
     private CharacterInputController cinput;
@@ -20,21 +21,18 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
+    public float pickupTime = 1.6f;
     public float cookingTime = 4f; // in seconds
     private float remainingTimer;
 
-    public bool hasIngredients;
+    public bool picking;
     public bool cooking;
-    public GameObject cookingStandingSpot;
-    //public float buttonCloseEnoughForMatchDistance = 2f;
-    public float cookingCloseEnoughDistance = 0.22f;
-    public float cookingCloseEnoughAngle = 5f;
+
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
     public float animationSpeed = 1f;
     public float rootMovementSpeed = 1f;
     public float rootTurnSpeed = 1f;
-    public GameObject cookingObject;
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
@@ -53,7 +51,7 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Awake()
     {
-
+        interactionManager = InteractionManager.instance;
         anim = GetComponent<Animator>();
 
         if (anim == null)
@@ -83,8 +81,8 @@ public class RootMotionControlScript : MonoBehaviour
     void Start()
     {
         //example of how to get access to certain limbs
-        leftFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
-        rightFoot = this.transform.Find("J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
+        leftFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
+        rightFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
@@ -105,6 +103,15 @@ public class RootMotionControlScript : MonoBehaviour
             cooking = false;
             inventory.FinishCooking();
         }
+        if (picking && Time.time > remainingTimer)
+        {
+            picking = false;
+            if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+            {
+                inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+            }
+        }
+
         //bool doMatchToButtonPress = false;
 
         //onCollisionXXX() doesn't always work for checking if the character is grounded from a playability perspective
@@ -114,78 +121,72 @@ public class RootMotionControlScript : MonoBehaviour
         //work
         bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
-
-        float buttonDistance = float.MaxValue;
-        float buttonAngleDegrees = float.MaxValue;
-
-        if (cookingStandingSpot != null)
+        if (cinput.Interact)
         {
-            buttonDistance = Vector3.Distance(transform.position, cookingStandingSpot.transform.position);
-            buttonAngleDegrees = Quaternion.Angle(transform.rotation, cookingStandingSpot.transform.rotation);
-            //Debug.Log("distance to cook " + buttonDistance);
-            //Debug.Log("angle to cook " + buttonAngleDegrees);
-        } 
-        if (cinput.Action)
-        {
-            if (buttonDistance <= cookingCloseEnoughDistance &&
-                    buttonAngleDegrees <= cookingCloseEnoughAngle)
+            if (interactionManager.CurrentTarget != null)
             {
-
-                if (inventory.HasEnoughIngredients())
+                this.RotateTowards(interactionManager.CurrentTarget.transform);
+                if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
                 {
-                    Debug.Log("Action pressed");
+                    //transform.LookAt(interactionManager.CurrentTarget.transform);
+                    Debug.Log("Picking initiated");
 
-                    //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
-                    //{
-
+                    picking = true;
+                    remainingTimer = Time.time + pickupTime;
+                }
+                else if (interactionManager.CurrentTarget.type == InteractableType.Tool)
+                {
+                    if (interactionManager.CurrentTarget.name == "Pan")
                     {
-                        Debug.Log("Cooking initiated");
+                        if (inventory.HasEnoughIngredients())
+                        {
+                            Debug.Log("Action pressed");
+                            //if (buttonDistance <= buttonCloseEnoughForMatchDistance)
+                            //{
+                            {
+                                Debug.Log("Cooking initiated");
 
-                        cooking = true;
-                        remainingTimer = Time.time + cookingTime;
+                                cooking = true;
+                                remainingTimer = Time.time + cookingTime;
+                            }
+                        }
+                        else
+                        {
+                            inventory.lackIngredient.SetActive(true);
+                            StartCoroutine("WaitForSec");
+                        }
                     }
-                } 
-                else
-                {
-                    inventory.lackIngredient.SetActive(true);
-                    StartCoroutine("WaitForSec");
                 }
             }
-            else
-            {
-                cooking = false;
-                //Debug.Log("match to button initiated");
-                //doMatchToButtonPress = true;
-            }
-
-            //}
+            
         }
-        if (buttonDistance > cookingCloseEnoughDistance ||
-                    buttonAngleDegrees > cookingCloseEnoughAngle) {
+        if (cinput.Moving)
+        {
             cooking = false;
+            picking = false;
         }
 
-            //// get info about current animation
-            //var animState = anim.GetCurrentAnimatorStateInfo(0);
-            //// If the transition to button press has been initiated then we want
-            //// to correct the character position to the correct place
-            //if (animState.IsName("MatchToButtonPress")
-            //&& !anim.IsInTransition(0) && !anim.isMatchingTarget)
-            //{
-            //    if (buttonPressStandingSpot != null)
-            //    {
-            //        Debug.Log("Target matching correction started");
+        //// get info about current animation
+        //var animState = anim.GetCurrentAnimatorStateInfo(0);
+        //// If the transition to button press has been initiated then we want
+        //// to correct the character position to the correct place
+        //if (animState.IsName("MatchToButtonPress")
+        //&& !anim.IsInTransition(0) && !anim.isMatchingTarget)
+        //{
+        //    if (buttonPressStandingSpot != null)
+        //    {
+        //        Debug.Log("Target matching correction started");
 
-            //        initalMatchTargetsAnimTime = animState.normalizedTime;
+        //        initalMatchTargetsAnimTime = animState.normalizedTime;
 
-            //        var t = buttonPressStandingSpot.transform;
-            //        anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
-            //        new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
-            //        1f),
-            //        initalMatchTargetsAnimTime,
-            //        exitMatchTargetsAnimTime);
-            //    }
-            //}
+        //        var t = buttonPressStandingSpot.transform;
+        //        anim.MatchTarget(t.position, t.rotation, AvatarTarget.Root,
+        //        new MatchTargetWeightMask(new Vector3(1f, 0f, 1f),
+        //        1f),
+        //        initalMatchTargetsAnimTime,
+        //        exitMatchTargetsAnimTime);
+        //    }
+        //}
 
         anim.speed = this.animationSpeed;
         anim.SetFloat("velx", Mathf.Abs(cinput.Turn));
@@ -194,10 +195,18 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
         anim.SetBool("cooking", cooking);
+        anim.SetBool("picking", picking);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
     }
 
+    private void RotateTowards(Transform target)
+    {
+        Vector3 targetPostition = new Vector3(target.position.x,
+                                        this.transform.position.y,
+                                        target.position.z);
+        this.transform.LookAt(targetPostition);
+    }
 
     //This is a physics callback
     void OnCollisionEnter(Collision collision)
@@ -210,24 +219,19 @@ public class RootMotionControlScript : MonoBehaviour
 
             // Generate an event that might play a sound, generate a particle effect, etc.
             //EventManager.TriggerEvent<PlayerLandsEvent, Vector3, float>(collision.contacts[0].point, collision.impulse.magnitude);
-
         }
-
     }
 
     private void OnCollisionExit(Collision collision)
     {
-
         if (collision.transform.gameObject.tag == "ground")
         {
             --groundContactCount;
         }
-
     }
 
     void OnAnimatorMove()
     {
-
         Vector3 newRootPosition;
         Quaternion newRootRotation;
 
@@ -253,44 +257,11 @@ public class RootMotionControlScript : MonoBehaviour
 
         this.transform.position = newRootPosition;
         this.transform.rotation = newRootRotation;
-
-    }
-
-    private void OnAnimatorIK(int layerIndex)
-    {
-        if (anim)
-        {
-            AnimatorStateInfo astate = anim.GetCurrentAnimatorStateInfo(0);
-
-            if (astate.IsName("ButtonPress"))
-            {
-                float buttonWeight = anim.GetFloat("buttonClose");
-
-                // Set the look target position, if one has been assigned
-                if (cookingObject != null)
-                {
-                    anim.SetLookAtWeight(buttonWeight);
-                    anim.SetLookAtPosition(cookingObject.transform.position);
-                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, buttonWeight);
-                    anim.SetIKPosition(AvatarIKGoal.RightHand,
-                    cookingObject.transform.position);
-
-                }
-            }
-            else
-            {
-                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-                anim.SetLookAtWeight(0);
-            }
-        }
     }
 
     IEnumerator WaitForSec()
     {
         yield return new WaitForSeconds(3);
         inventory.lackIngredient.SetActive(false);
-
-
-
     }
 }

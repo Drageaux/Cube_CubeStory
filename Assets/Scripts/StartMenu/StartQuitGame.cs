@@ -20,6 +20,7 @@ public class StartQuitGame : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("Demo");
+        Cursor.visible = false;
     }
 
     public void QuitGame()

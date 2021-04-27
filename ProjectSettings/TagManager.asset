@@ -7,6 +7,10 @@ TagManager:
   - Terrain
   - Potato
   - Egg
+  - MysteryBox
+  - Projectile
+  - chicken
+  - wolf
   layers:
   - Default
   - TransparentFX
@@ -21,10 +25,8 @@ TagManager:
   - Terrain
   - wolf
   - chicken
-  - 
-  - 
-  - 
-  - 
+  - mysterybox
+  - Projectile
   - 
   - 
   - 
