@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
 
     public void PickUpIngredient(ItemPickup pickup)
     {
-        if (pickup.type != InteractableType.Ingredient || pickup.type != InteractableType.AnimalIngredient)
+        if (pickup.type != InteractableType.Ingredient && pickup.type != InteractableType.AnimalIngredient)
             return;
         string ingrName = pickup.name;
 
