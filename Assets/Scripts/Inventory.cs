@@ -72,7 +72,6 @@ public class Inventory : MonoBehaviour
         {
             this.ingredientList[ingrName]++;
         }
-        pickup.Interact();
         switch (ingrName)
         {
             case "Potato":
@@ -85,7 +84,10 @@ public class Inventory : MonoBehaviour
                 chickenStorage.text = "+" + this.ingredientList[ingrName];
                 break;
             case "Gold Egg":
-                eggStorage.text = "+" + this.ingredientList[ingrName];
+                superIngredientStorage.text = "+" + this.ingredientList[ingrName];
+                popUp pop = GetComponent<popUp>();
+                pop.PopUp();
+                Debug.Log("pop works");
                 break;
         }
         foreach (KeyValuePair<string, int> entry in ingredientList)
@@ -93,6 +95,7 @@ public class Inventory : MonoBehaviour
             print(entry.Key);
             print(entry.Value);
         }
+        pickup.Interact();
     }
 
     public bool HasEnoughIngredients()
