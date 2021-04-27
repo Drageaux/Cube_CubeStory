@@ -107,6 +107,17 @@ public class RootMotionControlScript : MonoBehaviour
         }
         if (interactionManager.CurrentTarget != null)
         {
+            // Catching Animal
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dive Catch"))
+            {
+                if (interactionManager.CurrentTarget.type == InteractableType.AnimalIngredient)
+                {
+                    AnimalIngredient animal = (AnimalIngredient)interactionManager.CurrentTarget;
+                    if (animal.caught)
+                        inventory.PickUpIngredient(animal);
+                }
+
+            }
             if (cooking && Time.time > remainingTimer)
             {
                 cooking = false;
@@ -117,7 +128,7 @@ public class RootMotionControlScript : MonoBehaviour
                 picking = false;
                 if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
                 {
-                    inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                    inventory.PickUpIngredient((ItemPickup)interactionManager.CurrentTarget);
                 }
             }
             if (openingMysteryBox && Time.time > remainingTimer)
@@ -125,7 +136,6 @@ public class RootMotionControlScript : MonoBehaviour
                 openingMysteryBox = false;
                 if (interactionManager.CurrentTarget.name == "Mystery Box")
                 {
-                    print("opening box");
                     mysteryBoxCollector.CollectBox();
                 }
             }
