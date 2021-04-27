@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239a3dfaff1e0a74cabae1274ea3e19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 17
   name: Interactable
-  type: 0
+  type: 1
   quantity: 1
-  ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
+  ingredient: {fileID: 11400000, guid: 77123ac299bc6e24cb2ad69ee4560746, type: 2}
