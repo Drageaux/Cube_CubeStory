@@ -62,7 +62,7 @@ public class MysteryBoxCollector : MonoBehaviour
 
     public void CollectBox()
     {
-        MysteryBoxInterface mysteryBox = (MysteryBoxInterface)interactionManager.CurrentTarget;
+        MysteryBoxInterface mysteryBox = (MysteryBoxInterface) interactionManager.CurrentTarget;
         if (mysteryBox != null && mysteryBox.name == "Mystery Box")
         {
             string ingr = mysteryBox.RandomItem;
@@ -72,14 +72,16 @@ public class MysteryBoxCollector : MonoBehaviour
 
             if (ingr.Equals("Egg"))
             {
+                string plural = ingrQuantity > 1 ? "s" : "";
                 inventory.eggStorage.text = "+" + inventory.ingredientList[ingr];
-                eggText.text = "You found " + ingrQuantity + " " + ingr + " in the mystery box!";
+                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
                 showEggText = true;
             }
             if (ingr.Equals("Potato"))
             {
+                string plural = ingrQuantity > 1 ? "es" : "";
                 inventory.potatoStorage.text = "+" + inventory.ingredientList[ingr];
-                potatoText.text = "You found " + ingrQuantity + " " + ingr + " in the mystery box!";
+                potatoText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
                 showPotatoText = true;
             }
         }
