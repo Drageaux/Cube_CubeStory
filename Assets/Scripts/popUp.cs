@@ -12,12 +12,14 @@ public class popUp : MonoBehaviour
         
         popUpBox.SetActive(true);
         animator.SetTrigger("pop");
-      
+        Time.timeScale = 0f;
+
 
     }
     public void close()
     {
        
         animator.SetTrigger("close");
+        Time.timeScale = 1f;
     }
 }
