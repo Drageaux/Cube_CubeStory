@@ -10,6 +10,7 @@ TagManager:
   - MysteryBox
   - Projectile
   - chicken
+  - wolf
   layers:
   - Default
   - TransparentFX

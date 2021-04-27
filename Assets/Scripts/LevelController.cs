@@ -69,7 +69,7 @@ public class LevelController : MonoBehaviour
     void StartLevel()
     {
         this.levelTimer.SetTimerActive(true);
-        Cursor.visible = false;
+        // Cursor.visible = false;
         ToggleCanvas(levelEndCanvasGroup, false);
         ToggleCanvas(mainCanvasGroup, true);
         Time.timeScale = 1f;
