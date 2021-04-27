@@ -66,6 +66,10 @@ public class PlayerDetectionAnimal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
         chickenPos = gameObject.transform.position;
         playerPos = player.transform.position;
         if (goldEgg != null)
@@ -73,7 +77,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
             goldEgg.transform.position = chickenPos + new Vector3(0.6f, 0.1f, 0.6f);
         }
         distance = Vector3.Distance(chickenPos, playerPos);
-      //  egg_distance= Vector3.Distance(playerPos, eggPos);
+        //  egg_distance= Vector3.Distance(playerPos, eggPos);
 
         if (aistate != AIState.lay|| chickenRun)
         {
