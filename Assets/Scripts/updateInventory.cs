@@ -52,7 +52,7 @@ public class updateInventory : MonoBehaviour
             Debug.Log("can't find ingredient list");
         }
 
-        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        popUp pop = GameObject.FindGameObjectWithTag("Player").GetComponent<popUp>();
         pop.close();
     }
 
@@ -85,14 +85,14 @@ public class updateInventory : MonoBehaviour
         {
             Debug.Log("can't find ingredient list");
         }
-        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        popUp pop = GameObject.FindGameObjectWithTag("Player").GetComponent<popUp>();
         pop.close();
 
     }
 
     public void closeUI()
     {
-        popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+        popUp pop = GameObject.FindGameObjectWithTag("Player").GetComponent<popUp>();
         pop.close();
     }
 }
