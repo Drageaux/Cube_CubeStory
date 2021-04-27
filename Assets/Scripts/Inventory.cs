@@ -106,12 +106,12 @@ public class Inventory : MonoBehaviour
             foreach (Order o in ordersSystem.orders)
             {
                 // cook if not completed or not failed to do on time
-                if (!o.completed && o.RemainingTime > 0)
-                {
-                    //Debug.Log("checking for order: " + o.dish + " (completed: " + o.completed + ")");
-                    cookingOrder = o;
-                    break;
-                }
+                //if (!o.completed && o.RemainingTime > 0)
+                //{
+                //Debug.Log("checking for order: " + o.dish + " (completed: " + o.completed + ")");
+                cookingOrder = o;
+                break;
+                //}
             }
             Debug.Log(ordersSystem.orders);
             bool hasEnough = true;
