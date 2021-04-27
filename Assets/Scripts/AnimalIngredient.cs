@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimalIngredient: ItemPickup
 {
     public Ingredient ingredient;
+    public bool caught = false;
 
     protected override void Start()
     {
@@ -14,13 +15,6 @@ public class AnimalIngredient: ItemPickup
         SphereCollider pickUpCollider = GetComponent<SphereCollider>();
         pickUpCollider.radius = radius;
     }
-
-    private void Interact(Dictionary<string, int> ingredientList)
-    {
-        this.Interact(); // run the parent code's Interact
-        this.UpdateInventory(ingredientList);
-    }
-
 
     protected void OnCollisionEnter(Collision collision)
     {
@@ -33,7 +27,7 @@ public class AnimalIngredient: ItemPickup
                 {
                     print("Caught");
                     // TODO: Update Inventory
-                    this.Interact(other.GetComponent<Inventory>().ingredientList);
+                    caught = true;
                 } 
                 else
                 {
@@ -50,33 +44,5 @@ public class AnimalIngredient: ItemPickup
     private void OnDestroy()
     {
         this.OnDefocused();
-    }
-
-    private void UpdateInventory(Dictionary<string, int> ingredientList)
-    {
-        if (ingredientList != null)
-        {
-            if (!ingredientList.ContainsKey(ingredient.name))
-            {
-                ingredientList.Add(ingredient.name, 1);
-            }
-            else
-            {
-                ingredientList[ingredient.name]++;
-
-            }
-            if (ingredient.name.Equals("Chicken"))
-            {
-                //chickenStorage.text = "+" + ingredientList[ingredient.name];
-            }
-            else
-            {
-                //s_ingStorage.text = "+" + ingredientList[ingredient.name];
-            }
-        }
-        else
-        {
-            Debug.Log("can't find ingredient list");
-        }
     }
 }
