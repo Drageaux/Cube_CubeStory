@@ -27,7 +27,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
   m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &307586373
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 3
   name: Interactable
-  type: 2
+  type: 3
   quantity: 1
   ingredient: {fileID: 11400000, guid: 887c346089cd6fc4a9730ad4479aec86, type: 2}
 --- !u!1001 &4894614338860133970
