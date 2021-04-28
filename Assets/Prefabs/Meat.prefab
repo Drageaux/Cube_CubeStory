@@ -254,7 +254,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11314234
+  m_Radius: 1
   m_Center: {x: -0.00008741959, y: 0.0015710131, z: 5.084624e-12}
 --- !u!114 &6239000681686971958
 MonoBehaviour:
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239a3dfaff1e0a74cabae1274ea3e19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 1.25
   name: Wolf Meat
   type: 2
   quantity: 2
