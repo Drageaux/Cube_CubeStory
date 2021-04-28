@@ -17,7 +17,6 @@ public class PlayerDetectionAnimal : MonoBehaviour
     public Text s_ingStorage;
     Inventory invertory_script;
     private bool added = false;
-    private float catchTimer = 15.0f;
 
     private Vector3 chickenPos = Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
@@ -47,9 +46,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
-        player_anim = player.GetComponent<Animator>();
-    
-
+        player_anim = player.GetComponent<Animator>(); 
     }
     // Start is called before the first frame update
     void Start()
@@ -85,6 +82,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
             chickenRun = false;
             GetComponent<AnimalIngredient>().enabled = true;
             GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<SphereCollider>().enabled = true;
             if (agent.isStopped == true)
             {
                 agent.isStopped = false;
@@ -151,20 +149,21 @@ public class PlayerDetectionAnimal : MonoBehaviour
                     catchTimer = Time.time + 20;
                     agent.isStopped = false;
                     chickenRun = true;
+                 //   GetComponent<SphereCollider>().enabled = true;
                 }
 
                 else
                 {
                     Debug.Log("crouching");
                     chickenRun = false;
-                    //  if (distance < 1.5f&& Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
+                    if (Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
                     //// if (distance < 1.0f)
                     // {
                     //     Debug.Log("get gold egg");
                     //     agent.enabled = false;
                     //     //Destroy(this.gameObject);
                     //     //   Destroy(goldEgg);
-                    //     // collect = true;
+                    collect = true;
                     //     // goldEgg.SetActive(false);
                     //     //// updateInventory("Chicken");
                     //     // updateInventory("Gold Egg");
@@ -173,7 +172,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
                     //     // Debug.Log("pop works");
                     //     StartCoroutine("WaitFor2Sec");
 
-                    // }
+                   //  }
                     // else
                     // {
                     //     catchTimer = Time.time + 20;
