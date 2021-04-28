@@ -113,8 +113,6 @@ public class RootMotionControlScript : MonoBehaviour
         }
         if (settingTrap && Time.time > remainingTimer)
         {
-            print(Time.time);
-            print(remainingTimer);
             settingTrap = false;
             trapPlacer.PlaceTrap();
         }
