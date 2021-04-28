@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3470144574317863910}
   - component: {fileID: 3421055277363443098}
   - component: {fileID: 5121390717642253998}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Ham1/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,9 +90,11 @@ GameObject:
   - component: {fileID: 4281863297543318768}
   - component: {fileID: 2785593807867859263}
   - component: {fileID: 7247566032131496742}
-  m_Layer: 0
+  - component: {fileID: 9174641400180533299}
+  - component: {fileID: 4397926600373628615}
+  m_Layer: 16
   m_Name: Ham4/4
-  m_TagString: Untagged
+  m_TagString: wolf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +160,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &9174641400180533299
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393269795526007495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03474324
+  m_Height: 0.16663302
+  m_Direction: 2
+  m_Center: {x: -5.861557e-15, y: 0, z: 0.02177744}
+--- !u!136 &4397926600373628615
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393269795526007495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.05066041
+  m_Height: 0.16453072
+  m_Direction: 0
+  m_Center: {x: 1.6162503e-14, y: 0, z: -0.02}
 --- !u!1 &3251189084507789383
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +202,8 @@ GameObject:
   - component: {fileID: 5590659890502438753}
   - component: {fileID: 6239000681686971958}
   - component: {fileID: 2134770319942191174}
-  m_Layer: 0
+  - component: {fileID: 8276713016379795995}
+  m_Layer: 16
   m_Name: Meat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +217,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3251189084507789383}
-  m_LocalRotation: {x: -0.18301314, y: -0.6830158, z: 0.18301141, w: -0.6830098}
+  m_LocalRotation: {x: -0.0922951, y: -0.7010637, z: 0.09229676, w: -0.7010511}
   m_LocalPosition: {x: 1.278, y: 0.129, z: -0.073}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
@@ -196,7 +227,7 @@ Transform:
   - {fileID: 3470144574317863910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30.000002, y: -269.999, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: -269.999, z: 0}
 --- !u!33 &5550280526015431612
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -290,6 +321,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &8276713016379795995
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251189084507789383}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.020749856
+  m_Height: 0.3274629
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.06}
 --- !u!1 &5366445874540820046
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +346,7 @@ GameObject:
   - component: {fileID: 6502863798859127777}
   - component: {fileID: 6941986611925012873}
   - component: {fileID: 4313855545009983882}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Ham3/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +425,7 @@ GameObject:
   - component: {fileID: 5622408456105882104}
   - component: {fileID: 1659373623245056047}
   - component: {fileID: 4298568949214771986}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Ham2/4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

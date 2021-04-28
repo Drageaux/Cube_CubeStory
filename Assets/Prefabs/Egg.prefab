@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4810974639686778743}
   - component: {fileID: 2538176995565936927}
   - component: {fileID: 3080186575520473579}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Egg
   m_TagString: Egg
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3161222958445136065}
   - component: {fileID: 3161222958445136064}
   - component: {fileID: 3161222958445136071}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: egg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 3161222958833245883}
   - component: {fileID: 3161222958833245882}
   - component: {fileID: 3161222958833245881}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fence Type4 Big (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 3161222958833919574}
   - component: {fileID: 3161222958833919573}
   - component: {fileID: 3161222958833919572}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fence Type4 Big (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 3161222958998058671}
   - component: {fileID: 3161222958998058670}
   - component: {fileID: 3161222958998058669}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: egg3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 3161222959388780030}
   - component: {fileID: 3161222959388780029}
   - component: {fileID: 3161222959388780028}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: egg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 3161222959614196203}
   - component: {fileID: 3161222959614196202}
   - component: {fileID: 3161222959614196201}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fence Type4 Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 3161222959663099955}
   - component: {fileID: 3161222959663099954}
   - component: {fileID: 3161222959663099953}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: egg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -750,7 +750,7 @@ GameObject:
   - component: {fileID: 3161222959737591651}
   - component: {fileID: 3161222959737591650}
   - component: {fileID: 3161222959737591649}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Fence Type4 Big (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
