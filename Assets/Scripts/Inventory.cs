@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
     public Text potatoStorage;
     public Text eggStorage;
     public Text chickenStorage;
+    public Text wolfMeatStorage;
     public Text superIngredientStorage;
     public GameObject lackIngredient;
     public GameObject storagePanel;
@@ -22,8 +23,6 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        ordersSystem = Orders.instance;
-        interactionManager = InteractionManager.instance;
 
         cinput = GetComponent<CharacterInputController>();
         if (cinput == null)
@@ -33,9 +32,10 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ordersSystem = Orders.instance;
+        interactionManager = InteractionManager.instance;
         this.ingredientList = new Dictionary<string, int>();
         lackIngredient.SetActive(false);
-        
     }
 
     // Update is called once per frame
@@ -66,11 +66,11 @@ public class Inventory : MonoBehaviour
 
         if (!this.ingredientList.ContainsKey(ingrName))
         {
-            this.ingredientList.Add(ingrName, 1);
+            this.ingredientList.Add(ingrName, pickup.quantity);
         }
         else
         {
-            this.ingredientList[ingrName]++;
+            this.ingredientList[ingrName] += pickup.quantity;
         }
         switch (ingrName)
         {
@@ -82,6 +82,9 @@ public class Inventory : MonoBehaviour
                 break;
             case "Chicken":
                 chickenStorage.text = "+" + this.ingredientList[ingrName];
+                break;
+            case "Wolf Meat":
+                wolfMeatStorage.text = "+" + this.ingredientList[ingrName];
                 break;
             case "Gold Egg":
                 superIngredientStorage.text = "+" + this.ingredientList[ingrName];
