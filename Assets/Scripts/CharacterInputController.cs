@@ -165,6 +165,7 @@ public class CharacterInputController : MonoBehaviour
         Turn = filteredTurnInput;
 
         Interact = Input.GetKeyDown(KeyCode.E);
+        // TODO: prevent this when clicking on UI; may have to remove click button
         Trap = Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
