@@ -17,6 +17,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
     public Text s_ingStorage;
     Inventory invertory_script;
     private bool added = false;
+    public float catchTimer;
 
     private Vector3 chickenPos = Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
