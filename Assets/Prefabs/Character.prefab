@@ -2632,7 +2632,6 @@ GameObject:
   - component: {fileID: 6756955913280970998}
   - component: {fileID: 6756955913280970995}
   - component: {fileID: 6756955913280970993}
-  - component: {fileID: 6756955913280970999}
   - component: {fileID: 6756955913280970997}
   - component: {fileID: 6756955913280970986}
   - component: {fileID: 6756955913280970991}
@@ -3136,21 +3135,6 @@ MonoBehaviour:
   superIngredientStorage: {fileID: 0}
   lackIngredient: {fileID: 0}
   storagePanel: {fileID: 0}
---- !u!114 &6756955913280970999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3802949989193090414}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046267982da9f8249ae8adba479568ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rockPrefab: {fileID: 941711933621543192, guid: 785a65eaf7de3f245a7001f122a9a8f5,
-    type: 3}
-  currRock: {fileID: 0}
 --- !u!114 &6756955913280970997
 MonoBehaviour:
   m_ObjectHideFlags: 0

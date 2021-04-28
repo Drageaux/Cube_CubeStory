@@ -57,7 +57,6 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Awake()
     {
-        interactionManager = InteractionManager.instance;
         anim = GetComponent<Animator>();
 
         if (anim == null)
@@ -94,6 +93,8 @@ public class RootMotionControlScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        interactionManager = InteractionManager.instance;
+
         //example of how to get access to certain limbs
         leftFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
         rightFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
