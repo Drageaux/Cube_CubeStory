@@ -3132,6 +3132,7 @@ MonoBehaviour:
   potatoStorage: {fileID: 0}
   eggStorage: {fileID: 0}
   chickenStorage: {fileID: 0}
+  wolfMeatStorage: {fileID: 0}
   superIngredientStorage: {fileID: 0}
   lackIngredient: {fileID: 0}
   storagePanel: {fileID: 0}
@@ -3202,8 +3203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2abde3558cae141b6104f6e5ba532a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potatoStorage: {fileID: 0}
-  eggStorage: {fileID: 0}
   eggText: {fileID: 0}
   potatoText: {fileID: 0}
 --- !u!114 &6756955913280970976
@@ -3218,7 +3217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3acb4848b0e174f92b362c967eb440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapPrefab: {fileID: 0}
+  trapPrefab: {fileID: 7662584715290531414, guid: a5bd3ae5b14809d48b958a52dbf6541c,
+    type: 3}
 --- !u!1 &3807806426624303861
 GameObject:
   m_ObjectHideFlags: 0
