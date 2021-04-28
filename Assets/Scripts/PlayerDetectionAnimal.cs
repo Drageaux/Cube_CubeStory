@@ -84,10 +84,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
             goldEgg.SetActive(false);
             chickenRun = false;
             GetComponent<AnimalIngredient>().enabled = true;
-            //GetComponent<SphereCollider>().enabled = true;
-            //GetComponent<SphereCollider>().isTrigger = true;
-            //GetComponent<Rigidbody>().isKinematic = true;
-            //GetComponent<SphereCollider>().radius = 3.0f;
+            GetComponent<Rigidbody>().isKinematic = false;
             if (agent.isStopped == true)
             {
                 agent.isStopped = false;
@@ -135,14 +132,12 @@ public class PlayerDetectionAnimal : MonoBehaviour
             else if (distance < 5.0f)
             {
                 //close to chicken, chicken will run away
-                //anim.speed = 10;
                 Debug.Log("distance less than 5");
                 aistate = AIState.run;
             }
             else
             {
                 //far from chicken, chicken will wandaring
-                // anim.speed = 1;
                 aistate = AIState.wander;
 
             }
@@ -229,11 +224,8 @@ public class PlayerDetectionAnimal : MonoBehaviour
                     }
                     anim.Play("IdleLay");
                     GetComponent<SphereCollider>().enabled = false;
-                    //GetComponent<SphereCollider>().isTrigger = false;
-                    //GetComponent<SphereCollider>().radius = 0.5f;
-                    //GetComponent<Rigidbody>().isKinematic = true;
+                    GetComponent<Rigidbody>().isKinematic = true;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    // GetComponent<Collider>().
                     GetComponent<AnimalIngredient>().enabled = false;
                     if (collect==false)
                     {
