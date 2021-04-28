@@ -166,7 +166,7 @@ public class CharacterInputController : MonoBehaviour
 
         Interact = Input.GetKeyDown(KeyCode.E);
         // TODO: prevent this when clicking on UI; may have to remove click button
-        Trap = Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.F);
+        Trap = Input.GetKeyUp(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
         Moving = Input.GetKeyDown(KeyCode.A) 
