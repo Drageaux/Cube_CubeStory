@@ -33,4 +33,9 @@ public class StartQuitGame : MonoBehaviour
         SceneManager.LoadScene("Demo");
         Time.timeScale = 1f;
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
 }
