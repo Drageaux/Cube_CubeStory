@@ -167,6 +167,14 @@ public class Inventory : MonoBehaviour
                 {
                     eggStorage.text = "+" + ingredientList[ingredientName];
                 }
+                else if (ingredientName == "Wolf Meat")
+                {
+                    wolfMeatStorage.text = "+" + ingredientList[ingredientName];
+                } 
+                else if (ingredientName == "Chicken")
+                {
+                    chickenStorage.text = "+" + ingredientList[ingredientName];
+                }
                 if (ingredientList[ingredientName] <= 0)
                 {
                     ingredientList.Remove(ingredientName);
