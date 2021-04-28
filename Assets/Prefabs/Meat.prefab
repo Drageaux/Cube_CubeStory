@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 7320319359411036386}
   - component: {fileID: 5590659890502438753}
   - component: {fileID: 6239000681686971958}
+  - component: {fileID: 2134770319942191174}
   m_Layer: 0
   m_Name: Meat
   m_TagString: Untagged
@@ -273,6 +274,22 @@ MonoBehaviour:
   type: 2
   quantity: 2
   ingredient: {fileID: 11400000, guid: 7f69bd29537c63b4cbacfd8fd673f55e, type: 2}
+--- !u!54 &2134770319942191174
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251189084507789383}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5366445874540820046
 GameObject:
   m_ObjectHideFlags: 0
