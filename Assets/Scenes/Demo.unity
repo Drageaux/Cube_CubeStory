@@ -5032,10 +5032,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 457435820}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: [{m_Target: {fileID: 457435822}, m_MethodName: MainMenu, m_Mode: 1,
-          m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
-              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
-            m_BoolArgument: 0}, m_CallState: 2}]
+      m_Calls:
+      - m_Target: {fileID: 457435822}
+        m_MethodName: MainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &457435820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7104,6 +7112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trap (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662584715290531414, guid: a5bd3ae5b14809d48b958a52dbf6541c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7662584715290690102, guid: a5bd3ae5b14809d48b958a52dbf6541c,
         type: 3}
@@ -20837,12 +20850,12 @@ PrefabInstance:
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000004269366
+      value: -0.000000004269366
       objectReference: {fileID: 0}
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -5.25583e-10
+      value: 5.25583e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6756955912355246318, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
@@ -21033,6 +21046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trap
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662584715290531414, guid: a5bd3ae5b14809d48b958a52dbf6541c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7662584715290690102, guid: a5bd3ae5b14809d48b958a52dbf6541c,
         type: 3}

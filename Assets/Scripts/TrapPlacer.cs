@@ -21,6 +21,7 @@ public class TrapPlacer : MonoBehaviour
     {
         GameObject trap = Instantiate(trapPrefab, placeSpot);
         trap.transform.localPosition = Vector3.zero;
+        trap.SetActive(true);
         trap.transform.SetParent(null);
     }
 }
