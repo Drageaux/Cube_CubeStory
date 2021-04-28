@@ -71,5 +71,10 @@ public class FanShapedArea : MonoBehaviour
         }
         //Debug.Log(center.y);
         CreateMesh(vertices,center.y);  
-    }  
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(go);
+    }
 }
