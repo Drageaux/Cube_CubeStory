@@ -13475,7 +13475,7 @@ MonoBehaviour:
   - {fileID: 128756089}
   - {fileID: 885288371}
   - {fileID: 1781349576}
-  displayUI: 0
+  displayUI: 1
 --- !u!1 &1358852707 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100010, guid: 7d0701320ee303d439feed9498b8d336,
@@ -20909,12 +20909,12 @@ PrefabInstance:
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000004269366
+      value: 0.000000004269366
       objectReference: {fileID: 0}
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.25583e-10
+      value: -5.25583e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6756955912355246318, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
