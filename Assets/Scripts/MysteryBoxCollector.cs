@@ -135,19 +135,19 @@ public class MysteryBoxCollector : MonoBehaviour
                 potatoText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
                 showPotatoText = true;
             }
-            if (ingr.Equals("Gold Egg"))
-            {
-                string plural = ingrQuantity > 1 ? "s" : "";
-                inventory.goldEggStorage.text = "+" + inventory.ingredientList[ingr];
-                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
-                showGoldEggText = true;
-            }
             if (ingr.Equals("Chicken"))
             {
                 string plural = ingrQuantity > 1 ? "s" : "";
                 inventory.chickenStorage.text = "+" + inventory.ingredientList[ingr];
                 eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
                 showChickenText = true;
+            }
+            if (ingr.Equals("Gold Egg"))
+            {
+                string plural = ingrQuantity > 1 ? "s" : "";
+                inventory.superIngredientStorage.text = "+" + inventory.ingredientList[ingr];
+                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
+                showGoldEggText = true;
             }
         }
     }
