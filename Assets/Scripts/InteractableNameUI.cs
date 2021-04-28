@@ -28,9 +28,16 @@ public class InteractableNameUI : MonoBehaviour
     {
         //if (focusedTarget == i)
         //{
+        if (gameObject == null)
+        {
+            return;
+        }
+        else
+        {
             gameObject.SetActive(false);
             focusedTarget = null;
             textObj.text = "";
+        }
         //}
     }
 }

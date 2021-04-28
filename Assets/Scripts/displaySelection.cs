@@ -31,9 +31,10 @@ public class displaySelection : MonoBehaviour
         //checking whether have mystery
         if (invertory_script.ingredientList.ContainsKey("Gold Egg") && invertory_script.ingredientList["Gold Egg"] >0) {
             Debug.Log("contain super");
-            if (Input.GetKeyUp(KeyCode.Q)&& chicken_script.collect==true)
+            if (Input.GetKeyUp(KeyCode.Q))
             {
-                popUp pop = GameObject.FindGameObjectWithTag("chicken").GetComponent<popUp>();
+                Debug.Log("Q works");
+                popUp pop = GameObject.FindGameObjectWithTag("Player").GetComponent<popUp>();
                 pop.PopUp();
 
             }
