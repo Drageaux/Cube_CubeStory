@@ -18,6 +18,7 @@ public class RootMotionControlScript : MonoBehaviour
     private Health healthScript;
     private Inventory inventory;
     private MysteryBoxCollector mysteryBoxCollector;
+    private TrapPlacer trapPlacer;
 
     private Transform leftFoot;
     private Transform rightFoot;
@@ -25,11 +26,13 @@ public class RootMotionControlScript : MonoBehaviour
     public float pickupTime = 1.6f;
     public float cookingTime = 4f; // in seconds
     public float mysteryBoxOpenTime = 4f;
+    public float settingTrapTime = 3f;
     private float remainingTimer;
 
-    public bool picking;
-    public bool cooking;
-    public bool openingMysteryBox;
+    public bool picking = false;
+    public bool cooking = false;
+    public bool openingMysteryBox = false;
+    public bool settingTrap = false;
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
@@ -82,6 +85,9 @@ public class RootMotionControlScript : MonoBehaviour
         if (mysteryBoxCollector == null)
             Debug.Log("MysteryBoxCollector could not be found");
 
+        trapPlacer = GetComponent<TrapPlacer>();
+        if (trapPlacer == null)
+            Debug.Log("TrapPlacer could not be found");
     }
 
 
@@ -104,6 +110,13 @@ public class RootMotionControlScript : MonoBehaviour
         if (!healthScript.Alive())
         {
             return;
+        }
+        if (settingTrap && Time.time > remainingTimer)
+        {
+            print(Time.time);
+            print(remainingTimer);
+            settingTrap = false;
+            trapPlacer.PlaceTrap();
         }
         // Interact and Stop Animation
         if (interactionManager.CurrentTarget != null)
@@ -141,10 +154,6 @@ public class RootMotionControlScript : MonoBehaviour
                 }
             }
         } 
-        else
-        {
-            CancelInteraction();
-        }
 
         //bool doMatchToButtonPress = false;
 
@@ -201,8 +210,15 @@ public class RootMotionControlScript : MonoBehaviour
                     anim.Play("Dive Catch");
                 }
             }
-            
         }
+        
+        bool clickedTrap = cinput.Trap;
+        if (clickedTrap)
+        {
+            settingTrap = true;
+            remainingTimer = Time.time + settingTrapTime;
+        }
+
         if (cinput.Moving)
         {
             CancelInteraction();
@@ -237,7 +253,7 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
         anim.SetBool("usingTool", cooking || openingMysteryBox);
-        anim.SetBool("picking", picking);
+        anim.SetBool("picking", picking || settingTrap);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
     }
@@ -247,6 +263,7 @@ public class RootMotionControlScript : MonoBehaviour
         cooking = false;
         picking = false;
         openingMysteryBox = false;
+        settingTrap = false;
         remainingTimer = Time.time;
     }
 
