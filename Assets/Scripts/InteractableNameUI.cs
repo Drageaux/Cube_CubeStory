@@ -28,15 +28,14 @@ public class InteractableNameUI : MonoBehaviour
     {
         //if (focusedTarget == i)
         //{
-        if (gameObject == null)
-        {
-            return;
-        }
-        else
-        {
+        try { 
             gameObject.SetActive(false);
             focusedTarget = null;
             textObj.text = "";
+        }
+        catch
+        {
+            Debug.LogWarning("Hiding UI failed");
         }
         //}
     }
