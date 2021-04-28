@@ -18,6 +18,7 @@ public class CharacterInputController : MonoBehaviour
 
     private float forwardSpeedLimit = 1f;
 
+    private Health healthScript;
 
     public Vector3 Direction
     {
@@ -76,8 +77,20 @@ public class CharacterInputController : MonoBehaviour
 
     float turnSmoothVelocity;
 
+    private void Start()
+    {
+        healthScript = GetComponent<Health>();
+        if (healthScript == null)
+            Debug.Log("Health script could not be found");
+    }
+
+
     void Update()
     {
+        if (!healthScript.Alive())
+        {
+            return;
+        }
 
         //GetAxisRaw() so we can do filtering here instead of the InputManager
         float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis

@@ -58,12 +58,10 @@ public class RootMotionControlScript : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
-
         if (anim == null)
             Debug.Log("Animator could not be found");
 
         rbody = GetComponent<Rigidbody>();
-
         if (rbody == null)
             Debug.Log("Rigid body could not be found");
 
