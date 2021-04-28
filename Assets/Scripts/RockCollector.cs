@@ -31,16 +31,16 @@ public class RockCollector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cinput.Throw)
-        {
-            print("Throw");
-            this.ReceiveRock();
-            anim.SetBool("throw", true);
-        }
-        else
-        {
-            anim.SetBool("throw", false);
-        }
+        //if (cinput.Throw)
+        //{
+        //    print("Throw");
+        //    this.ReceiveRock();
+        //    anim.SetBool("throw", true);
+        //}
+        //else
+        //{
+        //    anim.SetBool("throw", false);
+        //}
     }
 
     void ReceiveRock()
