@@ -11,6 +11,7 @@ TagManager:
   - Projectile
   - chicken
   - wolf
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - chicken
   - mysterybox
   - Projectile
-  - 
+  - Trap
   - 
   - 
   - 
