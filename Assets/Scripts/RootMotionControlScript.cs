@@ -249,8 +249,8 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
-        anim.SetBool("usingTool", cooking || openingMysteryBox);
-        anim.SetBool("picking", picking || settingTrap);
+        anim.SetBool("interactMiddle", cooking || openingMysteryBox);
+        anim.SetBool("interactLow", picking || settingTrap);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
     }
