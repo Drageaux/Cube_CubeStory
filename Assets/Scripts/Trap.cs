@@ -10,13 +10,11 @@ public class Trap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trappedSpot = transform.Find("TrappedMeatSpot");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -26,7 +24,7 @@ public class Trap : MonoBehaviour
             print("killed wolf");
             trapped = collider.gameObject.GetComponent<WolfDieSpawnMeat>().MeatSpawner();
             trapped.SetActive(true);
-            trapped.transform.position = trappedSpot.position;
+            trapped.transform.position =  trappedSpot ? trappedSpot.position : transform.position;
             trapped.transform.SetParent(null);
             Destroy(collider.gameObject);
             Destroy(gameObject);
