@@ -214,7 +214,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
                 }
                 break;
             case AIState.lay:
-                Debug.Log("Lay Egg");
+                //Debug.Log("Lay Egg");
                 try
                 {
                     if (this.gameObject.activeSelf == true)
@@ -222,7 +222,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
                         agent.enabled = true;
                         agent.isStopped = true;
                     }
-                    anim.Play("IdleLay");
+                    //anim.Play("IdleLay");
                     GetComponent<SphereCollider>().enabled = false;
                     GetComponent<Rigidbody>().isKinematic = true;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;

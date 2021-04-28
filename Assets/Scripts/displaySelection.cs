@@ -30,7 +30,7 @@ public class displaySelection : MonoBehaviour
     {
         //checking whether have mystery
         if (invertory_script.ingredientList.ContainsKey("Gold Egg") && invertory_script.ingredientList["Gold Egg"] >0) {
-            Debug.Log("contain super");
+            //Debug.Log("contain super");
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 Debug.Log("Q works");
@@ -41,7 +41,7 @@ public class displaySelection : MonoBehaviour
         }
         else
         {
-            Debug.Log("no super");
+            //Debug.Log("no super");
         }
 
     }
