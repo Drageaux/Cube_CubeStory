@@ -16,6 +16,7 @@ public class popUp : MonoBehaviour
             Debug.LogError("component is null");
         }
         close();
+        animator.ResetTrigger("close");
     }
 
     // Start is called before the first frame update
