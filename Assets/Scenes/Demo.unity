@@ -13298,6 +13298,8 @@ MonoBehaviour:
   menu:
   - {fileID: 11400000, guid: 23360c6dbfdd0114abc946b8c1c99c8d, type: 2}
   - {fileID: 11400000, guid: 7aff124afb29fdf41bc59b2349635a2b, type: 2}
+  - {fileID: 11400000, guid: 428362b39501e544fafb2c5a0e6413f1, type: 2}
+  - {fileID: 11400000, guid: 9cc958ed6f573a54ebcd70cd3d64fbe8, type: 2}
   orders: []
 --- !u!4 &1341648444
 Transform:
@@ -20819,12 +20821,12 @@ PrefabInstance:
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000004269366
+      value: 0.000000004269366
       objectReference: {fileID: 0}
     - target: {fileID: 6756955911551065481, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 5.25583e-10
+      value: -5.25583e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6756955912355246318, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
@@ -20946,6 +20948,11 @@ PrefabInstance:
       propertyPath: lackIngredient
       value: 
       objectReference: {fileID: 88144477}
+    - target: {fileID: 6756955913280970993, guid: f9938f123fbb1cb4bbc40cee93817711,
+        type: 3}
+      propertyPath: wolfMeatStorage
+      value: 
+      objectReference: {fileID: 1655362077}
     - target: {fileID: 6756955913280970993, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: superIngredientStorage
