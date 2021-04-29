@@ -17,7 +17,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
     public Text s_ingStorage;
     Inventory invertory_script;
     private bool added = false;
-    private float catchTimer = 15.0f;
+    public float catchTimer;
 
     private Vector3 chickenPos = Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
@@ -48,8 +48,11 @@ public class PlayerDetectionAnimal : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
         player_anim = player.GetComponent<Animator>();
-    
-
+        this.ShuffleWaypoints();
+        foreach (GameObject w in waypoint)
+        {
+            w.transform.SetParent(null);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,10 @@ public class PlayerDetectionAnimal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
         chickenPos = gameObject.transform.position;
         playerPos = player.transform.position;
         if (goldEgg != null)
@@ -73,12 +80,15 @@ public class PlayerDetectionAnimal : MonoBehaviour
             goldEgg.transform.position = chickenPos + new Vector3(0.6f, 0.1f, 0.6f);
         }
         distance = Vector3.Distance(chickenPos, playerPos);
-      //  egg_distance= Vector3.Distance(playerPos, eggPos);
+        //  egg_distance= Vector3.Distance(playerPos, eggPos);
 
         if (aistate != AIState.lay|| chickenRun)
         {
             goldEgg.SetActive(false);
             chickenRun = false;
+            GetComponent<AnimalIngredient>().enabled = true;
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<SphereCollider>().enabled = true;
             if (agent.isStopped == true)
             {
                 agent.isStopped = false;
@@ -87,12 +97,12 @@ public class PlayerDetectionAnimal : MonoBehaviour
             {
                 aistate = AIState.lay;
             }
-            else if (distance < 1.0f)
-            {
-                Debug.Log("chicken_collected");
-                Debug.Log("distance less than 1");
-                aistate = AIState.getHit;
-                StartCoroutine("WaitForSec");
+            //else if (distance < 1.0f && Input.GetKeyUp(KeyCode.E))
+            //{
+            //    Debug.Log("chicken_collected");
+            //    Debug.Log("distance less than 1");
+            //    aistate = AIState.getHit;
+            //    StartCoroutine("WaitForSec");
                 //agent.enabled = false;
                 //Destroy(this.gameObject);
                 //this.gameObject.SetActive(false);
@@ -114,9 +124,9 @@ public class PlayerDetectionAnimal : MonoBehaviour
                 //{
                 //    Debug.Log("can't find ingredient list");
                 //}
-                updateInventory("Chicken");
+            //    updateInventory("Chicken");
 
-            }
+            //}
             else if (distance < 2.0f)
             {
                 Debug.Log("distance less than 2");
@@ -126,14 +136,12 @@ public class PlayerDetectionAnimal : MonoBehaviour
             else if (distance < 5.0f)
             {
                 //close to chicken, chicken will run away
-                //anim.speed = 10;
                 Debug.Log("distance less than 5");
                 aistate = AIState.run;
             }
             else
             {
                 //far from chicken, chicken will wandaring
-                // anim.speed = 1;
                 aistate = AIState.wander;
 
             }
@@ -147,33 +155,35 @@ public class PlayerDetectionAnimal : MonoBehaviour
                     catchTimer = Time.time + 20;
                     agent.isStopped = false;
                     chickenRun = true;
+                 //   GetComponent<SphereCollider>().enabled = true;
                 }
 
                 else
                 {
                     Debug.Log("crouching");
-                    //chickenRun = false;
-                     if (distance < 1.5f&& Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
-                   // if (distance < 1.0f)
-                    {
-                        Debug.Log("get gold egg");
-                        agent.enabled = false;
-                        //Destroy(this.gameObject);
-                        //   Destroy(goldEgg);
-                        collect = true;
-                        goldEgg.SetActive(false);
-                       // updateInventory("Chicken");
-                        updateInventory("superIngredient");
-                        popUp pop = GetComponent<popUp>();
-                        pop.PopUp();
-                        Debug.Log("pop works");
+                    chickenRun = false;
+                    if (Input.GetKeyUp(KeyCode.E)&&goldEgg.activeSelf==true)
+                    //// if (distance < 1.0f)
+                    // {
+                    //     Debug.Log("get gold egg");
+                    //     agent.enabled = false;
+                    //     //Destroy(this.gameObject);
+                    //     //   Destroy(goldEgg);
+                    collect = true;
+                    //     // goldEgg.SetActive(false);
+                    //     //// updateInventory("Chicken");
+                    //     // updateInventory("Gold Egg");
+                    //     // popUp pop = GetComponent<popUp>();
+                    //     // pop.PopUp();
+                    //     // Debug.Log("pop works");
+                    //     StartCoroutine("WaitFor2Sec");
 
-                    }
-                    else
-                    {
-                        catchTimer = Time.time + 20;
-                    }
-                   
+                   //  }
+                    // else
+                    // {
+                    //     catchTimer = Time.time + 20;
+                    // }
+
                 }
             }
             else
@@ -209,7 +219,7 @@ public class PlayerDetectionAnimal : MonoBehaviour
                 }
                 break;
             case AIState.lay:
-                Debug.Log("Lay Egg");
+                //Debug.Log("Lay Egg");
                 try
                 {
                     if (this.gameObject.activeSelf == true)
@@ -218,6 +228,10 @@ public class PlayerDetectionAnimal : MonoBehaviour
                         agent.isStopped = true;
                     }
                     anim.Play("IdleLay");
+                    GetComponent<SphereCollider>().enabled = false;
+                    GetComponent<Rigidbody>().isKinematic = true;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    GetComponent<AnimalIngredient>().enabled = false;
                     if (collect==false)
                     {
                         goldEgg.SetActive(true);
@@ -286,15 +300,15 @@ public class PlayerDetectionAnimal : MonoBehaviour
         }
     }
 
-   
-    IEnumerator WaitForSec()
+    private void ShuffleWaypoints()
     {
-        yield return new WaitForSeconds(0.5f);
-        // numOfChicken++;
-        updateInventory("Chicken");
-        agent.enabled = false;
-        //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);
+        for (int i = 0; i < waypoint.Length; i++)
+        {
+            GameObject temp = waypoint[i];
+            int randomIndex = Random.Range(i, waypoint.Length);
+            waypoint[i] = waypoint[randomIndex];
+            waypoint[randomIndex] = temp;
+        }
     }
 }
 

@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    public GameObject trapped;
+    public Transform trappedSpot;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        print(collider.gameObject.tag);
         if (collider.gameObject.CompareTag("wolf"))
         {
+            print("killed wolf");
+            trapped = collider.gameObject.GetComponent<WolfDieSpawnMeat>().MeatSpawner();
+            trapped.SetActive(true);
+            trapped.transform.position =  trappedSpot ? trappedSpot.position : transform.position;
+            trapped.transform.SetParent(null);
             Destroy(collider.gameObject);
-            //Inventory
+            Destroy(gameObject);
         }
     }
 }

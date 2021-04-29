@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class Health : MonoBehaviour
 {
     private float health = 100f;
     private Animator anim;
+    private AudioSource audioData;
 
     private void Awake()
     {
         health = 100f;
         anim = GetComponent<Animator>();
+        audioData = GetComponent<AudioSource>();
 
         if (anim == null)
             Debug.Log("Animator could not be found");
@@ -34,6 +37,7 @@ public class Health : MonoBehaviour
         {
             health -= dmgDone;
             anim.SetTrigger("hurt");
+            audioData.Play(0);
         }
     }
 

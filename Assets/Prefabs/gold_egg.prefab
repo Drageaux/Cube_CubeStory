@@ -89,10 +89,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813076499157959880}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 17
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1813076499157959893
 MonoBehaviour:
@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239a3dfaff1e0a74cabae1274ea3e19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 17
   name: Interactable
-  type: 0
+  type: 1
   quantity: 1
-  ingredient: {fileID: 11400000, guid: 390d84aceba4f5e459b8da80378b774a, type: 2}
+  ingredient: {fileID: 11400000, guid: 77123ac299bc6e24cb2ad69ee4560746, type: 2}

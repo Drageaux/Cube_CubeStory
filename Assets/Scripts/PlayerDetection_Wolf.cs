@@ -8,12 +8,12 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
-    private const float damage = 40f;
+    private const float damage = 20f;
     private const float hitRate = 2f;
     private float attackTimer;
 
     float minDistance = 10f;//if change, change FanShapedArea.cs as well
-    float minAngle = 90f;//if change, change FanShapedArea.cs as well
+    float minAngle = 100f;//if change, change FanShapedArea.cs as well
 
     private Vector3 wolfPos=Vector3.zero;
     private Vector3 playerPos = Vector3.zero;
@@ -36,6 +36,12 @@ public class PlayerDetection_Wolf : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        this.ShuffleWaypoints();
+        foreach (GameObject w in waypoint)
+        {
+            w.transform.SetParent(null);
+        }
+
         attackTimer = Time.time;
     }
     // Start is called before the first frame update
@@ -90,7 +96,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
             /* Attack condition */
             //wolf caught
-            if (distance < 1.2f)
+            if (distance < 2.4f && angle < minAngle / 2)
             {
                 if(Time.time > attackTimer)
                 {
@@ -165,5 +171,14 @@ public class PlayerDetection_Wolf : MonoBehaviour
          anim.Play("Run_RM");
      }*/
 
-
+    private void ShuffleWaypoints()
+    {
+        for (int i = 0; i < waypoint.Length; i++)
+        {
+            GameObject temp = waypoint[i];
+            int randomIndex = Random.Range(i, waypoint.Length);
+            waypoint[i] = waypoint[randomIndex];
+            waypoint[randomIndex] = temp;
+        }
+    }
 }

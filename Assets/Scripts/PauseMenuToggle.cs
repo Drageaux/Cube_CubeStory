@@ -9,15 +9,12 @@ public class PauseMenuToggle : MonoBehaviour
 
     private void Awake()
     {
-        if (GetComponent<CanvasGroup>()!=null)
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
-        else
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
         {
             Debug.LogError("component is null");
         }
-        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,7 +27,7 @@ public class PauseMenuToggle : MonoBehaviour
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
                 canvasGroup.alpha = 0f;
-                Cursor.visible = false;
+                //Cursor.visible = false;
             }
             else
             {

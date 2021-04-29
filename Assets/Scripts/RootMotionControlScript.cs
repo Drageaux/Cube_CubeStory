@@ -17,22 +17,28 @@ public class RootMotionControlScript : MonoBehaviour
     private CharacterInputController cinput;
     private Health healthScript;
     private Inventory inventory;
+    private MysteryBoxCollector mysteryBoxCollector;
+    private TrapPlacer trapPlacer;
 
     private Transform leftFoot;
     private Transform rightFoot;
 
-    public float pickupTime = 1.6f;
+    public float pickupTime = 2f;
     public float cookingTime = 4f; // in seconds
+    public float mysteryBoxOpenTime = 3f;
+    public float settingTrapTime = 3f;
     private float remainingTimer;
 
-    public bool picking;
-    public bool cooking;
+    public bool picking = false;
+    public bool cooking = false;
+    public bool openingMysteryBox = false;
+    public bool settingTrap = false;
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
-    public float animationSpeed = 1f;
-    public float rootMovementSpeed = 1f;
-    public float rootTurnSpeed = 1f;
+    public float animationSpeed = 1.25f;
+    public float rootMovementSpeed = 1.5f;
+    public float rootTurnSpeed = 1.5f;
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
@@ -51,14 +57,11 @@ public class RootMotionControlScript : MonoBehaviour
 
     void Awake()
     {
-        interactionManager = InteractionManager.instance;
         anim = GetComponent<Animator>();
-
         if (anim == null)
             Debug.Log("Animator could not be found");
 
         rbody = GetComponent<Rigidbody>();
-
         if (rbody == null)
             Debug.Log("Rigid body could not be found");
 
@@ -74,19 +77,28 @@ public class RootMotionControlScript : MonoBehaviour
         inventory = GetComponent<Inventory>();
         if (inventory == null)
             Debug.Log("Inventory could not be found");
+
+        mysteryBoxCollector = GetComponent<MysteryBoxCollector>();
+        if (mysteryBoxCollector == null)
+            Debug.Log("MysteryBoxCollector could not be found");
+
+        trapPlacer = GetComponent<TrapPlacer>();
+        if (trapPlacer == null)
+            Debug.Log("TrapPlacer could not be found");
     }
 
 
     // Use this for initialization
     void Start()
     {
+        interactionManager = InteractionManager.instance;
+
         //example of how to get access to certain limbs
         leftFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg/J_Bip_L_Foot");
         rightFoot = this.transform.Find("Root/J_Bip_C_Hips/J_Bip_R_UpperLeg/J_Bip_R_LowerLeg/J_Bip_R_Foot");
 
         if (leftFoot == null || rightFoot == null)
             Debug.Log("One of the feet could not be found");
-
     }
 
 
@@ -98,19 +110,47 @@ public class RootMotionControlScript : MonoBehaviour
         {
             return;
         }
-        if (cooking && Time.time > remainingTimer)
+        if (settingTrap && Time.time > remainingTimer)
         {
-            cooking = false;
-            inventory.FinishCooking();
+            settingTrap = false;
+            trapPlacer.PlaceTrap();
         }
-        if (picking && Time.time > remainingTimer)
+        // Interact and Stop Animation
+        if (interactionManager.CurrentTarget != null)
         {
-            picking = false;
-            if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+            // Catching Animal
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dive Catch"))
             {
-                inventory.PickUpIngredient((IngredientPickup)interactionManager.CurrentTarget);
+                if (interactionManager.CurrentTarget.type == InteractableType.AnimalIngredient)
+                {
+                    AnimalIngredient animal = (AnimalIngredient)interactionManager.CurrentTarget;
+                    if (animal.caught)
+                        inventory.PickUpIngredient(animal);
+                }
+
             }
-        }
+            if (cooking && Time.time > remainingTimer)
+            {
+                cooking = false;
+                inventory.FinishCooking();
+            }
+            if (picking && Time.time > remainingTimer)
+            {
+                picking = false;
+                if (interactionManager.CurrentTarget.type == InteractableType.Ingredient)
+                {
+                    inventory.PickUpIngredient((ItemPickup)interactionManager.CurrentTarget);
+                }
+            }
+            if (openingMysteryBox && Time.time > remainingTimer)
+            {
+                openingMysteryBox = false;
+                if (interactionManager.CurrentTarget.name == "Mystery Box")
+                {
+                    mysteryBoxCollector.CollectBox();
+                }
+            }
+        } 
 
         //bool doMatchToButtonPress = false;
 
@@ -121,6 +161,8 @@ public class RootMotionControlScript : MonoBehaviour
         //work
         bool isGrounded = IsGrounded;// || CharacterCommon.CheckGroundNear(this.transform.position, jumpableGroundNormalMaxAngle, 0.1f, 1f, out closeToJumpableGround);
 
+
+        // Play Animation
         if (cinput.Interact)
         {
             if (interactionManager.CurrentTarget != null)
@@ -133,6 +175,9 @@ public class RootMotionControlScript : MonoBehaviour
 
                     picking = true;
                     remainingTimer = Time.time + pickupTime;
+                    print(Time.time);
+                    print(remainingTimer);
+                    print(pickupTime);
                 }
                 else if (interactionManager.CurrentTarget.type == InteractableType.Tool)
                 {
@@ -155,15 +200,28 @@ public class RootMotionControlScript : MonoBehaviour
                             inventory.lackIngredient.SetActive(true);
                             StartCoroutine("WaitForSec");
                         }
+                    } 
+                    else if (interactionManager.CurrentTarget.name == "Mystery Box")
+                    {
+                        openingMysteryBox = true;
+                        remainingTimer = Time.time + mysteryBoxOpenTime;
                     }
+                } else if (interactionManager.CurrentTarget.type == InteractableType.AnimalIngredient) {
+                    anim.Play("Dive Catch");
                 }
             }
-            
         }
+        
+        bool clickedTrap = cinput.Trap;
+        if (clickedTrap)
+        {
+            settingTrap = true;
+            remainingTimer = Time.time + settingTrapTime;
+        }
+
         if (cinput.Moving)
         {
-            cooking = false;
-            picking = false;
+            CancelInteraction();
         }
 
         //// get info about current animation
@@ -194,10 +252,19 @@ public class RootMotionControlScript : MonoBehaviour
         anim.SetBool("crouching", cinput.Crouch);
         anim.SetBool("running", cinput.Run);
         anim.SetBool("isFalling", !isGrounded);
-        anim.SetBool("cooking", cooking);
-        anim.SetBool("picking", picking);
+        anim.SetBool("interactMiddle", cooking || openingMysteryBox);
+        anim.SetBool("interactLow", picking || settingTrap);
         //anim.SetBool("matchToButtonPress", doMatchToButtonPress);
 
+    }
+
+    private void CancelInteraction()
+    {
+        cooking = false;
+        picking = false;
+        openingMysteryBox = false;
+        settingTrap = false;
+        remainingTimer = Time.time;
     }
 
     private void RotateTowards(Transform target)

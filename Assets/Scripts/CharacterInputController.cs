@@ -18,6 +18,7 @@ public class CharacterInputController : MonoBehaviour
 
     private float forwardSpeedLimit = 1f;
 
+    private Health healthScript;
 
     public Vector3 Direction
     {
@@ -43,7 +44,7 @@ public class CharacterInputController : MonoBehaviour
         private set;
     }
 
-    public bool Throw
+    public bool Trap
     {
         get;
         private set;
@@ -76,8 +77,20 @@ public class CharacterInputController : MonoBehaviour
 
     float turnSmoothVelocity;
 
+    private void Start()
+    {
+        healthScript = GetComponent<Health>();
+        if (healthScript == null)
+            Debug.Log("Health script could not be found");
+    }
+
+
     void Update()
     {
+        if (!healthScript.Alive())
+        {
+            return;
+        }
 
         //GetAxisRaw() so we can do filtering here instead of the InputManager
         float h = Input.GetAxisRaw("Horizontal");// setup h variable as our horizontal input axis
@@ -152,7 +165,8 @@ public class CharacterInputController : MonoBehaviour
         Turn = filteredTurnInput;
 
         Interact = Input.GetKeyDown(KeyCode.E);
-        Throw = Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.F);
+        // TODO: prevent this when clicking on UI; may have to remove click button
+        Trap = Input.GetKeyUp(KeyCode.F);
         Jump = Input.GetButtonDown("Jump");
 
         Moving = Input.GetKeyDown(KeyCode.A) 

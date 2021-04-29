@@ -34,14 +34,20 @@ public class eggTrackerScript : MonoBehaviour
         float dist = Vector3.Distance(player.position, target.position);
         distanceText.text = dist.ToString("f1") + "m"; 
 
-        float thing = Vector3.Dot((target.position - cam.transform.position).normalized, cam.transform.forward);
-        if (thing <= 0 ||  dist < closeEnough){
+        if (dist < closeEnough){
             distanceText.text = "Egg Field";
-            // transform.position = cam.WorldToScreenPoint(target.position);
-            if (Input.GetKeyDown(KeyCode.E)){
-                Destroy(gameObject);
-            }
+            StartCoroutine("WaitForSec");
             
+        }
+
+        float thing = Vector3.Dot((target.position - cam.transform.position).normalized, cam.transform.forward);
+        if (thing <= 0){
+            ToggleUi(false);
+            // distanceText.text = "Egg Field";
+            // transform.position = cam.WorldToScreenPoint(target.position);
+            // if (Input.GetKeyDown(KeyCode.E)){
+            //     Destroy(gameObject);
+            // }
 
         } else {
             ToggleUi(true);
@@ -54,6 +60,16 @@ public class eggTrackerScript : MonoBehaviour
         // if(dist < closeEnough){
         //     ToggleUi(false);
         // }
+    }
+
+    IEnumerator WaitForSec()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(gameObject);
+        // DisplayText.SetActive(false);
+        // trigger = false;
+
+
     }
 
     // private void CheckonScreen(){
