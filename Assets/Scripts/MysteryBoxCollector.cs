@@ -5,13 +5,9 @@ using UnityEngine.UI;
 
 public class MysteryBoxCollector : MonoBehaviour
 {
-    public Text eggText;
-    public Text potatoText;
+    public Text text;
 
-    private bool showEggText = false;
-    private bool showPotatoText = false;
-    private bool showGoldEggText = false;
-    private bool showChickenText = false;
+    private bool showText = false;
 
     private Inventory inventory;
     private InteractionManager interactionManager;
@@ -25,91 +21,31 @@ public class MysteryBoxCollector : MonoBehaviour
     {
         inventory = gameObject.GetComponent<Inventory>();
         interactionManager = InteractionManager.instance;
-        transformX = eggText.rectTransform.position.x;
-        transformY = eggText.rectTransform.position.y;
+        transformX = text.rectTransform.position.x;
+        transformY = text.rectTransform.position.y;
     }
 
     private void Update()
     {
-        if (showEggText)
+        if (showText)
         {
-            eggText.gameObject.SetActive(true);
+            text.gameObject.SetActive(true);
             if (timer > 0)
             {
                 timer = timer - Time.deltaTime;
-                eggText.rectTransform.Translate(0, 20 * Time.deltaTime, 0);
+                text.rectTransform.Translate(0, 20 * Time.deltaTime, 0);
             }
             else
             {
-                showEggText = false;
+                showText = false;
                 timer = 4.0;
-                eggText.gameObject.SetActive(false);
-                eggText.rectTransform.position = new Vector2(transformX, transformY);
-                eggText.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                text.gameObject.SetActive(false);
+                text.rectTransform.position = new Vector2(transformX, transformY);
+                text.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+                text.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                text.rectTransform.pivot = new Vector2(0.5f, 0.5f);
             }
-        }
-
-        if (showPotatoText)
-        {
-            potatoText.gameObject.SetActive(true);
-            if (timer > 0)
-            {
-                timer = timer - Time.deltaTime;
-                potatoText.rectTransform.Translate(0, 20 * Time.deltaTime, 0);
-            }
-            else
-            {
-                showPotatoText = false;
-                timer = 4.0;
-                potatoText.gameObject.SetActive(false);
-                potatoText.rectTransform.position = new Vector2(transformX, transformY);
-                potatoText.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                potatoText.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                potatoText.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            }
-        }
-
-        if (showGoldEggText)
-        {
-            eggText.gameObject.SetActive(true);
-            if (timer > 0)
-            {
-                timer = timer - Time.deltaTime;
-                eggText.rectTransform.Translate(0, 20 * Time.deltaTime, 0);
-            }
-            else
-            {
-                showGoldEggText = false;
-                timer = 4.0;
-                eggText.gameObject.SetActive(false);
-                eggText.rectTransform.position = new Vector2(transformX, transformY);
-                eggText.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            }
-        }
-
-        if (showChickenText)
-        {
-            eggText.gameObject.SetActive(true);
-            if (timer > 0)
-            {
-                timer = timer - Time.deltaTime;
-                eggText.rectTransform.Translate(0, 20 * Time.deltaTime, 0);
-            }
-            else
-            {
-                showChickenText = false;
-                timer = 4.0;
-                eggText.gameObject.SetActive(false);
-                eggText.rectTransform.position = new Vector2(transformX, transformY);
-                eggText.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                eggText.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            }
-        }
+        } 
     }
 
     public void CollectBox()
@@ -120,35 +56,32 @@ public class MysteryBoxCollector : MonoBehaviour
             mysteryBox.Interact(inventory); // this must occur before referencing random item and randomitemquantity
             string ingr = mysteryBox.RandomItem;
             int ingrQuantity = mysteryBox.RandomItemQuantity;
-
+            
             if (ingr.Equals("Egg"))
             {
                 string plural = ingrQuantity > 1 ? "s" : "";
                 inventory.eggStorage.text = "+" + inventory.ingredientList[ingr];
-                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
-                showEggText = true;
+                text.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
             }
             if (ingr.Equals("Potato"))
             {
                 string plural = ingrQuantity > 1 ? "es" : "";
                 inventory.potatoStorage.text = "+" + inventory.ingredientList[ingr];
-                potatoText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
-                showPotatoText = true;
+                text.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
             }
             if (ingr.Equals("Chicken"))
             {
                 string plural = ingrQuantity > 1 ? "s" : "";
                 inventory.chickenStorage.text = "+" + inventory.ingredientList[ingr];
-                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
-                showChickenText = true;
+                text.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
             }
             if (ingr.Equals("Gold Egg"))
             {
                 string plural = ingrQuantity > 1 ? "s" : "";
                 inventory.superIngredientStorage.text = "+" + inventory.ingredientList[ingr];
-                eggText.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
-                showGoldEggText = true;
+                text.text = "You found " + ingrQuantity + " " + ingr + plural + " in the mystery box!";
             }
+            showText = true;
         }
     }
 }
