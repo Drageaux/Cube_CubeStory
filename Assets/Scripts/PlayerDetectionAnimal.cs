@@ -47,7 +47,12 @@ public class PlayerDetectionAnimal : MonoBehaviour
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
-        player_anim = player.GetComponent<Animator>(); 
+        player_anim = player.GetComponent<Animator>();
+        this.ShuffleWaypoints();
+        foreach (GameObject w in waypoint)
+        {
+            w.transform.SetParent(null);
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -295,27 +300,15 @@ public class PlayerDetectionAnimal : MonoBehaviour
         }
     }
 
-   
-    IEnumerator WaitForSec()
+    private void ShuffleWaypoints()
     {
-        yield return new WaitForSeconds(0.5f);
-        // numOfChicken++;
-        updateInventory("Chicken");
-        agent.enabled = false;
-        //Destroy(this.gameObject);
-        this.gameObject.SetActive(false);
-    }
-
-    IEnumerator WaitFor2Sec()
-    {
-        yield return new WaitForSeconds(2.0f);
-        collect = true;
-        goldEgg.SetActive(false);
-        // updateInventory("Chicken");
-        updateInventory("Gold Egg");
-        popUp pop = GetComponent<popUp>();
-        pop.PopUp();
-        Debug.Log("pop works");
+        for (int i = 0; i < waypoint.Length; i++)
+        {
+            GameObject temp = waypoint[i];
+            int randomIndex = Random.Range(i, waypoint.Length);
+            waypoint[i] = waypoint[randomIndex];
+            waypoint[randomIndex] = temp;
+        }
     }
 }
 
