@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(AudioSource))]
@@ -10,9 +11,13 @@ public class Health : MonoBehaviour
     private Animator anim;
     private AudioSource audioData;
 
+    public TextMeshProUGUI healthText;
+    private readonly string HEALTH_TEXT = "Health: ";
+
     private void Awake()
     {
         health = 100f;
+        this.healthText.text = HEALTH_TEXT + ((int) health);
         anim = GetComponent<Animator>();
         audioData = GetComponent<AudioSource>();
 
@@ -26,6 +31,7 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             anim.SetBool("dead", true);
+            this.healthText.text = HEALTH_TEXT + 0;
             //Destroy(GetComponent<CharacterInputController>());
         } 
     }
@@ -36,6 +42,7 @@ public class Health : MonoBehaviour
         if (dmgDone > 0)
         {
             health -= dmgDone;
+            this.healthText.text = HEALTH_TEXT + ((int) health);
             anim.SetTrigger("hurt");
             audioData.Play(0);
         }
