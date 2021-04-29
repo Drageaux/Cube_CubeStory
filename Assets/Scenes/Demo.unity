@@ -21413,6 +21413,16 @@ PrefabInstance:
       propertyPath: superIngredientStorage
       value: 
       objectReference: {fileID: 1054866645}
+    - target: {fileID: 6756955913280970995, guid: f9938f123fbb1cb4bbc40cee93817711,
+        type: 3}
+      propertyPath: pickupTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756955913280970995, guid: f9938f123fbb1cb4bbc40cee93817711,
+        type: 3}
+      propertyPath: mysteryBoxOpenTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6756955913280970997, guid: f9938f123fbb1cb4bbc40cee93817711,
         type: 3}
       propertyPath: animator

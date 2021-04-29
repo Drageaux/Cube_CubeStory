@@ -23,9 +23,9 @@ public class RootMotionControlScript : MonoBehaviour
     private Transform leftFoot;
     private Transform rightFoot;
 
-    public float pickupTime = 1.6f;
+    public float pickupTime = 2f;
     public float cookingTime = 4f; // in seconds
-    public float mysteryBoxOpenTime = 4f;
+    public float mysteryBoxOpenTime = 3f;
     public float settingTrapTime = 3f;
     private float remainingTimer;
 
@@ -36,9 +36,9 @@ public class RootMotionControlScript : MonoBehaviour
 
     public float initalMatchTargetsAnimTime = 0.25f;
     public float exitMatchTargetsAnimTime = 0.75f;
-    public float animationSpeed = 1f;
-    public float rootMovementSpeed = 1f;
-    public float rootTurnSpeed = 1f;
+    public float animationSpeed = 1.25f;
+    public float rootMovementSpeed = 1.5f;
+    public float rootTurnSpeed = 1.5f;
 
     //Useful if you implement jump in the future...
     public float jumpableGroundNormalMaxAngle = 45f;
@@ -175,6 +175,9 @@ public class RootMotionControlScript : MonoBehaviour
 
                     picking = true;
                     remainingTimer = Time.time + pickupTime;
+                    print(Time.time);
+                    print(remainingTimer);
+                    print(pickupTime);
                 }
                 else if (interactionManager.CurrentTarget.type == InteractableType.Tool)
                 {

@@ -40,7 +40,6 @@ public class PlayerDetection_Wolf : MonoBehaviour
         foreach (GameObject w in waypoint)
         {
             w.transform.SetParent(null);
-            print(w);
         }
 
         attackTimer = Time.time;
