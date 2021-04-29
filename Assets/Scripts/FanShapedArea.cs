@@ -63,14 +63,15 @@ public class FanShapedArea : MonoBehaviour
         Vector3 forward = t.forward;
         List<Vector3> vertices = new List<Vector3>();
         vertices.Add(center);  
-
+        
         for (int i = 1; i<pointAmount - 1; i++)
         {  
             Vector3 pos = Quaternion.Euler(0f, -angle / 2 + eachAngle * (i - 1), 0f) * forward * radius + center;
+            
             vertices.Add(pos);  
         }
         //Debug.Log(center.y);
-        CreateMesh(vertices,center.y);  
+        CreateMesh(vertices,0);  
     }
 
     private void OnDestroy()
