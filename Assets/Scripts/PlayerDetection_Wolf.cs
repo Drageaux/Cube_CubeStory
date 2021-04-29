@@ -39,6 +39,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
         this.ShuffleWaypoints();
         foreach (GameObject w in waypoint)
         {
+            w.transform.SetParent(null);
             print(w);
         }
 
