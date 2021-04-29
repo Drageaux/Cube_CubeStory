@@ -8,7 +8,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 {
     
     public GameObject player;
-    private const float damage = 40f;
+    private const float damage = 20f;
     private const float hitRate = 2f;
     private float attackTimer;
 
@@ -90,7 +90,7 @@ public class PlayerDetection_Wolf : MonoBehaviour
 
             /* Attack condition */
             //wolf caught
-            if (distance < 2.4f)
+            if (distance < 2.4f && angle < minAngle / 2)
             {
                 if(Time.time > attackTimer)
                 {
