@@ -36,6 +36,12 @@ public class PlayerDetection_Wolf : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        this.ShuffleWaypoints();
+        foreach (GameObject w in waypoint)
+        {
+            print(w);
+        }
+
         attackTimer = Time.time;
     }
     // Start is called before the first frame update
@@ -165,5 +171,14 @@ public class PlayerDetection_Wolf : MonoBehaviour
          anim.Play("Run_RM");
      }*/
 
-
+    private void ShuffleWaypoints()
+    {
+        for (int i = 0; i < waypoint.Length; i++)
+        {
+            GameObject temp = waypoint[i];
+            int randomIndex = Random.Range(i, waypoint.Length);
+            waypoint[i] = waypoint[randomIndex];
+            waypoint[randomIndex] = temp;
+        }
+    }
 }
