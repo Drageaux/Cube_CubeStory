@@ -13,6 +13,7 @@ public class LevelTimer : MonoBehaviour
 
     private readonly string FINISH_TIME_UI = "0:00";
 
+    private readonly string TIME_TEXT = "Time: ";
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class LevelTimer : MonoBehaviour
 
     public void SetTimerText()
     {
-        this.timerText.text = this.ConvertSecondsToMinutes(this.currTimer);
+        this.timerText.text = this.TIME_TEXT + this.ConvertSecondsToMinutes(this.currTimer);
 
     }
 

@@ -10,7 +10,7 @@ public class VideoTrailerHelper : MonoBehaviour
     void Start()
     {
         if (displayUI)
-            gameObject.SetActive(false);
+            this.enabled = false;
     }
 
     // Update is called once per frame
