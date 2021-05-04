@@ -143,7 +143,8 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -8916979742414710323}
+  m_Motion: {fileID: -203655887218126122, guid: a1c5031df4a45664d97310d975ba7af9,
+    type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1482,7 +1483,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree - Crouch Walk
+  m_Name: Crouch Walk
   m_Speed: 0.75
   m_CycleOffset: 0
   m_Transitions:
@@ -1498,7 +1499,8 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7981498003435340007}
+  m_Motion: {fileID: -203655887218126122, guid: 205d841ff7bce1c44873b6ec15e4f39b,
+    type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
